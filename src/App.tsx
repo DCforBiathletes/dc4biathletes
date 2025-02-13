@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Index from "./pages/Index";
 import About from "./pages/About";
+import Research from "./pages/Research";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,8 +22,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/research" element={<Research />} />
           {/* Placeholder routes - we'll implement these pages next */}
-          <Route path="/research" element={<NotFound />} />
           <Route path="/app" element={<NotFound />} />
           <Route path="/workshops" element={<NotFound />} />
           <Route path="/news" element={<NotFound />} />
