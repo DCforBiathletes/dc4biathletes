@@ -1,0 +1,73 @@
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { Button } from "./ui/button";
+
+const Navigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navItems = [
+    { name: "About", path: "/about" },
+    { name: "Research", path: "/research" },
+    { name: "App", path: "/app" },
+    { name: "Workshops", path: "/workshops" },
+    { name: "News", path: "/news" },
+    { name: "Contact", path: "/contact" },
+  ];
+
+  return (
+    <nav className="fixed w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <Link to="/" className="text-xl font-bold text-primary">
+            DC4Biathletes
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className="text-secondary hover:text-accent transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile menu button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X /> : <Menu />}
+          </Button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden py-4">
+            <div className="flex flex-col space-y-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className="text-secondary hover:text-accent transition-colors px-4 py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default Navigation;
