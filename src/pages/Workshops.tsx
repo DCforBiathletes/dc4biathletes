@@ -57,14 +57,14 @@ const Workshops = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-b from-white via-muted to-white">
+    <div className="min-h-screen pt-16 bg-gradient-to-b from-primary/5 via-primary/10 to-white">
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
             Workshops & Events
           </h1>
-          <p className="text-xl text-secondary mb-8">
+          <p className="text-xl text-primary/80 mb-8">
             Join our specialized workshops designed to help athletes balance their
             sporting and academic careers.
           </p>
@@ -76,7 +76,7 @@ const Workshops = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Calendar */}
-            <div className="glass-card p-6">
+            <div className="bg-white/90 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg p-6">
               <h2 className="text-2xl font-semibold text-primary mb-6">
                 Select Date
               </h2>
@@ -94,32 +94,34 @@ const Workshops = () => {
                 Available Workshops
               </h2>
               {selectedWorkshops.map((workshop) => (
-                <Card key={workshop.id} className="animate-fade-in">
+                <Card key={workshop.id} className="animate-fade-in border-primary/10">
                   <CardHeader>
                     <div className="flex justify-between items-start">
-                      <CardTitle className="text-xl font-bold">
+                      <CardTitle className="text-xl font-bold text-primary">
                         {workshop.title}
                       </CardTitle>
-                      <Badge variant="secondary">{workshop.type}</Badge>
+                      <Badge variant="outline" className="border-primary/20 text-primary">
+                        {workshop.type}
+                      </Badge>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="flex items-center gap-2">
-                        <CalendarCheck2 className="w-5 h-5 text-accent" />
-                        <span>{format(workshop.date, "MMMM d, yyyy")}</span>
+                        <CalendarCheck2 className="w-5 h-5 text-primary" />
+                        <span className="text-primary/80">{format(workshop.date, "MMMM d, yyyy")}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <MapPin className="w-5 h-5 text-accent" />
-                        <span>{workshop.location}</span>
+                        <MapPin className="w-5 h-5 text-primary" />
+                        <span className="text-primary/80">{workshop.location}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Clock className="w-5 h-5 text-accent" />
-                        <span>{workshop.time}</span>
+                        <Clock className="w-5 h-5 text-primary" />
+                        <span className="text-primary/80">{workshop.time}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Users className="w-5 h-5 text-accent" />
-                        <span>{workshop.capacity}</span>
+                        <Users className="w-5 h-5 text-primary" />
+                        <span className="text-primary/80">{workshop.capacity}</span>
                       </div>
                     </div>
                   </CardContent>
