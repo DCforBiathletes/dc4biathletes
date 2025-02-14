@@ -20,8 +20,12 @@ const Navigation = () => {
     <nav className="fixed w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-xl font-bold text-primary">
-            DC4Biathletes
+          <Link to="/" className="flex items-center">
+            <img
+              src="/lovable-uploads/70b3aab8-8456-4835-a4f3-616cf7898fd3.png"
+              alt="DC4Biathletes Logo"
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
