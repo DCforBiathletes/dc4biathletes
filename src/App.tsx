@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Research from "./pages/Research";
+import Workshops from "./pages/Workshops";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,9 +24,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/research" element={<Research />} />
+          <Route path="/workshops" element={<Workshops />} />
           {/* Placeholder routes - we'll implement these pages next */}
           <Route path="/app" element={<NotFound />} />
-          <Route path="/workshops" element={<NotFound />} />
           <Route path="/news" element={<NotFound />} />
           <Route path="/contact" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
