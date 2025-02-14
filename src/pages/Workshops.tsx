@@ -1,12 +1,21 @@
-
 import { useState } from "react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CalendarCheck2, MapPin, Clock, Users } from "lucide-react";
+import { CalendarCheck2, MapPin, Clock, Users, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
 
-// Sample workshop data - in a real app, this would come from an API
 const workshops = [
   {
     id: 1,
@@ -40,8 +49,16 @@ const workshops = [
 const Workshops = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedWorkshops, setSelectedWorkshops] = useState(workshops);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [newWorkshop, setNewWorkshop] = useState({
+    title: "",
+    location: "",
+    time: "",
+    capacity: "",
+    type: "",
+  });
+  const { toast } = useToast();
 
-  // Filter workshops based on selected date
   const handleSelect = (selectedDate: Date | undefined) => {
     setDate(selectedDate);
     if (selectedDate) {
@@ -56,9 +73,41 @@ const Workshops = () => {
     }
   };
 
+  const handleCreateWorkshop = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!date) {
+      toast({
+        title: "Please select a date",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const workshop = {
+      id: workshops.length + 1,
+      date: date,
+      ...newWorkshop,
+    };
+
+    workshops.push(workshop);
+    setSelectedWorkshops([...workshops]);
+    setIsDialogOpen(false);
+    setNewWorkshop({
+      title: "",
+      location: "",
+      time: "",
+      capacity: "",
+      type: "",
+    });
+
+    toast({
+      title: "Workshop created",
+      description: "The new workshop has been added to the calendar.",
+    });
+  };
+
   return (
     <div className="min-h-screen pt-16 bg-gradient-to-b from-primary/5 via-primary/10 to-white">
-      {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
@@ -71,15 +120,90 @@ const Workshops = () => {
         </div>
       </section>
 
-      {/* Calendar and Workshops Section */}
       <section className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Calendar */}
             <div className="bg-white/90 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg p-6">
-              <h2 className="text-2xl font-semibold text-primary mb-6">
-                Select Date
-              </h2>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-semibold text-primary">
+                  Select Date
+                </h2>
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="bg-primary text-white hover:bg-primary/80">
+                      <Plus className="w-4 h-4 mr-2" /> New Event
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle className="text-primary">Create New Workshop</DialogTitle>
+                    </DialogHeader>
+                    <form onSubmit={handleCreateWorkshop} className="space-y-4">
+                      <div>
+                        <Label htmlFor="title">Title</Label>
+                        <Input
+                          id="title"
+                          value={newWorkshop.title}
+                          onChange={(e) =>
+                            setNewWorkshop({ ...newWorkshop, title: e.target.value })
+                          }
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="location">Location</Label>
+                        <Input
+                          id="location"
+                          value={newWorkshop.location}
+                          onChange={(e) =>
+                            setNewWorkshop({ ...newWorkshop, location: e.target.value })
+                          }
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="time">Time</Label>
+                        <Input
+                          id="time"
+                          value={newWorkshop.time}
+                          onChange={(e) =>
+                            setNewWorkshop({ ...newWorkshop, time: e.target.value })
+                          }
+                          placeholder="e.g., 10:00 - 16:00"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="capacity">Capacity</Label>
+                        <Input
+                          id="capacity"
+                          value={newWorkshop.capacity}
+                          onChange={(e) =>
+                            setNewWorkshop({ ...newWorkshop, capacity: e.target.value })
+                          }
+                          placeholder="e.g., 20 participants"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="type">Type</Label>
+                        <Input
+                          id="type"
+                          value={newWorkshop.type}
+                          onChange={(e) =>
+                            setNewWorkshop({ ...newWorkshop, type: e.target.value })
+                          }
+                          placeholder="e.g., Planning, Skills, Academic"
+                          required
+                        />
+                      </div>
+                      <Button type="submit" className="w-full bg-primary text-white hover:bg-primary/80">
+                        Create Workshop
+                      </Button>
+                    </form>
+                  </DialogContent>
+                </Dialog>
+              </div>
               <Calendar
                 mode="single"
                 selected={date}
@@ -88,7 +212,6 @@ const Workshops = () => {
               />
             </div>
 
-            {/* Workshops List */}
             <div className="lg:col-span-2 space-y-6">
               <h2 className="text-2xl font-semibold text-primary mb-6">
                 Available Workshops
