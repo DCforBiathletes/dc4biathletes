@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Research from "./pages/Research";
 import Workshops from "./pages/Workshops";
 import News from "./pages/News";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,9 +31,9 @@ const App = () => (
               <Route path="/research" element={<Research />} />
               <Route path="/workshops" element={<Workshops />} />
               <Route path="/news" element={<News />} />
+              <Route path="/contact" element={<Contact />} />
               {/* Placeholder routes - we'll implement these pages next */}
               <Route path="/app" element={<NotFound />} />
-              <Route path="/contact" element={<NotFound />} />
               <Route path="/privacy-policy" element={<NotFound />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
