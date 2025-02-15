@@ -19,9 +19,6 @@ const Index = () => {
           <p className="text-xl text-primary/80 mb-8 max-w-2xl mx-auto">
             Supporting young biathletes in achieving excellence in both sports and education
           </p>
-          <Button className="bg-primary text-white hover:bg-primary/80 text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
-            Join Program <ArrowRight className="ml-2" />
-          </Button>
         </div>
       </section>
 
