@@ -11,7 +11,6 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // In a real app, this would send the form data to a backend
     toast({
       title: "Message Sent",
       description: "Thank you for your message. We'll get back to you soon!",
@@ -19,14 +18,14 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-b from-primary/5 via-primary/10 to-white">
+    <div className="min-h-screen pt-16 bg-gradient-to-br from-[#fdfcfb] via-[#e2d1c3] to-white">
       {/* Hero Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-gradient-to-r from-primary/10 to-accent/10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6 drop-shadow-sm">
             Get in Touch
           </h1>
-          <p className="text-xl text-primary/80 mb-8">
+          <p className="text-xl text-primary/90 mb-8 drop-shadow-sm">
             Have questions about our program? We're here to help!
           </p>
         </div>
@@ -40,9 +39,9 @@ const Contact = () => {
             <div className="space-y-8">
               <h2 className="text-2xl font-bold text-primary mb-6">Contact Information</h2>
               
-              <Card className="p-6 glass-card">
+              <Card className="p-6 bg-gradient-to-br from-white via-white/95 to-primary/5 border-primary/20 shadow-lg hover:shadow-xl transition-all">
                 <div className="flex items-start space-x-4">
-                  <Mail className="w-6 h-6 text-primary mt-1" />
+                  <Mail className="w-6 h-6 text-accent mt-1" />
                   <div>
                     <h3 className="font-semibold text-primary">Email</h3>
                     <p className="text-primary/80">info@dc4biathletes.eu</p>
@@ -50,9 +49,9 @@ const Contact = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 glass-card">
+              <Card className="p-6 bg-gradient-to-br from-white via-white/95 to-primary/5 border-primary/20 shadow-lg hover:shadow-xl transition-all">
                 <div className="flex items-start space-x-4">
-                  <Phone className="w-6 h-6 text-primary mt-1" />
+                  <Phone className="w-6 h-6 text-accent mt-1" />
                   <div>
                     <h3 className="font-semibold text-primary">Phone</h3>
                     <p className="text-primary/80">+43 123 456 789</p>
@@ -60,9 +59,9 @@ const Contact = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 glass-card">
+              <Card className="p-6 bg-gradient-to-br from-white via-white/95 to-primary/5 border-primary/20 shadow-lg hover:shadow-xl transition-all">
                 <div className="flex items-start space-x-4">
-                  <MapPin className="w-6 h-6 text-primary mt-1" />
+                  <MapPin className="w-6 h-6 text-accent mt-1" />
                   <div>
                     <h3 className="font-semibold text-primary">Address</h3>
                     <p className="text-primary/80">
@@ -76,51 +75,54 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="glass-card p-8">
+            <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
               <h2 className="text-2xl font-bold text-primary mb-6">Send us a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name" className="text-primary/90">Name</Label>
                   <Input
                     id="name"
                     placeholder="Your name"
                     required
-                    className="bg-white/50"
+                    className="bg-white/80 border-primary/20 focus:border-accent"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-primary/90">Email</Label>
                   <Input
                     id="email"
                     type="email"
                     placeholder="Your email"
                     required
-                    className="bg-white/50"
+                    className="bg-white/80 border-primary/20 focus:border-accent"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
+                  <Label htmlFor="subject" className="text-primary/90">Subject</Label>
                   <Input
                     id="subject"
                     placeholder="Message subject"
                     required
-                    className="bg-white/50"
+                    className="bg-white/80 border-primary/20 focus:border-accent"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
+                  <Label htmlFor="message" className="text-primary/90">Message</Label>
                   <textarea
                     id="message"
                     placeholder="Your message"
                     required
-                    className="w-full min-h-[150px] px-3 py-2 rounded-md border border-input bg-white/50 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="w-full min-h-[150px] px-3 py-2 rounded-md border border-primary/20 bg-white/80 text-sm focus:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-primary text-white hover:bg-primary/80">
+                <Button 
+                  type="submit" 
+                  className="w-full bg-accent hover:bg-accent/90 text-white shadow-lg hover:shadow-xl transition-all"
+                >
                   Send Message <Send className="ml-2 w-4 h-4" />
                 </Button>
               </form>
