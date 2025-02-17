@@ -23,7 +23,7 @@ const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-8 bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg">
-              <Book className="w-12 h-12 text-primary mb-4" />
+              <Book className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl font-bold text-primary mb-2">Our Mission</h3>
               <p className="text-primary/80">
                 To create a supportive environment where young biathletes can excel
@@ -31,7 +31,7 @@ const About = () => {
               </p>
             </div>
             <div className="p-8 bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg">
-              <Users className="w-12 h-12 text-primary mb-4" />
+              <Users className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl font-bold text-primary mb-2">Our Community</h3>
               <p className="text-primary/80">
                 A network of athletes, educators, and mentors working together to
@@ -39,7 +39,7 @@ const About = () => {
               </p>
             </div>
             <div className="p-8 bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg">
-              <Trophy className="w-12 h-12 text-primary mb-4" />
+              <Trophy className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl font-bold text-primary mb-2">Our Goals</h3>
               <p className="text-primary/80">
                 To help athletes achieve their full potential in sports while
@@ -92,7 +92,7 @@ const About = () => {
           <p className="text-xl text-primary/80 mb-8">
             Take the first step towards balancing your athletic and academic career
           </p>
-          <Button className="bg-primary text-white hover:bg-primary/80 text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
+          <Button className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
             Apply Now <ArrowRight className="ml-2" />
           </Button>
         </div>

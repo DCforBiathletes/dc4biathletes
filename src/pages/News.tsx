@@ -60,7 +60,7 @@ const News = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {newsArticles.map((article) => (
-              <Card key={article.id} className="glass-card overflow-hidden hover:shadow-xl transition-shadow">
+              <Card key={article.id} className="bg-white/80 backdrop-blur-sm border-primary/10 overflow-hidden hover:shadow-xl transition-shadow">
                 <img
                   src={article.image}
                   alt={article.title}
@@ -68,7 +68,7 @@ const News = () => {
                 />
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <Badge variant="outline" className="bg-primary/5">
+                    <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20">
                       {article.category}
                     </Badge>
                     <div className="flex items-center text-sm text-primary/60">
@@ -80,7 +80,7 @@ const News = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-primary/80 mb-4">{article.excerpt}</p>
-                  <Button variant="link" className="text-primary hover:text-primary/80 p-0">
+                  <Button variant="link" className="text-accent hover:text-accent/80 p-0">
                     Read More <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </CardContent>
@@ -94,7 +94,7 @@ const News = () => {
       <section className="py-20 px-4 bg-primary/5">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center mb-6">
-            <Newspaper className="w-12 h-12 text-primary" />
+            <Newspaper className="w-12 h-12 text-accent" />
           </div>
           <h2 className="text-3xl font-bold text-primary mb-4">
             Stay Updated
@@ -106,9 +106,9 @@ const News = () => {
             <input
               type="email"
               placeholder="Enter your email"
-              className="px-4 py-2 rounded-lg border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="px-4 py-2 rounded-lg border border-primary/20 focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
-            <Button className="bg-primary text-white hover:bg-primary/80">
+            <Button className="bg-accent hover:bg-accent/90 text-white">
               Subscribe
             </Button>
           </div>
