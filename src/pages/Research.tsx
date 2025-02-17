@@ -26,7 +26,7 @@ const Research = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="p-8 bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg">
-              <LineChart className="w-12 h-12 text-primary mb-4" />
+              <LineChart className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl font-bold text-primary mb-2">
                 Performance Analysis
               </h3>
@@ -39,7 +39,7 @@ const Research = () => {
               </Button>
             </div>
             <div className="p-8 bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg">
-              <UserSquare2 className="w-12 h-12 text-primary mb-4" />
+              <UserSquare2 className="w-12 h-12 text-accent mb-4" />
               <h3 className="text-xl font-bold text-primary mb-2">
                 Career Development
               </h3>
@@ -63,7 +63,7 @@ const Research = () => {
           <div className="space-y-6">
             <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
               <div className="flex items-start gap-4">
-                <BookOpen className="w-8 h-8 text-primary shrink-0" />
+                <BookOpen className="w-8 h-8 text-accent shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold text-primary">
                     Dual Career Support for Young Biathletes
@@ -86,7 +86,7 @@ const Research = () => {
 
             <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
               <div className="flex items-start gap-4">
-                <ScrollText className="w-8 h-8 text-primary shrink-0" />
+                <ScrollText className="w-8 h-8 text-accent shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold text-primary">
                     Academic Performance in Elite Sports
@@ -120,7 +120,7 @@ const Research = () => {
             Interested in collaborating on research projects? We're always looking
             for partners in advancing dual career knowledge.
           </p>
-          <Button className="bg-primary text-white hover:bg-primary/80 text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
+          <Button className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
             Contact Research Team <ArrowRight className="ml-2" />
           </Button>
         </div>
