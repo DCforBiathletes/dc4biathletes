@@ -5,7 +5,7 @@ import StatisticCard from "@/components/StatisticCard";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f1f0fb] via-[#e5deff] to-white pt-16">
+    <div className="min-h-screen bg-[#E5DEFF] pt-16">
       {/* Hero Section */}
       <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 animate-fade-in">
         <div className="max-w-4xl mx-auto">
@@ -60,7 +60,7 @@ const Index = () => {
       </section>
 
       {/* Statistics Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-white to-[#f1f0fb]">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <StatisticCard value="200+" label="Active Athletes" />
