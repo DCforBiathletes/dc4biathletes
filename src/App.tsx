@@ -9,14 +9,16 @@ import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Research from "./pages/Research";
+import App from "./pages/App";
 import Workshops from "./pages/Workshops";
 import News from "./pages/News";
 import Contact from "./pages/Contact";
+import Partners from "./pages/Partners";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const Router = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -29,11 +31,11 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
               <Route path="/research" element={<Research />} />
+              <Route path="/app" element={<App />} />
               <Route path="/workshops" element={<Workshops />} />
               <Route path="/news" element={<News />} />
               <Route path="/contact" element={<Contact />} />
-              {/* Placeholder routes - we'll implement these pages next */}
-              <Route path="/app" element={<NotFound />} />
+              <Route path="/partners" element={<Partners />} />
               <Route path="/privacy-policy" element={<NotFound />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -45,4 +47,4 @@ const App = () => (
   </QueryClientProvider>
 );
 
-export default App;
+export default Router;
