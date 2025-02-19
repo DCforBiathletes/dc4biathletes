@@ -9,9 +9,6 @@ const Index = () => {
       {/* Hero Section */}
       <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 animate-fade-in">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-block px-4 py-2 bg-primary/10 backdrop-blur-sm rounded-full text-primary mb-6">
-            EU-Sponsored Initiative
-          </div>
           <h1 className="text-5xl md:text-7xl font-bold text-primary mb-6">
             Balance Your
             <span className="text-primary"> Dual Career</span>
