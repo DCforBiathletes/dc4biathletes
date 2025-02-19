@@ -1,5 +1,5 @@
 
-import { ArrowRight, GraduationCap, Medal, Users } from "lucide-react";
+import { ArrowRight, GraduationCap, Medal, Users, Clipboard, BookOpen, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatisticCard from "@/components/StatisticCard";
 
@@ -19,14 +19,26 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Introduction Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-lg text-primary/80 leading-relaxed">
+            Biathlon is a demanding sport requiring exceptional physical and mental resilience. However, 
+            many young biathletes struggle to balance their sports careers with academic and professional 
+            development, leading to high dropout rates. DC4Biathletes addresses this challenge by providing 
+            structured support through education, career planning tools, and research-backed methodologies.
+          </p>
+        </div>
+      </section>
+
+      {/* Project Objectives */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-primary mb-4">About DC4Biathletes</h2>
-            <p className="text-primary/80 max-w-2xl mx-auto">
-              We believe that athletic excellence and academic achievement can go hand in hand.
-              Our program provides the support and resources needed to succeed in both arenas.
+            <h2 className="text-4xl font-bold text-primary mb-4">Project Objectives</h2>
+            <p className="text-primary/80 max-w-3xl mx-auto">
+              The DC4Biathletes project aims to create a strong support system that helps young biathletes 
+              balance their sports careers with education and future career goals.
             </p>
           </div>
 
@@ -35,29 +47,58 @@ const Index = () => {
               <Medal className="w-12 h-12 text-primary mb-4" />
               <h3 className="text-xl font-bold text-primary mb-2">Sports Excellence</h3>
               <p className="text-primary/80">
-                Professional coaching and training facilities to reach your athletic potential
+                Professional coaching and comprehensive support for athletic development
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-white/80 backdrop-blur-sm border border-primary/10 shadow-lg">
               <GraduationCap className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-bold text-primary mb-2">Academic Support</h3>
+              <h3 className="text-xl font-bold text-primary mb-2">Educational Resources</h3>
               <p className="text-primary/80">
-                Flexible education programs and tutoring to maintain academic progress
+                Interactive digital learning materials and career planning tools
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-white/80 backdrop-blur-sm border border-primary/10 shadow-lg">
-              <Users className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-bold text-primary mb-2">Community</h3>
+              <BookOpen className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-bold text-primary mb-2">Research & Development</h3>
               <p className="text-primary/80">
-                Connect with fellow athletes who understand the dual career journey
+                Evidence-based strategies for successful dual career paths
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Statistics Section */}
+      {/* Work Packages */}
       <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-primary mb-12 text-center">Work Packages</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="p-6 bg-[#E5DEFF] rounded-lg">
+              <h3 className="font-bold text-primary mb-2">WP1: Mapping Guidelines</h3>
+              <p className="text-primary/80 text-sm">Comprehensive review of EU and national-level dual career policies</p>
+            </div>
+            <div className="p-6 bg-[#E5DEFF] rounded-lg">
+              <h3 className="font-bold text-primary mb-2">WP2: Research</h3>
+              <p className="text-primary/80 text-sm">Studying barriers and challenges faced by young biathletes</p>
+            </div>
+            <div className="p-6 bg-[#E5DEFF] rounded-lg">
+              <h3 className="font-bold text-primary mb-2">WP3: Status Review</h3>
+              <p className="text-primary/80 text-sm">Examining current opportunities and best practices</p>
+            </div>
+            <div className="p-6 bg-[#E5DEFF] rounded-lg">
+              <h3 className="font-bold text-primary mb-2">WP4: Mobile App</h3>
+              <p className="text-primary/80 text-sm">Development of interactive support tools and resources</p>
+            </div>
+            <div className="p-6 bg-[#E5DEFF] rounded-lg">
+              <h3 className="font-bold text-primary mb-2">WP5: Impact</h3>
+              <p className="text-primary/80 text-sm">Communication, dissemination, and sustainability planning</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <StatisticCard value="200+" label="Active Athletes" />
@@ -68,7 +109,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 text-center">
+      <section className="py-20 px-4 text-center bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold text-primary mb-6">
             Ready to Start Your Journey?
@@ -76,9 +117,23 @@ const Index = () => {
           <p className="text-xl text-primary/80 mb-8">
             Join DC4Biathletes and become part of a community that supports your dual career aspirations
           </p>
-          <Button className="bg-primary text-white hover:bg-primary/80 text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
-            Apply Now <ArrowRight className="ml-2" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="bg-primary text-white hover:bg-primary/80 text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
+              Apply Now <ArrowRight className="ml-2" />
+            </Button>
+            <Button variant="outline" className="text-lg px-8 py-6 rounded-full border-primary/20 text-primary hover:bg-primary/5">
+              Contact Us <Phone className="ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Note */}
+      <section className="py-8 px-4 bg-[#1A1F2C] text-white text-sm text-center">
+        <div className="max-w-4xl mx-auto">
+          <p className="opacity-80">
+            "Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor the granting authority can be held responsible for them."
+          </p>
         </div>
       </section>
     </div>
