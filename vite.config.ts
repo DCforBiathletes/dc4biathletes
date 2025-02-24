@@ -22,9 +22,9 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    outDir: "dist", // Specify the output directory for the build
-    sourcemap: true, // Generate source maps for debugging
-    minify: true, // Enable minification for production
-    assetsDir: "assets", // Directory for static assets in the build output
+    outDir: "docs", // Changed from "dist" to "docs" for GitHub Pages
+    sourcemap: true,
+    minify: true,
+    assetsDir: "assets",
   },
 }));
