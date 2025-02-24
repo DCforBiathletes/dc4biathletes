@@ -1,5 +1,5 @@
 
-import { ArrowRight, GraduationCap, Medal, Users, Clipboard, BookOpen, Phone } from "lucide-react";
+import { GraduationCap, Medal, Users, Clipboard, BookOpen, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatisticCard from "@/components/StatisticCard";
 
@@ -117,14 +117,6 @@ const Index = () => {
           <p className="text-xl text-primary/80 mb-8">
             Join DC4Biathletes and become part of a community that supports your dual career aspirations
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-primary text-white hover:bg-primary/80 text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
-              Apply Now <ArrowRight className="ml-2" />
-            </Button>
-            <Button variant="outline" className="text-lg px-8 py-6 rounded-full border-primary/20 text-primary hover:bg-primary/5">
-              Contact Us <Phone className="ml-2" />
-            </Button>
-          </div>
         </div>
       </section>
 
