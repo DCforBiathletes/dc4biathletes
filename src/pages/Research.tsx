@@ -6,8 +6,20 @@ const Research = () => {
   return (
     <div className="min-h-screen pt-16 bg-[#E5DEFF]">
       {/* Hero Section */}
-      <section className="py-20 px-4 bg-[#0698d6]">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative py-32">
+        {/* Hero Image Container */}
+        <div className="absolute inset-0">
+          <img
+            src="/lovable-uploads/b8b2a470-2d02-4dff-bbfb-8dc75c8f8976.png"
+            alt="Athletes celebrating"
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-primary/70"></div>
+          <div className="absolute inset-0 bg-black/20"></div>
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Research & Publications
           </h1>
