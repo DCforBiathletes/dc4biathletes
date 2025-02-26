@@ -1,10 +1,8 @@
-
 import { Newspaper, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-// Sample news data - in a real app, this would come from an API
 const newsArticles = [
   {
     id: 1,
@@ -42,14 +40,14 @@ const newsArticles = [
 
 const News = () => {
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-b from-primary/5 via-primary/10 to-white">
+    <div className="min-h-screen pt-16 bg-[#E5DEFF]">
       {/* Hero Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-[#0698d6]">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Latest News & Updates
           </h1>
-          <p className="text-xl text-primary/80 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Stay informed about our program, success stories, and upcoming events
           </p>
         </div>

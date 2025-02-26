@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
@@ -107,13 +108,13 @@ const Workshops = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-b from-primary/5 via-primary/10 to-white">
-      <section className="py-20 px-4">
+    <div className="min-h-screen pt-16 bg-[#E5DEFF]">
+      <section className="py-20 px-4 bg-[#0698d6]">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Workshops & Events
           </h1>
-          <p className="text-xl text-primary/80 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Join our specialized workshops designed to help athletes balance their
             sporting and academic careers.
           </p>

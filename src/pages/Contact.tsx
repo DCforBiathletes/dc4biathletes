@@ -18,14 +18,14 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-br from-[#fdfcfb] via-[#e2d1c3] to-white">
+    <div className="min-h-screen pt-16 bg-[#E5DEFF]">
       {/* Hero Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-primary/10 to-accent/10">
+      <section className="py-20 px-4 bg-[#0698d6]">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6 drop-shadow-sm">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Get in Touch
           </h1>
-          <p className="text-xl text-primary/90 mb-8 drop-shadow-sm">
+          <p className="text-xl text-white/90 mb-8">
             Have questions about our program? We're here to help!
           </p>
         </div>

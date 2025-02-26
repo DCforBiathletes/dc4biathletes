@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 
 const Research = () => {
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-b from-primary/5 via-primary/10 to-white">
+    <div className="min-h-screen pt-16 bg-[#E5DEFF]">
       {/* Hero Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-[#0698d6]">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Research & Publications
           </h1>
-          <p className="text-xl text-primary/80 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Advancing knowledge in dual career development for young athletes through
             evidence-based research.
           </p>
