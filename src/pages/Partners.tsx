@@ -27,7 +27,8 @@ const Partners = () => {
     {
       name: "Re:vise Hub",
       role: "Digital Development",
-      description: "[Description pending]",
+      description: "Re:vise Hub is a pioneering digital agency based in Ljubljana, empowering organizations through innovative digital solutions. With a focus on delivering exceptional digital experiences, Re:vise Hub combines creative design with cutting-edge technology to create impactful digital products that help organizations achieve their goals.",
+      webLink: "https://revise-hub.com",
       logoUrl: "/placeholder.svg"
     }
   ];
@@ -53,7 +54,20 @@ const Partners = () => {
                     <Building2 className="w-10 h-10 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-primary mb-1">{partner.name}</h3>
+                    <h3 className="text-xl font-bold text-primary mb-1">
+                      {partner.webLink ? (
+                        <a 
+                          href={partner.webLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="hover:text-accent transition-colors"
+                        >
+                          {partner.name}
+                        </a>
+                      ) : (
+                        partner.name
+                      )}
+                    </h3>
                     {partner.role && (
                       <p className="text-accent mb-2 font-medium">{partner.role}</p>
                     )}
