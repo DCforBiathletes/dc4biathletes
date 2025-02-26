@@ -132,9 +132,6 @@ const Research = () => {
             Interested in collaborating on research projects? We're always looking
             for partners in advancing dual career knowledge.
           </p>
-          <Button className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
-            Contact Research Team <ArrowRight className="ml-2" />
-          </Button>
         </div>
       </section>
     </div>
