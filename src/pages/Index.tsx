@@ -1,3 +1,4 @@
+
 import { GraduationCap, Medal, Users, Clipboard, BookOpen, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatisticCard from "@/components/StatisticCard";
@@ -102,17 +103,6 @@ const Index = () => {
               <h3 className="font-bold text-primary mb-2">WP5: Impact</h3>
               <p className="text-primary/80 text-sm">Communication, dissemination, and sustainability planning</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Statistics Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <StatisticCard value="200+" label="Active Athletes" />
-            <StatisticCard value="95%" label="Program Completion Rate" />
-            <StatisticCard value="15+" label="Partner Universities" />
           </div>
         </div>
       </section>
