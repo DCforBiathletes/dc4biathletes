@@ -6,8 +6,20 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-[#E5DEFF] pt-16">
       {/* Hero Section */}
-      <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 animate-fade-in bg-[#0698d6]">
-        <div className="max-w-4xl mx-auto">
+      <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 animate-fade-in">
+        {/* Hero Image Container */}
+        <div className="absolute inset-0 w-full h-full">
+          <img
+            src="/lovable-uploads/5f6366a0-fe59-48da-9b22-ba964da04c01.png"
+            alt="Biathlon training session"
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-[#0698d6]/80"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="max-w-4xl mx-auto relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
             DC4Biathletes
           </h1>
