@@ -6,7 +6,7 @@ const Partners = () => {
     {
       name: "Institute of Sport",
       role: "Coordinator",
-      description: "[Description pending]",
+      description: "The Institute of Sport in Warsaw was established in 1977 as an independent research unit and has held the status of a National Research Institute since 2015. It employs around 80 people, including 20 researchers. Its motto, \"Science for sport, sport for science,\" reflects its mission to integrate scientific innovations into sports.\nThe Institute runs about 20 projects on education, sports governance, athlete support, data analysis, and training innovations. Since 2016, it has led the Team100 program, helping young athletes balance sports and education. It also coordinates Erasmus+ Sport projects.\nIts activities include sports research, diagnostics, consultancy for sports organizations, measurement tool development, certification of sports equipment, and training programs for coaches and managers.",
       logoUrl: "/placeholder.svg"
     },
     {
@@ -78,7 +78,7 @@ const Partners = () => {
                     {partner.role && (
                       <p className="text-accent mb-2 font-medium">{partner.role}</p>
                     )}
-                    <p className="text-primary/80">{partner.description}</p>
+                    <p className="text-primary/80 whitespace-pre-line">{partner.description}</p>
                   </div>
                 </div>
               </div>
