@@ -17,6 +17,7 @@ const Partners = () => {
     {
       name: "International Biathlon Union",
       description: "The International Biathlon Union (IBU) is the international governing body for the Olympic sport of biathlon, recognized by the International Olympic Committee (IOC). Headquartered in Anif, Austria, the IBU is a non-profit organization overseeing competition organization and sport regulation worldwide. In collaboration with its 63 member national federations, the IBU promotes and develops biathlon participation through competitions, events, programs, and educational initiatives.",
+      webLink: "https://www.biathlonworld.com",
       logoUrl: "/placeholder.svg"
     },
     {
