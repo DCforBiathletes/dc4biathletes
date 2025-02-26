@@ -35,12 +35,9 @@ const Index = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-primary mb-4">Project Objectives</h2>
-            <p className="text-primary/80 max-w-3xl mx-auto mb-8">
+            <p className="text-primary/80 max-w-3xl mx-auto">
               The DC4Biathletes project aims to create a strong support system that helps young biathletes 
               balance their sports careers with education and future career goals.
-            </p>
-            <p className="text-primary/80 max-w-3xl mx-auto">
-              The DC4Biathletes project aims to create a strong support system that helps biathletes balance their sports careers with education and future career goals. By analyzing existing dual career programs, the project aims to identify best practices and areas for improvement to ensure equal access to support for all athletes. It also aims to develop educational resources and career planning tools, including interactive digital learning materials, to help biathletes gain self-awareness, build essential skills, and make informed decisions about their future. Additionally, through comprehensive research, the project will enhance knowledge of dual career strategies, equipping young athletes with the tools needed to succeed in both sport and education.
             </p>
           </div>
 
