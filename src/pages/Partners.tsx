@@ -35,7 +35,7 @@ const Partners = () => {
 
   return (
     <div className="min-h-screen pt-16 bg-[#E5DEFF]">
-      <section className="relative py-32 bg-primary/90 before:absolute before:inset-0 before:z-0 before:bg-black/40">
+      <section className="relative py-32 bg-primary/70 before:absolute before:inset-0 before:z-0 before:bg-black/20">
         <div className="absolute inset-0 z-[-1]">
           <img
             src="/lovable-uploads/619c457c-792b-45d0-b4af-d399947f8b92.png"
