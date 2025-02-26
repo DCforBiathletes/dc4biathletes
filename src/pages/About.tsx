@@ -1,6 +1,5 @@
 
-import { Book, Users, Trophy, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Book, Users, Trophy } from "lucide-react";
 
 const About = () => {
   return (
@@ -92,9 +91,6 @@ const About = () => {
           <p className="text-xl text-primary/80 mb-8">
             Take the first step towards balancing your athletic and academic career
           </p>
-          <Button className="bg-accent hover:bg-accent/90 text-white text-lg px-8 py-6 rounded-full transition-all duration-300 shadow-lg">
-            Apply Now <ArrowRight className="ml-2" />
-          </Button>
         </div>
       </section>
     </div>
