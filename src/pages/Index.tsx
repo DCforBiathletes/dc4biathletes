@@ -1,3 +1,4 @@
+
 import { GraduationCap, Medal, Users, Clipboard, BookOpen, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatisticCard from "@/components/StatisticCard";
@@ -6,12 +7,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-[#E5DEFF] pt-16">
       {/* Hero Section */}
-      <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 animate-fade-in">
+      <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 animate-fade-in bg-[#0698d6]">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-primary mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
             DC4Biathletes
           </h1>
-          <p className="text-xl text-primary/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Supporting young biathletes in achieving excellence in both sports and education
           </p>
         </div>
