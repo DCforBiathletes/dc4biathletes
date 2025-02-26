@@ -1,6 +1,5 @@
 
 import { Smartphone, BookOpen, BarChart, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const App = () => {
   return (
@@ -60,9 +59,6 @@ const App = () => {
           <p className="text-primary/80 mb-8">
             Be the first to know when our mobile app launches. Subscribe to our newsletter for updates.
           </p>
-          <Button className="bg-primary text-white hover:bg-primary/80">
-            Join Waitlist
-          </Button>
         </div>
       </section>
     </div>
