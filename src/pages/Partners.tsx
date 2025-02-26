@@ -27,7 +27,7 @@ const Partners = () => {
     {
       name: "Re:vise Hub",
       role: "Digital Development",
-      description: "Re:vise Hub is a pioneering digital agency based in Ljubljana, empowering organizations through innovative digital solutions. With a focus on delivering exceptional digital experiences, Re:vise Hub combines creative design with cutting-edge technology to create impactful digital products that help organizations achieve their goals.",
+      description: "Re:vise Hub is a pioneering digital agency based in Espoo, Finland, empowering organizations through innovative digital solutions. With a focus on delivering exceptional digital experiences, Re:vise Hub combines creative design with cutting-edge technology to create impactful digital products that help organizations achieve their goals.",
       webLink: "https://revise-hub.com",
       logoUrl: "/placeholder.svg"
     }
