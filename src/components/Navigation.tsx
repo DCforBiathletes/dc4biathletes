@@ -21,7 +21,17 @@ const Navigation = () => {
     <>
       <nav className="fixed w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center h-16 gap-8">
+          <div className="flex items-center h-16 gap-4">
+            {/* Mobile menu button - now on the left */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X /> : <Menu />}
+            </Button>
+            
             <Link to="/" className="flex-shrink-0">
               <img
                 src="./lovable-uploads/70b3aab8-8456-4835-a4f3-616cf7898fd3.png"
@@ -31,7 +41,7 @@ const Navigation = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-4 ml-4">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -42,16 +52,6 @@ const Navigation = () => {
                 </Link>
               ))}
             </div>
-
-            {/* Mobile menu button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="ml-auto md:hidden"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X /> : <Menu />}
-            </Button>
           </div>
 
           {/* Mobile Navigation */}
