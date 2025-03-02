@@ -132,6 +132,24 @@ const Research = () => {
             Interested in collaborating on research projects? We're always looking
             for partners in advancing dual career knowledge.
           </p>
+          
+          {/* Athletes Survey Button */}
+          <div className="mt-8">
+            <h3 className="text-2xl font-semibold text-primary mb-4">Participate in Our Research</h3>
+            <p className="text-lg text-primary/80 mb-6">
+              Are you a biathlete? Help us improve dual career support by taking our survey.
+            </p>
+            <a 
+              href="https://insp.qualtrics.com/jfe/form/SV_b7M8Zp7Gxv3f5u6" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block"
+            >
+              <Button className="px-8 py-6 text-lg bg-accent hover:bg-accent/90 text-white">
+                Take the Athletes Survey
+              </Button>
+            </a>
+          </div>
         </div>
       </section>
     </div>
