@@ -45,7 +45,7 @@ const Research = () => {
             rel="noopener noreferrer"
             className="inline-block"
           >
-            <Button className="px-8 py-6 text-lg bg-accent hover:bg-accent/90 text-white">
+            <Button className="px-8 py-6 text-lg bg-[#d3d800] hover:bg-[#d3d800]/90 text-primary font-bold">
               Take the Athletes Survey
             </Button>
           </a>
