@@ -30,6 +30,28 @@ const Research = () => {
         </div>
       </section>
 
+      {/* Athletes Survey Section - Moved here */}
+      <section className="py-16 px-4 bg-white/70 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-primary mb-6">
+            Participate in Our Research
+          </h2>
+          <p className="text-xl text-primary/80 mb-8">
+            Are you a biathlete? Help us improve dual career support by taking our survey.
+          </p>
+          <a 
+            href="https://insp.qualtrics.com/jfe/form/SV_b7M8Zp7Gxv3f5u6" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block"
+          >
+            <Button className="px-8 py-6 text-lg bg-accent hover:bg-accent/90 text-white">
+              Take the Athletes Survey
+            </Button>
+          </a>
+        </div>
+      </section>
+
       {/* Current Research Projects */}
       <section className="py-20 px-4 bg-white/50">
         <div className="max-w-6xl mx-auto">
@@ -132,24 +154,6 @@ const Research = () => {
             Interested in collaborating on research projects? We're always looking
             for partners in advancing dual career knowledge.
           </p>
-          
-          {/* Athletes Survey Button */}
-          <div className="mt-8">
-            <h3 className="text-2xl font-semibold text-primary mb-4">Participate in Our Research</h3>
-            <p className="text-lg text-primary/80 mb-6">
-              Are you a biathlete? Help us improve dual career support by taking our survey.
-            </p>
-            <a 
-              href="https://insp.qualtrics.com/jfe/form/SV_b7M8Zp7Gxv3f5u6" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
-              <Button className="px-8 py-6 text-lg bg-accent hover:bg-accent/90 text-white">
-                Take the Athletes Survey
-              </Button>
-            </a>
-          </div>
         </div>
       </section>
     </div>
