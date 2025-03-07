@@ -1,4 +1,3 @@
-
 import { GraduationCap, Medal, Users, Clipboard, BookOpen, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatisticCard from "@/components/StatisticCard";
@@ -123,7 +122,7 @@ const Index = () => {
       <section className="py-8 px-4 bg-[#1A1F2C] text-white text-sm text-center">
         <div className="max-w-4xl mx-auto">
           <p className="opacity-80">
-            "Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor the granting authority can be held responsible for them."
+            "Co-funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor the granting authority can be held responsible for them."
           </p>
         </div>
       </section>
