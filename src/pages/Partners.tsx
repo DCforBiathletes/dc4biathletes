@@ -11,8 +11,9 @@ const Partners = () => {
     },
     {
       name: "University of Ljubljana",
-      description: "[Description pending]",
-      logoUrl: "/placeholder.svg"
+      description: "The University of Ljubljana is Slovenia's premier educational and research institution, with a rich tradition dating back to 1919. It consists of 23 faculties and 3 art academies, offering education in the humanities, social sciences, natural sciences, and technical studies. With over 40,000 students, it ranks among the largest universities in Europe and has been consistently recognized for academic excellence and innovation in research and education.",
+      logoUrl: "/lovable-uploads/1fc87e4b-96da-474a-b069-96e25f9605b4.png",
+      webLink: "https://www.uni-lj.si/eng/"
     },
     {
       name: "International Biathlon Union",
@@ -63,9 +64,19 @@ const Partners = () => {
             {partners.map((partner, index) => (
               <div key={index} className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl p-8 shadow-lg">
                 <div className="flex items-start gap-6">
-                  <div className="w-20 h-20 bg-primary/5 rounded-lg flex items-center justify-center shrink-0">
-                    <Building2 className="w-10 h-10 text-primary" />
-                  </div>
+                  {partner.logoUrl === "/placeholder.svg" ? (
+                    <div className="w-20 h-20 bg-primary/5 rounded-lg flex items-center justify-center shrink-0">
+                      <Building2 className="w-10 h-10 text-primary" />
+                    </div>
+                  ) : (
+                    <div className="w-40 h-20 flex items-center justify-center shrink-0">
+                      <img 
+                        src={partner.logoUrl} 
+                        alt={`${partner.name} logo`}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
+                  )}
                   <div>
                     <h3 className="text-xl font-bold text-primary mb-1">
                       {partner.webLink ? (
