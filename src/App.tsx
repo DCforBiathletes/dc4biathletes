@@ -6,7 +6,6 @@ import Index from "@/pages/Index";
 import Research from "@/pages/Research";
 import Partners from "@/pages/Partners";
 import AppPage from "@/pages/App";
-import Workshops from "@/pages/Workshops";
 import News from "@/pages/News";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
@@ -24,7 +23,6 @@ function App() {
             <Route path="/research" element={<Research />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/app" element={<AppPage />} />
-            <Route path="/workshops" element={<Workshops />} />
             <Route path="/news" element={<News />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
