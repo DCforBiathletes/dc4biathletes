@@ -1,6 +1,7 @@
 
 import { BookOpen, ScrollText, Download, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 const Research = () => {
   return (
@@ -58,6 +59,14 @@ const Research = () => {
           <h2 className="text-3xl font-bold text-primary mb-8 text-center">
             Latest Publications
           </h2>
+          
+          <Alert className="mb-6 bg-accent/10 border-accent/20">
+            <AlertTitle className="text-accent-foreground font-bold">Coming Soon</AlertTitle>
+            <AlertDescription className="text-accent-foreground/90">
+              Our research publications are currently being finalized and will be available for download shortly.
+            </AlertDescription>
+          </Alert>
+          
           <div className="space-y-6">
             <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
               <div className="flex items-start gap-4">
