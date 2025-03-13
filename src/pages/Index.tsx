@@ -1,3 +1,4 @@
+
 import { GraduationCap, Medal, Users, Clipboard, BookOpen, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatisticCard from "@/components/StatisticCard";
@@ -82,25 +83,25 @@ const Index = () => {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-primary mb-12 text-center">Work Packages</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="p-6 bg-[#0698d6]/10 rounded-lg">
-              <h3 className="font-bold text-primary mb-2">WP1: Mapping Guidelines</h3>
-              <p className="text-primary/80 text-sm">Comprehensive review of EU and national-level dual career policies</p>
+            <div className="p-6 bg-[#0698d6] rounded-lg text-white">
+              <h3 className="font-bold mb-2">WP1: Mapping Guidelines</h3>
+              <p className="text-white/90 text-sm">Comprehensive review of EU and national-level dual career policies</p>
             </div>
-            <div className="p-6 bg-[#0698d6]/10 rounded-lg">
-              <h3 className="font-bold text-primary mb-2">WP2: Research</h3>
-              <p className="text-primary/80 text-sm">Studying barriers and challenges faced by young biathletes</p>
+            <div className="p-6 bg-[#0698d6] rounded-lg text-white">
+              <h3 className="font-bold mb-2">WP2: Research</h3>
+              <p className="text-white/90 text-sm">Studying barriers and challenges faced by young biathletes</p>
             </div>
-            <div className="p-6 bg-[#0698d6]/10 rounded-lg">
-              <h3 className="font-bold text-primary mb-2">WP3: Status Review</h3>
-              <p className="text-primary/80 text-sm">Examining current opportunities and best practices</p>
+            <div className="p-6 bg-[#0698d6] rounded-lg text-white">
+              <h3 className="font-bold mb-2">WP3: Status Review</h3>
+              <p className="text-white/90 text-sm">Examining current opportunities and best practices</p>
             </div>
-            <div className="p-6 bg-[#0698d6]/10 rounded-lg">
-              <h3 className="font-bold text-primary mb-2">WP4: Mobile App</h3>
-              <p className="text-primary/80 text-sm">Development of interactive support tools and resources</p>
+            <div className="p-6 bg-[#0698d6] rounded-lg text-white">
+              <h3 className="font-bold mb-2">WP4: Mobile App</h3>
+              <p className="text-white/90 text-sm">Development of interactive support tools and resources</p>
             </div>
-            <div className="p-6 bg-[#0698d6]/10 rounded-lg">
-              <h3 className="font-bold text-primary mb-2">WP5: Impact</h3>
-              <p className="text-primary/80 text-sm">Communication, dissemination, and sustainability planning</p>
+            <div className="p-6 bg-[#0698d6] rounded-lg text-white">
+              <h3 className="font-bold mb-2">WP5: Impact</h3>
+              <p className="text-white/90 text-sm">Communication, dissemination, and sustainability planning</p>
             </div>
           </div>
         </div>
