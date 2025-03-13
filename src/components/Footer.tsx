@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -37,15 +37,6 @@ const Footer = () => {
               aria-label="Instagram"
             >
               <Instagram className="w-6 h-6" />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors"
-              aria-label="Twitter"
-            >
-              <Twitter className="w-6 h-6" />
             </a>
             <a
               href="https://linkedin.com"
