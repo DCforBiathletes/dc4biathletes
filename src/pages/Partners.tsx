@@ -78,7 +78,7 @@ const Partners = () => {
                       />
                     </div>
                   )}
-                  <div>
+                  <div className="text-left">
                     <h3 className="text-xl font-bold text-primary mb-1">
                       {partner.webLink ? (
                         <a 
