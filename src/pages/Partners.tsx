@@ -7,7 +7,7 @@ const Partners = () => {
       name: "Institute of Sport",
       role: "Coordinator",
       description: "The Institute of Sport in Warsaw was established in 1977 as an independent research unit and has held the status of a National Research Institute since 2015. It employs around 80 people, including 20 researchers. Its motto, \"Science for sport, sport for science,\" reflects its mission to integrate scientific innovations into sports.\nThe Institute runs about 20 projects on education, sports governance, athlete support, data analysis, and training innovations. Since 2016, it has led the Team100 program, helping young athletes balance sports and education. It also coordinates Erasmus+ Sport projects.\nIts activities include sports research, diagnostics, consultancy for sports organizations, measurement tool development, certification of sports equipment, and training programs for coaches and managers.",
-      logoUrl: "/lovable-uploads/77d89634-8212-43fa-9ec8-07b6623bb61e.png",
+      logoUrl: "/lovable-uploads/2a462c3e-dc4f-4675-8db5-94b0d34cd2ab.png",
       webLink: "https://www.insp.pl"
     },
     {
@@ -33,7 +33,7 @@ const Partners = () => {
       role: "Digital Development",
       description: "Re:vise Hub is a pioneering digital agency based in Espoo, Finland, empowering organizations through innovative digital solutions. With a focus on delivering exceptional digital experiences, Re:vise Hub combines creative design with cutting-edge technology to create impactful digital products that help organizations achieve their goals.",
       webLink: "https://revise-hub.com",
-      logoUrl: "/lovable-uploads/2a462c3e-dc4f-4675-8db5-94b0d34cd2ab.png"
+      logoUrl: "/lovable-uploads/77d89634-8212-43fa-9ec8-07b6623bb61e.png"
     }
   ];
 
