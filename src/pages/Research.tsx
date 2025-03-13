@@ -1,4 +1,3 @@
-
 import { BookOpen, ScrollText, Download, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -15,9 +14,8 @@ const Research = () => {
             alt="Student studying on tablet"
             className="w-full h-full object-cover"
           />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-primary/70"></div>
-          <div className="absolute inset-0 bg-black/20"></div>
+          {/* Overlay - removed colored overlay, keeping only a subtle shadow for text readability */}
+          <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4">

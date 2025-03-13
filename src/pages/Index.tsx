@@ -14,8 +14,8 @@ const Index = () => {
             alt="Biathlon training session"
             className="w-full h-full object-cover"
           />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-[#0698d6]/80"></div>
+          {/* Overlay - removed colored overlay, keeping only a subtle shadow for text readability */}
+          <div className="absolute inset-0 bg-black/30"></div>
         </div>
         
         {/* Content */}
