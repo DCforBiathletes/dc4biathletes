@@ -1,5 +1,5 @@
 
-import { BookOpen, LineChart, UserSquare2, Download, ArrowRight, ScrollText } from "lucide-react";
+import { BookOpen, ScrollText, Download, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Research = () => {
@@ -30,7 +30,7 @@ const Research = () => {
         </div>
       </section>
 
-      {/* Athletes Survey Section - Moved here */}
+      {/* Athletes Survey Section */}
       <section className="py-16 px-4 bg-white/70 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-primary mb-6">
@@ -49,42 +49,6 @@ const Research = () => {
               Take the Athletes Survey
             </Button>
           </a>
-        </div>
-      </section>
-
-      {/* Current Research Projects */}
-      <section className="py-20 px-4 bg-white/50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-primary mb-12 text-center">
-            Current Research Projects
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg">
-              <LineChart className="w-12 h-12 text-accent mb-4" />
-              <h3 className="text-xl font-bold text-primary mb-2">
-                Performance Analysis
-              </h3>
-              <p className="text-primary/80 mb-4">
-                Studying the impact of academic commitments on athletic performance
-                and vice versa.
-              </p>
-              <Button variant="outline" className="mt-4 border-primary/20 text-primary hover:bg-primary/5">
-                Learn More <ArrowRight className="ml-2" />
-              </Button>
-            </div>
-            <div className="p-8 bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl shadow-lg">
-              <UserSquare2 className="w-12 h-12 text-accent mb-4" />
-              <h3 className="text-xl font-bold text-primary mb-2">
-                Career Development
-              </h3>
-              <p className="text-primary/80 mb-4">
-                Investigating long-term career outcomes for dual career athletes.
-              </p>
-              <Button variant="outline" className="mt-4 border-primary/20 text-primary hover:bg-primary/5">
-                Learn More <ArrowRight className="ml-2" />
-              </Button>
-            </div>
-          </div>
         </div>
       </section>
 
