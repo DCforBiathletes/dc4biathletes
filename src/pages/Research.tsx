@@ -1,3 +1,4 @@
+
 import { BookOpen, ScrollText, Download, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -44,7 +45,7 @@ const Research = () => {
             rel="noopener noreferrer"
             className="inline-block"
           >
-            <Button className="px-8 py-6 text-lg bg-[#d3d800] hover:bg-[#d3d800]/90 text-primary font-bold">
+            <Button className="px-8 py-6 text-lg bg-[#0698d6] hover:bg-[#0698d6]/90 text-white font-bold">
               Take the Athletes Survey
             </Button>
           </a>
@@ -58,7 +59,7 @@ const Research = () => {
             Latest Publications
           </h2>
           
-          <Alert className="mb-6 bg-accent/10 border-accent/20">
+          <Alert className="mb-6 bg-[#0698d6]/10 border-[#0698d6]/20">
             <AlertTitle className="text-accent-foreground font-bold">Coming Soon</AlertTitle>
             <AlertDescription className="text-accent-foreground/90">
               Our research publications are currently being finalized and will be available for download shortly.
@@ -68,7 +69,7 @@ const Research = () => {
           <div className="space-y-6">
             <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
               <div className="flex items-start gap-4">
-                <BookOpen className="w-8 h-8 text-accent shrink-0" />
+                <BookOpen className="w-8 h-8 text-[#0698d6] shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold text-primary">
                     Dual Career Support for Young Biathletes
@@ -91,7 +92,7 @@ const Research = () => {
 
             <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
               <div className="flex items-start gap-4">
-                <ScrollText className="w-8 h-8 text-accent shrink-0" />
+                <ScrollText className="w-8 h-8 text-[#0698d6] shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold text-primary">
                     Academic Performance in Elite Sports
@@ -116,7 +117,7 @@ const Research = () => {
       </section>
 
       {/* Research Collaboration */}
-      <section className="py-20 px-4 bg-primary/5">
+      <section className="py-20 px-4 bg-[#0698d6]/5">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-primary mb-6">
             Research Collaboration
