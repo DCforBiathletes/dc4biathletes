@@ -37,7 +37,7 @@ const Partners = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-16 bg-[#E5DEFF]">
+    <div className="min-h-screen pt-16 bg-[#06374f]">
       <section className="relative py-32">
         {/* Hero Image Container */}
         <div className="absolute inset-0">

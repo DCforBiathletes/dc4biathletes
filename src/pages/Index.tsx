@@ -4,7 +4,7 @@ import StatisticCard from "@/components/StatisticCard";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-[#E5DEFF] pt-16">
+    <div className="min-h-screen bg-[#06374f] pt-16">
       {/* Hero Section */}
       <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 animate-fade-in">
         {/* Hero Image Container */}

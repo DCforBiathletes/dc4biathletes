@@ -1,4 +1,3 @@
-
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +17,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16 bg-[#E5DEFF]">
+    <div className="min-h-screen pt-16 bg-[#06374f]">
       {/* Hero Section */}
       <section className="py-20 px-4 bg-[#0698d6]">
         <div className="max-w-4xl mx-auto text-center">
