@@ -96,7 +96,7 @@ const Partners = () => {
                     {partner.role && (
                       <p className="text-accent mb-2 font-medium">{partner.role}</p>
                     )}
-                    <p className="text-primary/80 whitespace-pre-line">{partner.description}</p>
+                    <p className="text-primary/80 whitespace-pre-line [text-wrap:balance]">{partner.description}</p>
                   </div>
                 </div>
               </div>
