@@ -23,8 +23,9 @@ const Partners = () => {
     },
     {
       name: "European Federation of Sport Psychology",
-      description: "[Description pending]",
-      logoUrl: "/placeholder.svg"
+      description: "FEPSAC (European Federation of Sport Psychology) is an organisation that promotes the development and application of sport and exercise psychology across Europe. It facilitates research, education, and professional practice in the field by organising conferences, publishing resources, and supporting collaboration among sport psychologists. FEPSAC also works to enhance the role of psychology in sports performance, athlete well-being, and coaching.",
+      logoUrl: "/lovable-uploads/8843b318-eb4b-4e98-91b7-9f5f894cd1e3.png",
+      webLink: "https://www.fepsac.com"
     },
     {
       name: "Re:vise Hub",
