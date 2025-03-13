@@ -5,7 +5,7 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 const Research = () => {
   return (
-    <div className="min-h-screen pt-16 bg-[#E5DEFF]">
+    <div className="min-h-screen pt-16 bg-[#06374f]">
       {/* Hero Section */}
       <section className="relative py-32">
         {/* Hero Image Container */}
