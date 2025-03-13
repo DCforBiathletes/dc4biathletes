@@ -10,8 +10,8 @@ const Research = () => {
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
-            src="/lovable-uploads/b8b2a470-2d02-4dff-bbfb-8dc75c8f8976.png"
-            alt="Athletes celebrating"
+            src="/lovable-uploads/099cd1db-83da-471c-b765-b7d78b2e840f.png"
+            alt="Student studying on tablet"
             className="w-full h-full object-cover"
           />
           {/* Overlay */}
