@@ -1,41 +1,39 @@
+
 import { Newspaper, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationItem, 
+  PaginationLink, 
+  PaginationNext, 
+  PaginationPrevious 
+} from "@/components/ui/pagination";
 
 const newsArticles = [
   {
     id: 1,
-    title: "2024 Program Applications Now Open",
-    date: "2024-03-15",
-    category: "Announcements",
-    excerpt: "Applications for the 2024-2025 academic year are now open. Apply before May 30th to secure your spot.",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 2,
-    title: "Success Story: Maria's Journey",
-    date: "2024-03-10",
-    category: "Success Stories",
-    excerpt: "Read about how Maria balanced her biathlon training while completing her engineering degree.",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 3,
-    title: "New Partnership with Alpine University",
-    date: "2024-03-05",
-    category: "Partnerships",
-    excerpt: "We're excited to announce our new partnership with Alpine University, expanding educational opportunities.",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 4,
-    title: "Winter Training Camp Highlights",
-    date: "2024-02-28",
+    title: "DC4Biathletes at the IBU Youth and Junior World Championships in Östersund",
+    date: "2025-03-10",
     category: "Events",
-    excerpt: "Check out the highlights from our recent winter training camp in the Alps.",
-    image: "/placeholder.svg",
-  },
+    excerpt: "From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Östersund, Sweden.",
+    content: `From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Östersund, Sweden. The initiative aimed to raise awareness about the importance of dual careers in biathlon and encourage athletes aged 18 and older to participate in the project's survey.
+
+The event provided a valuable opportunity to connect with young biathletes, coaches, and support teams worldwide. A dedicated DC4Biathletes stand was set up, featuring roll-ups, beach flags, and stickers, along with the recognized IBU Academy branding. Dagmara Gerasimuk, IBU Development Director, and Anna Kitzbichler, IBU Education Manager, were present at the stand to engage with athletes through one-on-one conversations and to give athletes access to the survey via tablets or their smartphones.
+
+To ensure maximum outreach, multiple communication channels were utilized, including:
+• Personal interactions and discussions with athletes, coaches, and team officials.
+• Announcements through the official event WhatsApp group.
+• Using personal connections within the biathlon community.
+• Presentation during workshops organized by the IBU Sustainability Department.
+
+To encourage participation, small incentives were provided to athletes who engaged with the project and completed the survey. As a result, 110 responses from 31 different countries were collected over the three days.
+
+The visit to Östersund marked a significant step in promoting the DC4Biathletes project within the biathlon community, enhancing awareness of dual career challenges, and gathering valuable data to improve support for young athletes.`,
+    image: "/lovable-uploads/ba54deb2-a7c1-4636-b8b9-5844630c315b.png",
+  }
 ];
 
 const News = () => {
@@ -56,34 +54,51 @@ const News = () => {
       {/* News Grid */}
       <section className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8">
             {newsArticles.map((article) => (
               <Card key={article.id} className="bg-white/80 backdrop-blur-sm border-primary/10 overflow-hidden hover:shadow-xl transition-shadow">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-48 object-cover"
-                />
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20">
-                      {article.category}
-                    </Badge>
-                    <div className="flex items-center text-sm text-primary/60">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {new Date(article.date).toLocaleDateString()}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover rounded-l-lg"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20">
+                        {article.category}
+                      </Badge>
+                      <div className="flex items-center text-sm text-primary/60">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {new Date(article.date).toLocaleDateString()}
+                      </div>
+                    </div>
+                    <h2 className="text-2xl font-bold text-primary mb-4">{article.title}</h2>
+                    <div className="prose text-primary/80 max-w-none mb-6">
+                      <p className="whitespace-pre-line">{article.content}</p>
                     </div>
                   </div>
-                  <CardTitle className="text-xl text-primary">{article.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-primary/80 mb-4">{article.excerpt}</p>
-                  <Button variant="link" className="text-accent hover:text-accent/80 p-0">
-                    Read More <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </CardContent>
+                </div>
               </Card>
             ))}
+          </div>
+          
+          <div className="mt-12">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#" isActive>1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </div>
         </div>
       </section>
