@@ -5,9 +5,9 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 const Research = () => {
   return (
-    <div className="min-h-screen pt-16 bg-[#06374f]">
+    <div className="min-h-screen pt-16 bg-[#06374f] w-full">
       {/* Hero Section */}
-      <section className="relative py-32">
+      <section className="relative py-32 w-full">
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
@@ -19,7 +19,7 @@ const Research = () => {
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+        <div className="relative z-10 container mx-auto text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Research & Publications
           </h1>
@@ -31,8 +31,8 @@ const Research = () => {
       </section>
 
       {/* Athletes Survey Section */}
-      <section className="py-16 px-4 bg-white/70 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-16 px-4 bg-white/70 backdrop-blur-sm w-full">
+        <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-primary mb-6">
             Participate in Our Research
           </h2>
@@ -53,8 +53,8 @@ const Research = () => {
       </section>
 
       {/* Latest Publications */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-20 px-4 w-full">
+        <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">
             Latest Publications
           </h2>
@@ -117,8 +117,8 @@ const Research = () => {
       </section>
 
       {/* Research Collaboration */}
-      <section className="py-20 px-4 bg-[#0698d6]/5">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-20 px-4 bg-[#0698d6]/5 w-full">
+        <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-6">
             Research Collaboration
           </h2>
