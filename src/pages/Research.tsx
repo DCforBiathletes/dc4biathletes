@@ -55,34 +55,34 @@ const Research = () => {
       {/* Latest Publications */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-primary mb-8 text-center">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
             Latest Publications
           </h2>
           
           <Alert className="mb-6 bg-[#0698d6]/10 border-[#0698d6]/20">
-            <AlertTitle className="text-accent-foreground font-bold">Coming Soon</AlertTitle>
-            <AlertDescription className="text-accent-foreground/90">
+            <AlertTitle className="text-white font-bold">Coming Soon</AlertTitle>
+            <AlertDescription className="text-white/90">
               Our research publications are currently being finalized and will be available for download shortly.
             </AlertDescription>
           </Alert>
           
           <div className="space-y-6">
-            <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
+            <div className="bg-white/20 backdrop-blur-sm border border-white/10 rounded-lg p-6 shadow-lg">
               <div className="flex items-start gap-4">
                 <BookOpen className="w-8 h-8 text-[#0698d6] shrink-0" />
                 <div>
-                  <h3 className="text-xl font-bold text-primary">
+                  <h3 className="text-xl font-bold text-white">
                     Dual Career Support for Young Biathletes
                   </h3>
-                  <p className="text-primary/80 mt-2">
+                  <p className="text-white/80 mt-2">
                     A comprehensive study on the effectiveness of dual career
                     support programs in biathlon.
                   </p>
                   <div className="mt-4 flex gap-4">
-                    <Button variant="outline" size="sm" className="border-primary/20 text-primary hover:bg-primary/5">
+                    <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
                       <Download className="mr-2" /> PDF
                     </Button>
-                    <Button variant="outline" size="sm" className="border-primary/20 text-primary hover:bg-primary/5">
+                    <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
                       Cite
                     </Button>
                   </div>
@@ -90,22 +90,22 @@ const Research = () => {
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
+            <div className="bg-white/20 backdrop-blur-sm border border-white/10 rounded-lg p-6 shadow-lg">
               <div className="flex items-start gap-4">
                 <ScrollText className="w-8 h-8 text-[#0698d6] shrink-0" />
                 <div>
-                  <h3 className="text-xl font-bold text-primary">
+                  <h3 className="text-xl font-bold text-white">
                     Academic Performance in Elite Sports
                   </h3>
-                  <p className="text-primary/80 mt-2">
+                  <p className="text-white/80 mt-2">
                     Analysis of academic achievement patterns among high-performance
                     biathletes.
                   </p>
                   <div className="mt-4 flex gap-4">
-                    <Button variant="outline" size="sm" className="border-primary/20 text-primary hover:bg-primary/5">
+                    <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
                       <Download className="mr-2" /> PDF
                     </Button>
-                    <Button variant="outline" size="sm" className="border-primary/20 text-primary hover:bg-primary/5">
+                    <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
                       Cite
                     </Button>
                   </div>
@@ -119,10 +119,10 @@ const Research = () => {
       {/* Research Collaboration */}
       <section className="py-20 px-4 bg-[#0698d6]/5">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-primary mb-6">
+          <h2 className="text-3xl font-bold text-white mb-6">
             Research Collaboration
           </h2>
-          <p className="text-xl text-primary/80 mb-8">
+          <p className="text-xl text-white/80 mb-8">
             Interested in collaborating on research projects? We're always looking
             for partners in advancing dual career knowledge.
           </p>
