@@ -3,9 +3,48 @@ import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const partners = [
+    {
+      name: "Institute of Sport",
+      logoUrl: "/lovable-uploads/2a462c3e-dc4f-4675-8db5-94b0d34cd2ab.png",
+    },
+    {
+      name: "University of Ljubljana",
+      logoUrl: "/lovable-uploads/1fc87e4b-96da-474a-b069-96e25f9605b4.png",
+    },
+    {
+      name: "International Biathlon Union",
+      logoUrl: "/lovable-uploads/aa70bb33-4a8b-4d31-afcb-5e18ccd78873.png",
+    },
+    {
+      name: "European Federation of Sport Psychology",
+      logoUrl: "/lovable-uploads/8843b318-eb4b-4e98-91b7-9f5f894cd1e3.png",
+    },
+    {
+      name: "Re:vise Hub",
+      logoUrl: "/lovable-uploads/77d89634-8212-43fa-9ec8-07b6623bb61e.png",
+    }
+  ];
+
   return (
     <footer className="bg-primary/5 border-t border-primary/10">
       <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Partner Logos */}
+        <div className="mb-12">
+          <p className="text-center text-primary/80 mb-6 text-sm font-medium">Our Partners</p>
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            {partners.map((partner, index) => (
+              <div key={index} className="h-16 flex items-center">
+                <img
+                  src={partner.logoUrl}
+                  alt={`${partner.name} Logo`}
+                  className="max-h-full w-auto max-w-[120px] object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
           {/* Logo */}
           <div className="flex items-center">
