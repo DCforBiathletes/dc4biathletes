@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +14,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert";
 import emailjs from 'emailjs-com';
 
 const Contact = () => {
@@ -33,6 +38,25 @@ const Contact = () => {
     isConfigured: false
   });
   const [showConfig, setShowConfig] = useState(false);
+  const [showEmailInfo, setShowEmailInfo] = useState(false);
+
+  // Load saved config on component mount
+  useEffect(() => {
+    const savedConfig = localStorage.getItem('emailjs_config');
+    if (savedConfig) {
+      try {
+        const config = JSON.parse(savedConfig);
+        setEmailjsConfig({
+          serviceId: config.serviceId,
+          templateId: config.templateId,
+          userId: config.userId,
+          isConfigured: true
+        });
+      } catch (error) {
+        console.error("Error parsing saved EmailJS config:", error);
+      }
+    }
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -74,49 +98,25 @@ const Contact = () => {
       const { name, email, subject, message } = formValues;
       
       if (!emailjsConfig.isConfigured) {
-        const savedConfig = localStorage.getItem('emailjs_config');
-        if (savedConfig) {
-          const config = JSON.parse(savedConfig);
-          setEmailjsConfig({
-            ...config,
-            isConfigured: true
-          });
-          
-          // Send email using EmailJS
-          const templateParams = {
-            from_name: name,
-            reply_to: email,
-            subject: subject,
-            message: message
-          };
-          
-          await emailjs.send(
-            config.serviceId,
-            config.templateId,
-            templateParams,
-            config.userId
-          );
-        } else {
-          setShowConfig(true);
-          setIsSubmitting(false);
-          return;
-        }
-      } else {
-        // Send email using EmailJS
-        const templateParams = {
-          from_name: name,
-          reply_to: email,
-          subject: subject,
-          message: message
-        };
-        
-        await emailjs.send(
-          emailjsConfig.serviceId,
-          emailjsConfig.templateId,
-          templateParams,
-          emailjsConfig.userId
-        );
+        setShowConfig(true);
+        setIsSubmitting(false);
+        return;
       }
+      
+      // Send email using EmailJS
+      const templateParams = {
+        from_name: name,
+        reply_to: email,
+        subject: subject,
+        message: message
+      };
+      
+      await emailjs.send(
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        templateParams,
+        emailjsConfig.userId
+      );
       
       console.log(`Email sent to recipient:
         Name: ${name}
@@ -163,7 +163,7 @@ const Contact = () => {
             alt="Colorful code on screen"
             className="w-full h-full object-cover object-center"
           />
-          {/* Overlay with 15% transparency instead of 30% */}
+          {/* Overlay with 15% transparency */}
           <div className="absolute inset-0 bg-black/15"></div>
         </div>
 
@@ -183,15 +183,35 @@ const Contact = () => {
           <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => setShowConfig(true)}
-                className="text-xs"
-              >
-                Email Settings
-              </Button>
+              <div className="flex space-x-2">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => setShowEmailInfo(true)}
+                  className="text-xs"
+                >
+                  How It Works
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => setShowConfig(true)}
+                  className="text-xs"
+                >
+                  Email Settings
+                </Button>
+              </div>
             </div>
+
+            {!emailjsConfig.isConfigured && (
+              <Alert className="mb-6 bg-amber-50 border-amber-200">
+                <AlertTitle className="text-amber-800">Email Service Not Configured</AlertTitle>
+                <AlertDescription className="text-amber-700">
+                  Please click on "Email Settings" to configure your EmailJS credentials before sending messages.
+                </AlertDescription>
+              </Alert>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-primary/90">Name</Label>
@@ -249,7 +269,7 @@ const Contact = () => {
               <Button 
                 type="submit" 
                 className="w-full bg-accent hover:bg-accent/90 text-white shadow-lg hover:shadow-xl transition-all"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !emailjsConfig.isConfigured}
               >
                 {isSubmitting ? "Sending..." : "Send Message"} 
                 <Send className="ml-2 w-4 h-4" />
@@ -292,6 +312,39 @@ const Contact = () => {
               className="bg-accent hover:bg-accent/90"
             >
               Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Email Information Dialog */}
+      <Dialog open={showEmailInfo} onOpenChange={setShowEmailInfo}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>How Email Sending Works</DialogTitle>
+            <DialogDescription>
+              This contact form uses EmailJS to send messages. The sender email is configured in your EmailJS account, not directly in this form.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 text-sm">
+            <p>When a visitor completes this form:</p>
+            <ol className="list-decimal pl-5 space-y-2">
+              <li>Their message is sent via your EmailJS account</li>
+              <li>The email appears to come from the email address you configured in your EmailJS service</li>
+              <li>The visitor's email address is included as the reply-to address</li>
+            </ol>
+            <p className="font-medium mt-4">To set up EmailJS:</p>
+            <ol className="list-decimal pl-5 space-y-2">
+              <li>Create an account at <a href="https://www.emailjs.com" target="_blank" rel="noopener noreferrer" className="text-accent underline">EmailJS.com</a></li>
+              <li>Add an email service (Gmail, Outlook, etc.) in your EmailJS dashboard</li>
+              <li>Create an email template with variables: <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{{'{{'}}from_name{{'}}'}}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{{'{{'}}reply_to{{'}}'}}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{{'{{'}}subject{{'}}'}}</code>, and <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{{'{{'}}message{{'}}'}}</code></li>
+              <li>Enter your Service ID, Template ID, and User ID (public key) in the Email Settings</li>
+            </ol>
+          </div>
+          <DialogFooter className="mt-4">
+            <Button onClick={() => setShowEmailInfo(false)}>Close</Button>
+            <Button onClick={() => { setShowEmailInfo(false); setShowConfig(true); }} className="bg-accent hover:bg-accent/90">
+              Configure EmailJS
             </Button>
           </DialogFooter>
         </DialogContent>
