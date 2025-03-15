@@ -1,3 +1,4 @@
+
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,35 +14,117 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showThankYouDialog, setShowThankYouDialog] = useState(false);
+  const [formValues, setFormValues] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [emailjsConfig, setEmailjsConfig] = useState({
+    serviceId: '',
+    templateId: '',
+    userId: '',
+    isConfigured: false
+  });
+  const [showConfig, setShowConfig] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormValues(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleConfigSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    setEmailjsConfig({
+      serviceId: formData.get('serviceId') as string,
+      templateId: formData.get('templateId') as string,
+      userId: formData.get('userId') as string,
+      isConfigured: true
+    });
+    
+    localStorage.setItem('emailjs_config', JSON.stringify({
+      serviceId: formData.get('serviceId'),
+      templateId: formData.get('templateId'),
+      userId: formData.get('userId')
+    }));
+    
+    setShowConfig(false);
+    toast({
+      title: "Configuration Saved",
+      description: "EmailJS configuration has been saved successfully.",
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Get form data
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const subject = formData.get('subject') as string;
-    const message = formData.get('message') as string;
-    
-    // In a real implementation, this would send the email
-    // This is a simulation of sending an email
-    console.log(`Sending email to jouni@revise-hub.com with:
-      Name: ${name}
-      Email: ${email}
-      Subject: ${subject}
-      Message: ${message}
-    `);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Get form data
+      const { name, email, subject, message } = formValues;
+      
+      if (!emailjsConfig.isConfigured) {
+        const savedConfig = localStorage.getItem('emailjs_config');
+        if (savedConfig) {
+          const config = JSON.parse(savedConfig);
+          setEmailjsConfig({
+            ...config,
+            isConfigured: true
+          });
+          
+          // Send email using EmailJS
+          const templateParams = {
+            from_name: name,
+            reply_to: email,
+            subject: subject,
+            message: message
+          };
+          
+          await emailjs.send(
+            config.serviceId,
+            config.templateId,
+            templateParams,
+            config.userId
+          );
+        } else {
+          setShowConfig(true);
+          setIsSubmitting(false);
+          return;
+        }
+      } else {
+        // Send email using EmailJS
+        const templateParams = {
+          from_name: name,
+          reply_to: email,
+          subject: subject,
+          message: message
+        };
+        
+        await emailjs.send(
+          emailjsConfig.serviceId,
+          emailjsConfig.templateId,
+          templateParams,
+          emailjsConfig.userId
+        );
+      }
+      
+      console.log(`Email sent to recipient:
+        Name: ${name}
+        Email: ${email}
+        Subject: ${subject}
+        Message: ${message}
+      `);
+      
       toast({
         title: "Message Sent",
         description: "Thank you for your message. We'll get back to you soon!",
@@ -50,9 +133,23 @@ const Contact = () => {
       // Show thank you dialog
       setShowThankYouDialog(true);
       
-      // Reset form
-      e.currentTarget.reset();
-    }, 1000);
+      // Reset form values
+      setFormValues({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send your message. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -84,7 +181,17 @@ const Contact = () => {
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-primary mb-6">Send us a Message</h2>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowConfig(true)}
+                className="text-xs"
+              >
+                Email Settings
+              </Button>
+            </div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-primary/90">Name</Label>
@@ -94,6 +201,8 @@ const Contact = () => {
                   placeholder="Your name"
                   required
                   className="bg-white/80 border-primary/20 focus:border-accent"
+                  value={formValues.name}
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -106,6 +215,8 @@ const Contact = () => {
                   placeholder="Your email"
                   required
                   className="bg-white/80 border-primary/20 focus:border-accent"
+                  value={formValues.email}
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -117,6 +228,8 @@ const Contact = () => {
                   placeholder="Message subject"
                   required
                   className="bg-white/80 border-primary/20 focus:border-accent"
+                  value={formValues.subject}
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -128,6 +241,8 @@ const Contact = () => {
                   placeholder="Your message"
                   required
                   className="w-full min-h-[150px] bg-white/80 border-primary/20 focus:border-accent focus-visible:ring-accent/50"
+                  value={formValues.message}
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -179,6 +294,54 @@ const Contact = () => {
               Close
             </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Email Configuration Dialog */}
+      <Dialog open={showConfig} onOpenChange={setShowConfig}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Email Service Configuration</DialogTitle>
+            <DialogDescription>
+              Enter your EmailJS credentials to enable email sending functionality.
+              You'll need to create a free account at <a href="https://www.emailjs.com" target="_blank" rel="noopener noreferrer" className="text-accent underline">EmailJS.com</a>
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleConfigSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="serviceId">Service ID</Label>
+              <Input 
+                id="serviceId" 
+                name="serviceId" 
+                placeholder="e.g., service_xxxxxxx" 
+                required 
+                defaultValue={emailjsConfig.serviceId}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="templateId">Template ID</Label>
+              <Input 
+                id="templateId" 
+                name="templateId" 
+                placeholder="e.g., template_xxxxxxx" 
+                required 
+                defaultValue={emailjsConfig.templateId}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="userId">User ID (Public Key)</Label>
+              <Input 
+                id="userId" 
+                name="userId" 
+                placeholder="e.g., user_xxxxxxxxxxxxxxxxx" 
+                required 
+                defaultValue={emailjsConfig.userId}
+              />
+            </div>
+            <DialogFooter>
+              <Button type="submit">Save Configuration</Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </div>
