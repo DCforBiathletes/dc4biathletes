@@ -59,7 +59,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen pt-16 bg-[#06374f]">
       {/* Hero Section with Image */}
-      <section className="relative py-32">
+      <section className="relative py-16">
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
