@@ -1,5 +1,4 @@
-
-import { Send, HelpCircle } from "lucide-react";
+import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -40,7 +39,6 @@ const Contact = () => {
   const [showConfig, setShowConfig] = useState(false);
   const [showEmailInfo, setShowEmailInfo] = useState(false);
 
-  // Load saved config on component mount
   useEffect(() => {
     const savedConfig = localStorage.getItem('emailjs_config');
     if (savedConfig) {
@@ -94,7 +92,6 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Get form data
       const { name, email, subject, message } = formValues;
       
       if (!emailjsConfig.isConfigured) {
@@ -103,7 +100,6 @@ const Contact = () => {
         return;
       }
       
-      // Send email using EmailJS
       const templateParams = {
         from_name: name,
         reply_to: email,
@@ -130,10 +126,8 @@ const Contact = () => {
         description: "Thank you for your message. We'll get back to you soon!",
       });
       
-      // Show thank you dialog
       setShowThankYouDialog(true);
       
-      // Reset form values
       setFormValues({
         name: '',
         email: '',
@@ -154,16 +148,13 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-16 bg-[#06374f]">
-      {/* Hero Section with Image */}
       <section className="relative py-16">
-        {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=1920&q=80"
             alt="Colorful code on screen"
             className="w-full h-full object-cover object-center"
           />
-          {/* Overlay with 15% transparency */}
           <div className="absolute inset-0 bg-black/15"></div>
         </div>
 
@@ -177,21 +168,11 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form */}
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
-            <div className="flex justify-between items-center mb-6">
+            <div className="mb-6">
               <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => setShowEmailInfo(true)}
-                className="text-xs flex items-center"
-              >
-                <HelpCircle className="mr-1 h-3 w-3" />
-                How It Works
-              </Button>
             </div>
 
             {!emailjsConfig.isConfigured && (
@@ -270,7 +251,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Thank You Dialog */}
       <Dialog open={showThankYouDialog} onOpenChange={setShowThankYouDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -308,7 +288,6 @@ const Contact = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Email Information Dialog */}
       <Dialog open={showEmailInfo} onOpenChange={setShowEmailInfo}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -341,7 +320,6 @@ const Contact = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Email Configuration Dialog */}
       <Dialog open={showConfig} onOpenChange={setShowConfig}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
