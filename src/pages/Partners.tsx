@@ -47,8 +47,8 @@ const Partners = () => {
             alt="Partners meeting"
             className="w-full h-full object-cover"
           />
-          {/* Overlay - removed colored overlay, keeping only a subtle shadow for text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
+          {/* Overlay - updated to use the same 30% black transparency as other pages */}
+          <div className="absolute inset-0 bg-black/30"></div>
         </div>
 
         <div className="relative z-10 container mx-auto text-center px-4">
