@@ -337,7 +337,7 @@ const Contact = () => {
             <ol className="list-decimal pl-5 space-y-2">
               <li>Create an account at <a href="https://www.emailjs.com" target="_blank" rel="noopener noreferrer" className="text-accent underline">EmailJS.com</a></li>
               <li>Add an email service (Gmail, Outlook, etc.) in your EmailJS dashboard</li>
-              <li>Create an email template with variables: <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{{'{{'}}from_name{{'}}'}}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{{'{{'}}reply_to{{'}}'}}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{{'{{'}}subject{{'}}'}}</code>, and <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{{'{{'}}message{{'}}'}}</code></li>
+              <li>Create an email template with variables: <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{from_name}}"}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{reply_to}}"}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{subject}}"}</code>, and <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{message}}"}</code></li>
               <li>Enter your Service ID, Template ID, and User ID (public key) in the Email Settings</li>
             </ol>
           </div>
