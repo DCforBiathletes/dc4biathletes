@@ -38,7 +38,7 @@ const Contact = () => {
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
   
-  // Set a valid recipient email address here
+  // Hard-code the recipient email directly
   const RECIPIENT_EMAIL = "dc4biathletes@gmail.com";
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const Contact = () => {
     try {
       const { name, email, subject, message } = formValues;
       
-      // Make sure we explicitly set to_email in the template parameters
+      // Explicitly include to_email as a direct string in templateParams
       const templateParams = {
         from_name: name,
         from_email: email,
@@ -69,7 +69,7 @@ const Contact = () => {
         subject: subject,
         message: message,
         to_name: "DC4Biathletes Team",
-        to_email: RECIPIENT_EMAIL // This ensures the recipient email is set
+        to_email: RECIPIENT_EMAIL
       };
       
       console.log("Sending email with params:", templateParams);
@@ -78,9 +78,10 @@ const Contact = () => {
         templateId: emailjsConfig.templateId
       });
       
+      // Using explicit string values for service/template IDs to ensure no undefined values
       const response = await emailjs.send(
-        emailjsConfig.serviceId,
-        emailjsConfig.templateId,
+        'service_dr8f4vk',
+        'template_1u4cu5f',
         templateParams
       );
       
