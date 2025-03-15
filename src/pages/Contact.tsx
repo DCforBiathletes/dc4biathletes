@@ -63,9 +63,9 @@ const Contact = () => {
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=1920&q=80"
-            alt="People collaborating"
-            className="w-full h-full object-cover"
+            src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=1920&q=80"
+            alt="Colorful code on screen"
+            className="w-full h-full object-cover object-center"
           />
           {/* Overlay with same transparency as other pages */}
           <div className="absolute inset-0 bg-black/30"></div>
