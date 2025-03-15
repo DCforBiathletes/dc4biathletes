@@ -14,8 +14,11 @@ import { PrivacyPolicyDialog } from "@/components/PrivacyPolicyDialog";
 import "./App.css";
 
 function App() {
+  // Get the base URL from the document or default to "/"
+  const baseUrl = document.querySelector('base')?.getAttribute('href') || '/';
+
   return (
-    <Router>
+    <Router basename={baseUrl}>
       <div className="flex flex-col min-h-screen">
         <Navigation />
         <main className="flex-grow">
