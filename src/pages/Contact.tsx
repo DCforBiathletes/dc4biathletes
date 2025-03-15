@@ -41,9 +41,10 @@ const Contact = () => {
 
   // Initialize EmailJS when component mounts
   useEffect(() => {
-    emailjs.init(emailjsConfig.userId);
-    console.log("EmailJS initialized with user ID:", emailjsConfig.userId);
-  }, [emailjsConfig.userId]);
+    // For EmailJS v3, we need to set the public key before sending emails
+    emailjs.init("vPrSFwIfO2--Bf-TN");
+    console.log("EmailJS initialized with public key");
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -71,15 +72,15 @@ const Contact = () => {
       console.log("Sending email with params:", templateParams);
       console.log("Using config:", {
         serviceId: emailjsConfig.serviceId,
-        templateId: emailjsConfig.templateId,
-        userId: emailjsConfig.userId
+        templateId: emailjsConfig.templateId
       });
       
+      // For EmailJS v3, we use only service ID and template ID in the send method
+      // The public key is already set with emailjs.init()
       const response = await emailjs.send(
         emailjsConfig.serviceId,
         emailjsConfig.templateId,
-        templateParams,
-        emailjsConfig.userId
+        templateParams
       );
       
       console.log("EmailJS response:", response);
