@@ -1,4 +1,3 @@
-
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,15 +32,12 @@ const Contact = () => {
   });
   const [emailjsConfig] = useState({
     serviceId: 'service_dr8f4vk',
-    templateId: 'template_gnn88ur',
-    userId: 'jQdYKgoxSCX5YIQFOvMKp',
+    templateId: 'template_o8j5j59',
     isConfigured: true
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
 
-  // Initialize EmailJS when component mounts
   useEffect(() => {
-    // For EmailJS v3, we need to set the public key before sending emails
     emailjs.init("vPrSFwIfO2--Bf-TN");
     console.log("EmailJS initialized with public key");
   }, []);
@@ -63,7 +59,7 @@ const Contact = () => {
       
       const templateParams = {
         from_name: name,
-        from_email: email, // Make sure this matches your template parameter
+        from_email: email,
         reply_to: email,
         subject: subject,
         message: message
@@ -75,8 +71,6 @@ const Contact = () => {
         templateId: emailjsConfig.templateId
       });
       
-      // For EmailJS v3, we use only service ID and template ID in the send method
-      // The public key is already set with emailjs.init()
       const response = await emailjs.send(
         emailjsConfig.serviceId,
         emailjsConfig.templateId,
