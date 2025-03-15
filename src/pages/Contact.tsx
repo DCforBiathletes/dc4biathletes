@@ -58,9 +58,20 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-16 bg-[#06374f]">
-      {/* Hero Section */}
-      <section className="py-20 px-4 bg-[#0698d6]">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Hero Section with Image */}
+      <section className="relative py-32">
+        {/* Hero Image Container */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=1920&q=80"
+            alt="People collaborating"
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay with same transparency as other pages */}
+          <div className="absolute inset-0 bg-black/30"></div>
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Get in Touch
           </h1>
