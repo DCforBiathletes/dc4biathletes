@@ -1,5 +1,5 @@
 
-import { Send } from "lucide-react";
+import { Send, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -181,8 +181,17 @@ const Contact = () => {
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
-            <div className="mb-6">
+            <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowEmailInfo(true)}
+                className="text-xs flex items-center"
+              >
+                <HelpCircle className="mr-1 h-3 w-3" />
+                How It Works
+              </Button>
             </div>
 
             {!emailjsConfig.isConfigured && (
