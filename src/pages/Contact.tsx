@@ -38,8 +38,8 @@ const Contact = () => {
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
   
-  // Set your recipient email address here - replace this with your actual email
-  const RECIPIENT_EMAIL = "your.email@example.com";
+  // Set a valid recipient email address here
+  const RECIPIENT_EMAIL = "dc4biathletes@gmail.com";
 
   useEffect(() => {
     emailjs.init("vPrSFwIfO2--Bf-TN");
@@ -68,8 +68,8 @@ const Contact = () => {
         reply_to: email,
         subject: subject,
         message: message,
-        to_name: "DC4Biathletes Team", // Adding a recipient name
-        to_email: RECIPIENT_EMAIL // This is crucial - the recipient email
+        to_name: "DC4Biathletes Team",
+        to_email: RECIPIENT_EMAIL // This ensures the recipient email is set
       };
       
       console.log("Sending email with params:", templateParams);
