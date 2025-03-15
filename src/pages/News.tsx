@@ -46,7 +46,7 @@ const News = () => {
           <img
             src="/lovable-uploads/68663ed8-5147-47c9-9b3a-cb6468b2e6e1.png"
             alt="Athletes posing together"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
           {/* Overlay - using the same transparency as home page */}
           <div className="absolute inset-0 bg-black/30"></div>
