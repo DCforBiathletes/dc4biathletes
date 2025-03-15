@@ -1,4 +1,3 @@
-
 import { BookOpen, ScrollText, Download, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -15,8 +14,8 @@ const Research = () => {
             alt="Research notebook with coffee"
             className="w-full h-full object-cover"
           />
-          {/* Overlay - using the same transparency as home page */}
-          <div className="absolute inset-0 bg-black/30"></div>
+          {/* Overlay - updated to use 15% black transparency instead of 30% */}
+          <div className="absolute inset-0 bg-black/15"></div>
         </div>
 
         <div className="relative z-10 container mx-auto text-center px-4">

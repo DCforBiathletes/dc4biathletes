@@ -1,4 +1,3 @@
-
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,8 +66,8 @@ const Contact = () => {
             alt="Colorful code on screen"
             className="w-full h-full object-cover object-center"
           />
-          {/* Overlay with same transparency as other pages */}
-          <div className="absolute inset-0 bg-black/30"></div>
+          {/* Overlay with 15% transparency instead of 30% */}
+          <div className="absolute inset-0 bg-black/15"></div>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4">

@@ -1,4 +1,3 @@
-
 import { Smartphone, BookOpen, BarChart, Users } from "lucide-react";
 
 const App = () => {
@@ -13,8 +12,8 @@ const App = () => {
             alt="Person working on mobile app development"
             className="w-full h-full object-cover object-center"
           />
-          {/* Overlay with transparency */}
-          <div className="absolute inset-0 bg-black/30"></div>
+          {/* Overlay with transparency updated to 15% */}
+          <div className="absolute inset-0 bg-black/15"></div>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
