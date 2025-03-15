@@ -11,12 +11,12 @@ const Research = () => {
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
-            src="/lovable-uploads/099cd1db-83da-471c-b765-b7d78b2e840f.png"
-            alt="Student studying on tablet"
+            src="/lovable-uploads/68663ed8-5147-47c9-9b3a-cb6468b2e6e1.png"
+            alt="Athletes posing together"
             className="w-full h-full object-cover"
           />
-          {/* Overlay - removed colored overlay, keeping only a subtle shadow for text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
+          {/* Overlay - using the same transparency as home page */}
+          <div className="absolute inset-0 bg-black/30"></div>
         </div>
 
         <div className="relative z-10 container mx-auto text-center px-4">

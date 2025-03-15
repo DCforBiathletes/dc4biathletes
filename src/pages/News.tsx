@@ -40,8 +40,19 @@ const News = () => {
   return (
     <div className="min-h-screen pt-16 bg-[#06374f]">
       {/* Hero Section */}
-      <section className="py-20 px-4 bg-[#0698d6]">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-20 px-4 relative">
+        {/* Hero Image Container */}
+        <div className="absolute inset-0">
+          <img
+            src="/lovable-uploads/43cf9540-21e1-4ae1-b121-37dbf314f79d.png"
+            alt="Research notebook with coffee"
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay - using the same transparency as home page */}
+          <div className="absolute inset-0 bg-black/30"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Latest News & Updates
           </h1>
