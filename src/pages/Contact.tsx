@@ -37,8 +37,9 @@ const Contact = () => {
     isConfigured: true
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
-  // Default recipient email - this should be replaced with your actual contact email
-  const RECIPIENT_EMAIL = "contact@example.com";
+  
+  // Set your recipient email address here - replace this with your actual email
+  const RECIPIENT_EMAIL = "your.email@example.com";
 
   useEffect(() => {
     emailjs.init("vPrSFwIfO2--Bf-TN");
@@ -60,13 +61,15 @@ const Contact = () => {
     try {
       const { name, email, subject, message } = formValues;
       
+      // Make sure we explicitly set to_email in the template parameters
       const templateParams = {
         from_name: name,
         from_email: email,
         reply_to: email,
         subject: subject,
         message: message,
-        to_email: RECIPIENT_EMAIL // Add recipient email for EmailJS
+        to_name: "DC4Biathletes Team", // Adding a recipient name
+        to_email: RECIPIENT_EMAIL // This is crucial - the recipient email
       };
       
       console.log("Sending email with params:", templateParams);
