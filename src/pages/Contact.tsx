@@ -181,26 +181,8 @@ const Contact = () => {
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
-            <div className="flex justify-between items-center mb-6">
+            <div className="mb-6">
               <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
-              <div className="flex space-x-2">
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => setShowEmailInfo(true)}
-                  className="text-xs"
-                >
-                  How It Works
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => setShowConfig(true)}
-                  className="text-xs"
-                >
-                  Email Settings
-                </Button>
-              </div>
             </div>
 
             {!emailjsConfig.isConfigured && (
