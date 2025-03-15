@@ -1,4 +1,3 @@
-
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,7 +33,7 @@ const Contact = () => {
   const [emailjsConfig] = useState({
     serviceId: 'service_dr8f4vk',
     templateId: 'template_gnn88ur',
-    userId: 'dQMnd7xOnA6jnGFh3',
+    userId: 'vPrSFwIfO2--Bf-TN',
     isConfigured: true
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
