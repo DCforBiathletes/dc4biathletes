@@ -33,7 +33,7 @@ const Contact = () => {
   const [emailjsConfig] = useState({
     serviceId: 'service_dr8f4vk',
     templateId: 'template_gnn88ur',
-    userId: 'vPrSFwIfO2--Bf-TN',
+    userId: 'jQdYKgoxSCX5YIQFOvMKp',
     isConfigured: true
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
