@@ -4,8 +4,20 @@ import { Smartphone, BookOpen, BarChart, Users } from "lucide-react";
 const App = () => {
   return (
     <div className="min-h-screen pt-16 bg-[#06374f]">
-      <section className="py-20 px-4 bg-[#0698d6]">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Hero Section with Image */}
+      <section className="relative py-16">
+        {/* Hero Image Container */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1920&q=80"
+            alt="Person working on mobile app development"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Overlay with transparency */}
+          <div className="absolute inset-0 bg-black/30"></div>
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
           <div className="inline-block p-2 bg-white/10 text-white rounded-full mb-6">
             Coming Soon!
           </div>
