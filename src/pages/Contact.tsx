@@ -37,6 +37,8 @@ const Contact = () => {
     isConfigured: true
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
+  // Default recipient email - this should be replaced with your actual contact email
+  const RECIPIENT_EMAIL = "contact@example.com";
 
   useEffect(() => {
     emailjs.init("vPrSFwIfO2--Bf-TN");
@@ -63,7 +65,8 @@ const Contact = () => {
         from_email: email,
         reply_to: email,
         subject: subject,
-        message: message
+        message: message,
+        to_email: RECIPIENT_EMAIL // Add recipient email for EmailJS
       };
       
       console.log("Sending email with params:", templateParams);
@@ -84,6 +87,7 @@ const Contact = () => {
         Email: ${email}
         Subject: ${subject}
         Message: ${message}
+        To: ${RECIPIENT_EMAIL}
       `);
       
       toast({
