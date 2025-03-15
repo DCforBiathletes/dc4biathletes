@@ -38,8 +38,8 @@ const Partners = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-16 bg-[#06374f]">
-      <section className="relative py-32">
+    <div className="min-h-screen pt-16 bg-[#06374f] w-full">
+      <section className="relative py-32 w-full">
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
@@ -51,7 +51,7 @@ const Partners = () => {
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+        <div className="relative z-10 container mx-auto text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Partners</h1>
           <p className="text-xl text-white/90 mb-8">
             Working together to support dual careers in biathlon
@@ -59,27 +59,32 @@ const Partners = () => {
         </div>
       </section>
 
-      <section className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-12 px-4 w-full">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {partners.map((partner, index) => (
               <div key={index} className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl p-8 shadow-lg">
-                <div className="flex items-start gap-6">
-                  {partner.logoUrl ? (
-                    <div className="w-40 h-20 flex items-center justify-center shrink-0">
-                      <img 
-                        src={partner.logoUrl} 
-                        alt={`${partner.name} logo`}
-                        className="max-w-full max-h-full object-contain"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-20 h-20 bg-primary/5 rounded-lg flex items-center justify-center shrink-0">
-                      <Building2 className="w-10 h-10 text-primary" />
-                    </div>
-                  )}
-                  <div className="text-left">
-                    <h3 className="text-xl font-bold text-primary mb-1">
+                <div className="flex flex-col items-center gap-6">
+                  {/* Logo section - moved to the top */}
+                  <div className="w-full flex justify-center mb-4">
+                    {partner.logoUrl ? (
+                      <div className="w-48 h-28 flex items-center justify-center">
+                        <img 
+                          src={partner.logoUrl} 
+                          alt={`${partner.name} logo`}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-28 h-28 bg-primary/5 rounded-lg flex items-center justify-center">
+                        <Building2 className="w-12 h-12 text-primary" />
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Text content section */}
+                  <div className="text-center">
+                    <h3 className="text-2xl font-bold text-primary mb-2">
                       {partner.webLink ? (
                         <a 
                           href={partner.webLink} 
@@ -94,7 +99,7 @@ const Partners = () => {
                       )}
                     </h3>
                     {partner.role && (
-                      <p className="text-accent mb-2 font-medium">{partner.role}</p>
+                      <p className="text-accent mb-3 font-medium">{partner.role}</p>
                     )}
                     <p className="text-primary/80 whitespace-pre-line [text-wrap:balance]">{partner.description}</p>
                   </div>
