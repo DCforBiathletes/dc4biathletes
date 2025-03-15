@@ -1,3 +1,4 @@
+
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,31 +31,13 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  const [emailjsConfig, setEmailjsConfig] = useState({
-    serviceId: '',
-    templateId: '',
-    userId: '',
-    isConfigured: false
+  const [emailjsConfig] = useState({
+    serviceId: 'service_dr8f4vk',
+    templateId: 'template_gnn88ur',
+    userId: 'dQMnd7xOnA6jnGFh3',
+    isConfigured: true
   });
-  const [showConfig, setShowConfig] = useState(false);
   const [showEmailInfo, setShowEmailInfo] = useState(false);
-
-  useEffect(() => {
-    const savedConfig = localStorage.getItem('emailjs_config');
-    if (savedConfig) {
-      try {
-        const config = JSON.parse(savedConfig);
-        setEmailjsConfig({
-          serviceId: config.serviceId,
-          templateId: config.templateId,
-          userId: config.userId,
-          isConfigured: true
-        });
-      } catch (error) {
-        console.error("Error parsing saved EmailJS config:", error);
-      }
-    }
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -64,41 +47,12 @@ const Contact = () => {
     }));
   };
 
-  const handleConfigSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    setEmailjsConfig({
-      serviceId: formData.get('serviceId') as string,
-      templateId: formData.get('templateId') as string,
-      userId: formData.get('userId') as string,
-      isConfigured: true
-    });
-    
-    localStorage.setItem('emailjs_config', JSON.stringify({
-      serviceId: formData.get('serviceId'),
-      templateId: formData.get('templateId'),
-      userId: formData.get('userId')
-    }));
-    
-    setShowConfig(false);
-    toast({
-      title: "Configuration Saved",
-      description: "EmailJS configuration has been saved successfully.",
-    });
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
       const { name, email, subject, message } = formValues;
-      
-      if (!emailjsConfig.isConfigured) {
-        setShowConfig(true);
-        setIsSubmitting(false);
-        return;
-      }
       
       const templateParams = {
         from_name: name,
@@ -175,15 +129,6 @@ const Contact = () => {
               <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
             </div>
 
-            {!emailjsConfig.isConfigured && (
-              <Alert className="mb-6 bg-amber-50 border-amber-200">
-                <AlertTitle className="text-amber-800">Email Service Not Configured</AlertTitle>
-                <AlertDescription className="text-amber-700">
-                  Please click on "Email Settings" to configure your EmailJS credentials before sending messages.
-                </AlertDescription>
-              </Alert>
-            )}
-
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-primary/90">Name</Label>
@@ -241,7 +186,7 @@ const Contact = () => {
               <Button 
                 type="submit" 
                 className="w-full bg-accent hover:bg-accent/90 text-white shadow-lg hover:shadow-xl transition-all"
-                disabled={isSubmitting || !emailjsConfig.isConfigured}
+                disabled={isSubmitting}
               >
                 {isSubmitting ? "Sending..." : "Send Message"} 
                 <Send className="ml-2 w-4 h-4" />
@@ -308,62 +253,11 @@ const Contact = () => {
               <li>Create an account at <a href="https://www.emailjs.com" target="_blank" rel="noopener noreferrer" className="text-accent underline">EmailJS.com</a></li>
               <li>Add an email service (Gmail, Outlook, etc.) in your EmailJS dashboard</li>
               <li>Create an email template with variables: <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{from_name}}"}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{reply_to}}"}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{subject}}"}</code>, and <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{message}}"}</code></li>
-              <li>Enter your Service ID, Template ID, and User ID (public key) in the Email Settings</li>
             </ol>
           </div>
           <DialogFooter className="mt-4">
             <Button onClick={() => setShowEmailInfo(false)}>Close</Button>
-            <Button onClick={() => { setShowEmailInfo(false); setShowConfig(true); }} className="bg-accent hover:bg-accent/90">
-              Configure EmailJS
-            </Button>
           </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={showConfig} onOpenChange={setShowConfig}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Email Service Configuration</DialogTitle>
-            <DialogDescription>
-              Enter your EmailJS credentials to enable email sending functionality.
-              You'll need to create a free account at <a href="https://www.emailjs.com" target="_blank" rel="noopener noreferrer" className="text-accent underline">EmailJS.com</a>
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={handleConfigSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="serviceId">Service ID</Label>
-              <Input 
-                id="serviceId" 
-                name="serviceId" 
-                placeholder="e.g., service_xxxxxxx" 
-                required 
-                defaultValue={emailjsConfig.serviceId}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="templateId">Template ID</Label>
-              <Input 
-                id="templateId" 
-                name="templateId" 
-                placeholder="e.g., template_xxxxxxx" 
-                required 
-                defaultValue={emailjsConfig.templateId}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="userId">User ID (Public Key)</Label>
-              <Input 
-                id="userId" 
-                name="userId" 
-                placeholder="e.g., user_xxxxxxxxxxxxxxxxx" 
-                required 
-                defaultValue={emailjsConfig.userId}
-              />
-            </div>
-            <DialogFooter>
-              <Button type="submit">Save Configuration</Button>
-            </DialogFooter>
-          </form>
         </DialogContent>
       </Dialog>
     </div>
