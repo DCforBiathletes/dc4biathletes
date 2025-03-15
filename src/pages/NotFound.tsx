@@ -1,11 +1,12 @@
 
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, RefreshCw } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.error(
@@ -13,6 +14,14 @@ const NotFound = () => {
       location.pathname
     );
   }, [location.pathname]);
+
+  const handleRetry = () => {
+    window.location.reload();
+  };
+
+  const handleGoHome = () => {
+    navigate("/");
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#06374f] to-[#082f45] text-white">
@@ -28,11 +37,22 @@ const NotFound = () => {
           </p>
         </div>
         
-        <Link to="/">
-          <Button className="bg-accent hover:bg-accent/80 text-white">
+        <div className="flex justify-center gap-4">
+          <Button 
+            onClick={handleGoHome}
+            className="bg-accent hover:bg-accent/80 text-white"
+          >
             <ChevronLeft className="mr-2 h-4 w-4" /> Back to Home
           </Button>
-        </Link>
+          
+          <Button 
+            onClick={handleRetry} 
+            variant="outline" 
+            className="bg-transparent border-white text-white hover:bg-white/10"
+          >
+            <RefreshCw className="mr-2 h-4 w-4" /> Retry
+          </Button>
+        </div>
       </div>
     </div>
   );
