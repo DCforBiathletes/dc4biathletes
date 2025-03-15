@@ -11,8 +11,8 @@ const Research = () => {
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
-            src="/lovable-uploads/68663ed8-5147-47c9-9b3a-cb6468b2e6e1.png"
-            alt="Athletes posing together"
+            src="/lovable-uploads/43cf9540-21e1-4ae1-b121-37dbf314f79d.png"
+            alt="Research notebook with coffee"
             className="w-full h-full object-cover"
           />
           {/* Overlay - using the same transparency as home page */}
