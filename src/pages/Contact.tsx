@@ -1,3 +1,4 @@
+
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,6 +39,12 @@ const Contact = () => {
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
 
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    emailjs.init(emailjsConfig.userId);
+    console.log("EmailJS initialized with user ID:", emailjsConfig.userId);
+  }, [emailjsConfig.userId]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormValues(prev => ({
@@ -55,18 +62,27 @@ const Contact = () => {
       
       const templateParams = {
         from_name: name,
+        from_email: email, // Make sure this matches your template parameter
         reply_to: email,
         subject: subject,
         message: message
       };
       
-      await emailjs.send(
+      console.log("Sending email with params:", templateParams);
+      console.log("Using config:", {
+        serviceId: emailjsConfig.serviceId,
+        templateId: emailjsConfig.templateId,
+        userId: emailjsConfig.userId
+      });
+      
+      const response = await emailjs.send(
         emailjsConfig.serviceId,
         emailjsConfig.templateId,
         templateParams,
         emailjsConfig.userId
       );
       
+      console.log("EmailJS response:", response);
       console.log(`Email sent to recipient:
         Name: ${name}
         Email: ${email}
