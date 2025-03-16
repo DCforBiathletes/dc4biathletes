@@ -1,3 +1,4 @@
+
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +19,6 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert";
-import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -30,23 +30,11 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  const [emailjsConfig] = useState({
-    serviceId: 'service_dr8f4vk',
-    templateId: 'template_1u4cu5f',
-    isConfigured: true
-  });
-  const [showEmailInfo, setShowEmailInfo] = useState(false);
   const [showZapierConfig, setShowZapierConfig] = useState(false);
   const [zapierWebhookUrl, setZapierWebhookUrl] = useState('');
   const [zapierEnabled, setZapierEnabled] = useState(false);
-  
-  // Hard-code the recipient email directly
-  const RECIPIENT_EMAIL = "dc4biathletes@gmail.com";
 
   useEffect(() => {
-    emailjs.init("vPrSFwIfO2--Bf-TN");
-    console.log("EmailJS initialized with public key");
-
     // Check if zapier webhook URL exists in localStorage
     const savedWebhookUrl = localStorage.getItem('zapierWebhookUrl');
     if (savedWebhookUrl) {
@@ -112,49 +100,28 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      const { name, email, subject, message } = formValues;
-      
-      // Explicitly include to_email as a direct string in templateParams
-      const templateParams = {
-        from_name: name,
-        from_email: email,
-        reply_to: email,
-        subject: subject,
-        message: message,
-        to_name: "DC4Biathletes Team",
-        to_email: RECIPIENT_EMAIL
-      };
-      
-      console.log("Sending email with params:", templateParams);
-      console.log("Using config:", {
-        serviceId: emailjsConfig.serviceId,
-        templateId: emailjsConfig.templateId
-      });
-      
-      // Using explicit string values for service/template IDs to ensure no undefined values
-      const response = await emailjs.send(
-        'service_dr8f4vk',
-        'template_1u4cu5f',
-        templateParams
-      );
-      
-      console.log("EmailJS response:", response);
-      console.log(`Email sent to recipient:
-        Name: ${name}
-        Email: ${email}
-        Subject: ${subject}
-        Message: ${message}
-        To: ${RECIPIENT_EMAIL}
-      `);
-      
-      // If Zapier is enabled, also send the data to Zapier
+      // Send the form data to Zapier if enabled
       if (zapierEnabled) {
         const zapierSuccess = await triggerZapierWebhook(formValues);
         if (zapierSuccess) {
           console.log("Successfully sent data to Zapier webhook");
         } else {
           console.warn("Failed to send data to Zapier webhook");
+          // If Zapier fails but it's the only option, we should show an error
+          if (!zapierWebhookUrl) {
+            throw new Error("No way to submit the form - please configure Zapier");
+          }
         }
+      } else {
+        // If Zapier is not configured, inform the user
+        toast({
+          title: "Configuration Required",
+          description: "Please configure the Zapier webhook to receive form submissions.",
+          variant: "destructive"
+        });
+        setShowZapierConfig(true);
+        setIsSubmitting(false);
+        return;
       }
       
       toast({
@@ -171,7 +138,7 @@ const Contact = () => {
         message: ''
       });
     } catch (error) {
-      console.error("Error sending email:", error);
+      console.error("Error submitting form:", error);
       toast({
         title: "Error",
         description: "Failed to send your message. Please try again later.",
@@ -327,34 +294,6 @@ const Contact = () => {
             >
               Close
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={showEmailInfo} onOpenChange={setShowEmailInfo}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>How Email Sending Works</DialogTitle>
-            <DialogDescription>
-              This contact form uses EmailJS to send messages. The sender email is configured in your EmailJS account, not directly in this form.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 text-sm">
-            <p>When a visitor completes this form:</p>
-            <ol className="list-decimal pl-5 space-y-2">
-              <li>Their message is sent via your EmailJS account</li>
-              <li>The email appears to come from the email address you configured in your EmailJS service</li>
-              <li>The visitor's email address is included as the reply-to address</li>
-            </ol>
-            <p className="font-medium mt-4">To set up EmailJS:</p>
-            <ol className="list-decimal pl-5 space-y-2">
-              <li>Create an account at <a href="https://www.emailjs.com" target="_blank" rel="noopener noreferrer" className="text-accent underline">EmailJS.com</a></li>
-              <li>Add an email service (Gmail, Outlook, etc.) in your EmailJS dashboard</li>
-              <li>Create an email template with variables: <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{from_name}}"}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{reply_to}}"}</code>, <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{subject}}"}</code>, and <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">{"{{message}}"}</code></li>
-            </ol>
-          </div>
-          <DialogFooter className="mt-4">
-            <Button onClick={() => setShowEmailInfo(false)}>Close</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
