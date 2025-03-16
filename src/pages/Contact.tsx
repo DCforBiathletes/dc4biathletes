@@ -1,4 +1,3 @@
-
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -81,7 +80,12 @@ const Contact = () => {
         },
         mode: "no-cors", // Handle CORS issues
         body: JSON.stringify({
-          ...formData,
+          pageTitle: "Contact Form Submission", 
+          pageURL: window.location.href,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
           timestamp: new Date().toISOString(),
           source: window.location.origin,
         }),
@@ -320,6 +324,21 @@ const Contact = () => {
                 Create a Zap in Zapier with the "Webhooks by Zapier" trigger, then paste the webhook URL here.
               </p>
             </div>
+            
+            <Alert className="bg-blue-50 border-blue-200">
+              <AlertTitle className="text-blue-800">Google Sheets Integration</AlertTitle>
+              <AlertDescription className="text-blue-700">
+                <p className="mb-2">The form now sends data compatible with your Google Sheets script. Make sure your script expects the following fields:</p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>pageTitle - Title of the submission</li>
+                  <li>pageURL - URL where the form was submitted</li>
+                  <li>name - Submitter's name</li>
+                  <li>email - Submitter's email</li>
+                  <li>subject - Message subject</li>
+                  <li>message - The message content</li>
+                </ul>
+              </AlertDescription>
+            </Alert>
             
             <div className="space-y-2">
               <h4 className="text-sm font-medium">How to Set Up:</h4>
