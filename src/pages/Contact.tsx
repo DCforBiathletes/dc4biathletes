@@ -1,3 +1,4 @@
+
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,8 @@ import {
   AlertTitle,
 } from "@/components/ui/alert";
 
+const DEFAULT_ZAPIER_WEBHOOK = "https://hooks.zapier.com/hooks/catch/9911481/2lfcqob/";
+
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,14 +33,18 @@ const Contact = () => {
     message: ''
   });
   const [showZapierConfig, setShowZapierConfig] = useState(false);
-  const [zapierWebhookUrl, setZapierWebhookUrl] = useState('');
-  const [zapierEnabled, setZapierEnabled] = useState(false);
+  const [zapierWebhookUrl, setZapierWebhookUrl] = useState(DEFAULT_ZAPIER_WEBHOOK);
+  const [zapierEnabled, setZapierEnabled] = useState(true); // Pre-enabled since we have a default
 
   useEffect(() => {
     // Check if zapier webhook URL exists in localStorage
     const savedWebhookUrl = localStorage.getItem('zapierWebhookUrl');
     if (savedWebhookUrl) {
       setZapierWebhookUrl(savedWebhookUrl);
+      setZapierEnabled(true);
+    } else if (DEFAULT_ZAPIER_WEBHOOK) {
+      // If no saved webhook but we have a default, save it
+      localStorage.setItem('zapierWebhookUrl', DEFAULT_ZAPIER_WEBHOOK);
       setZapierEnabled(true);
     }
   }, []);
