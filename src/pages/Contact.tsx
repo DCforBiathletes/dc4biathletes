@@ -1,4 +1,3 @@
-
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,6 +36,9 @@ const Contact = () => {
     isConfigured: true
   });
   const [showEmailInfo, setShowEmailInfo] = useState(false);
+  const [showZapierConfig, setShowZapierConfig] = useState(false);
+  const [zapierWebhookUrl, setZapierWebhookUrl] = useState('');
+  const [zapierEnabled, setZapierEnabled] = useState(false);
   
   // Hard-code the recipient email directly
   const RECIPIENT_EMAIL = "dc4biathletes@gmail.com";
@@ -44,6 +46,13 @@ const Contact = () => {
   useEffect(() => {
     emailjs.init("vPrSFwIfO2--Bf-TN");
     console.log("EmailJS initialized with public key");
+
+    // Check if zapier webhook URL exists in localStorage
+    const savedWebhookUrl = localStorage.getItem('zapierWebhookUrl');
+    if (savedWebhookUrl) {
+      setZapierWebhookUrl(savedWebhookUrl);
+      setZapierEnabled(true);
+    }
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -52,6 +61,50 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const saveZapierWebhook = () => {
+    if (zapierWebhookUrl) {
+      localStorage.setItem('zapierWebhookUrl', zapierWebhookUrl);
+      setZapierEnabled(true);
+      setShowZapierConfig(false);
+      toast({
+        title: "Zapier Webhook Saved",
+        description: "Your form submissions will now be sent to Zapier.",
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: "Please enter a valid webhook URL",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const triggerZapierWebhook = async (formData: typeof formValues) => {
+    if (!zapierWebhookUrl) return false;
+    
+    try {
+      console.log("Sending data to Zapier webhook");
+      const response = await fetch(zapierWebhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors", // Handle CORS issues
+        body: JSON.stringify({
+          ...formData,
+          timestamp: new Date().toISOString(),
+          source: window.location.origin,
+        }),
+      });
+      
+      console.log("Data sent to Zapier webhook");
+      return true;
+    } catch (error) {
+      console.error("Error sending data to Zapier:", error);
+      return false;
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -93,6 +146,16 @@ const Contact = () => {
         Message: ${message}
         To: ${RECIPIENT_EMAIL}
       `);
+      
+      // If Zapier is enabled, also send the data to Zapier
+      if (zapierEnabled) {
+        const zapierSuccess = await triggerZapierWebhook(formValues);
+        if (zapierSuccess) {
+          console.log("Successfully sent data to Zapier webhook");
+        } else {
+          console.warn("Failed to send data to Zapier webhook");
+        }
+      }
       
       toast({
         title: "Message Sent",
@@ -144,8 +207,16 @@ const Contact = () => {
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
-            <div className="mb-6">
+            <div className="mb-6 flex justify-between items-center">
               <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setShowZapierConfig(true)}
+                className="text-xs"
+              >
+                Configure Zapier
+              </Button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -210,6 +281,14 @@ const Contact = () => {
                 {isSubmitting ? "Sending..." : "Send Message"} 
                 <Send className="ml-2 w-4 h-4" />
               </Button>
+              
+              {zapierEnabled && (
+                <div className="mt-2 text-xs text-center text-primary/70">
+                  <span className="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                    Zapier integration active
+                  </span>
+                </div>
+              )}
             </form>
           </div>
         </div>
@@ -276,6 +355,53 @@ const Contact = () => {
           </div>
           <DialogFooter className="mt-4">
             <Button onClick={() => setShowEmailInfo(false)}>Close</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showZapierConfig} onOpenChange={setShowZapierConfig}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Configure Zapier Integration</DialogTitle>
+            <DialogDescription>
+              Enter your Zapier webhook URL to send form submissions to Google Sheets or other apps.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="webhookUrl">Zapier Webhook URL</Label>
+              <Input
+                id="webhookUrl"
+                placeholder="https://hooks.zapier.com/hooks/catch/..."
+                value={zapierWebhookUrl}
+                onChange={(e) => setZapierWebhookUrl(e.target.value)}
+              />
+              <p className="text-sm text-muted-foreground">
+                Create a Zap in Zapier with the "Webhooks by Zapier" trigger, then paste the webhook URL here.
+              </p>
+            </div>
+            
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium">How to Set Up:</h4>
+              <ol className="text-sm space-y-1 list-decimal pl-4">
+                <li>Create a new Zap in Zapier</li>
+                <li>Select "Webhooks by Zapier" as your trigger</li>
+                <li>Choose "Catch Hook" as the event</li>
+                <li>Copy the webhook URL provided by Zapier</li>
+                <li>Paste it in the field above</li>
+                <li>Continue setting up your Zap to connect to Google Sheets</li>
+              </ol>
+            </div>
+          </div>
+          
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowZapierConfig(false)}>
+              Cancel
+            </Button>
+            <Button onClick={saveZapierWebhook}>
+              Save Webhook
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
