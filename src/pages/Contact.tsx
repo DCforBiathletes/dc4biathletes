@@ -77,16 +77,35 @@ const Contact = () => {
         const { success, debugLog: zapierDebugLog } = await triggerZapierWebhook(zapierWebhookUrl, formValues);
         debugLog += zapierDebugLog;
         
+        // Because of CORS limitations, we treat all requests that don't throw an error as potentially successful
+        // The user will need to check their Zapier dashboard to confirm
         if (success) {
-          debugLog += `Successfully sent data to Zapier webhook\n`;
-          console.log("Successfully sent data to Zapier webhook");
+          debugLog += `Request to Zapier webhook completed\n`;
+          
+          // Show thank you dialog
+          setShowThankYouDialog(true);
+          
+          // Reset form
+          setFormValues({
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+          });
+          
+          toast({
+            title: "Message Sent",
+            description: "Thank you for your message. Please check your Zapier dashboard to confirm receipt.",
+          });
         } else {
           debugLog += `Failed to send data to Zapier webhook\n`;
           console.warn("Failed to send data to Zapier webhook");
-          // If Zapier fails but it's the only option, we should show an error
-          if (!zapierWebhookUrl) {
-            throw new Error("No way to submit the form - please configure Zapier");
-          }
+          
+          toast({
+            title: "Submission Uncertain",
+            description: "We couldn't confirm if your message was received. Please check your Zapier dashboard.",
+            variant: "destructive"
+          });
         }
       } else {
         debugLog += `Zapier not configured\n`;
@@ -101,20 +120,6 @@ const Contact = () => {
         setDebugInfo(debugLog);
         return;
       }
-      
-      toast({
-        title: "Message Sent",
-        description: "Thank you for your message. We'll get back to you soon!",
-      });
-      
-      setShowThankYouDialog(true);
-      
-      setFormValues({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
     } catch (error) {
       debugLog += `Error submitting form: ${error}\n`;
       console.error("Error submitting form:", error);
