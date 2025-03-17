@@ -17,8 +17,6 @@ interface ContactFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   isSubmitting: boolean;
   zapierEnabled: boolean;
-  setShowZapierConfig: (show: boolean) => void;
-  setShowDebugDialog: (show: boolean) => void;
 }
 
 export const ContactForm = ({
@@ -27,32 +25,12 @@ export const ContactForm = ({
   handleSubmit,
   isSubmitting,
   zapierEnabled,
-  setShowZapierConfig,
-  setShowDebugDialog,
 }: ContactFormProps) => {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
-        <div className="mb-6 flex justify-between items-center">
+        <div className="mb-6">
           <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
-          <div className="flex gap-2">
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => setShowZapierConfig(true)}
-              className="text-xs"
-            >
-              Configure Zapier
-            </Button>
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => setShowDebugDialog(true)}
-              className="text-xs"
-            >
-              Debug Info
-            </Button>
-          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -117,14 +95,6 @@ export const ContactForm = ({
             {isSubmitting ? "Sending..." : "Send Message"} 
             <Send className="ml-2 w-4 h-4" />
           </Button>
-          
-          {zapierEnabled && (
-            <div className="mt-2 text-xs text-center text-primary/70">
-              <span className="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
-                Zapier integration active
-              </span>
-            </div>
-          )}
         </form>
       </div>
     </div>

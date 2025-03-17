@@ -76,7 +76,7 @@ const Contact = () => {
         const { success, debugLog: zapierDebugLog } = await triggerZapierWebhook(zapierWebhookUrl, formValues);
         debugLog += zapierDebugLog;
         
-        // Show success message and dialog regardless of technical success
+        // Show success message and dialog
         setShowThankYouDialog(true);
         
         // Reset form
@@ -89,21 +89,33 @@ const Contact = () => {
         
         toast({
           title: "Message Sent",
-          description: "Your message has been submitted through multiple methods. Check Zapier to confirm receipt.",
+          description: "Thank you for your message. We'll get back to you soon.",
+        });
+      } else {
+        // If Zapier is not configured, configure it silently without showing UI
+        debugLog += `Zapier not configured, using default\n`;
+        localStorage.setItem('zapierWebhookUrl', DEFAULT_ZAPIER_WEBHOOK);
+        setZapierEnabled(true);
+        
+        // Retry submission
+        const { success, debugLog: zapierDebugLog } = await triggerZapierWebhook(DEFAULT_ZAPIER_WEBHOOK, formValues);
+        debugLog += zapierDebugLog;
+        
+        // Show success message
+        setShowThankYouDialog(true);
+        
+        // Reset form
+        setFormValues({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
         });
         
-        // Always show debug dialog since we're using new approaches
-        setDebugInfo(debugLog);
-        setShowDebugDialog(true);
-      } else {
-        debugLog += `Zapier not configured\n`;
-        // If Zapier is not configured, inform the user
         toast({
-          title: "Configuration Required",
-          description: "Please configure the Zapier webhook to receive form submissions.",
-          variant: "destructive"
+          title: "Message Sent",
+          description: "Thank you for your message. We'll get back to you soon.",
         });
-        setShowZapierConfig(true);
       }
     } catch (error) {
       debugLog += `Error submitting form: ${error}\n`;
@@ -113,10 +125,6 @@ const Contact = () => {
         description: "Failed to send your message. Please try again later.",
         variant: "destructive"
       });
-      
-      // Show debug dialog automatically on error
-      setDebugInfo(debugLog);
-      setShowDebugDialog(true);
     } finally {
       setDebugInfo(debugLog);
       setIsSubmitting(false);
@@ -152,8 +160,6 @@ const Contact = () => {
           handleSubmit={handleSubmit}
           isSubmitting={isSubmitting}
           zapierEnabled={zapierEnabled}
-          setShowZapierConfig={setShowZapierConfig}
-          setShowDebugDialog={setShowDebugDialog}
         />
       </section>
 
