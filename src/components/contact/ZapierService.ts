@@ -27,8 +27,30 @@ export const triggerZapierWebhook = async (
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
   
   try {
-    // First attempt: Standard fetch with no-cors mode
-    debugLog += `Attempting standard fetch with no-cors mode\n`;
+    // Primary approach: XMLHttpRequest in background
+    debugLog += `Attempting XMLHttpRequest in background\n`;
+    
+    // Create a Promise-based XMLHttpRequest
+    const sendXHR = new Promise<void>((resolve) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', zapierWebhookUrl, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onload = () => {
+        debugLog += `XHR completed with status: ${xhr.status}\n`;
+        resolve();
+      };
+      xhr.onerror = () => {
+        debugLog += `XHR failed, but continuing with backup methods\n`;
+        resolve();
+      };
+      xhr.send(JSON.stringify(payload));
+    });
+    
+    // Wait for XHR to complete
+    await sendXHR;
+    
+    // Backup approach: Fetch with no-cors mode
+    debugLog += `Attempting fetch with no-cors mode as backup\n`;
     
     try {
       await fetch(zapierWebhookUrl, {
@@ -45,26 +67,20 @@ export const triggerZapierWebhook = async (
       debugLog += `Fetch attempt failed: ${fetchError}\n`;
     }
     
-    // Second attempt: Using JSONP-like approach
-    const jsonpUrl = `${zapierWebhookUrl}?data=${encodeURIComponent(JSON.stringify(payload))}`;
-    debugLog += `Attempting JSONP-like approach with URL: ${jsonpUrl}\n`;
+    // Second backup: Using invisible iframe for submission instead of opening a new tab
+    debugLog += `Creating hidden iframe for form submission\n`;
     
-    // Create a script element to load the URL
-    const script = document.createElement('script');
-    script.src = jsonpUrl;
-    document.body.appendChild(script);
+    // Create an invisible iframe
+    const iframe = document.createElement('iframe');
+    iframe.name = 'zapier-hidden-iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
     
-    // Remove script after a short delay
-    setTimeout(() => {
-      document.body.removeChild(script);
-    }, 5000);
-    
-    // Modified third attempt: Form submission approach without opening new tab
-    debugLog += `Attempting form submission approach as backup\n`;
+    // Create a form targeting the iframe
     const formElement = document.createElement('form');
     formElement.method = 'POST';
     formElement.action = zapierWebhookUrl;
-    // Remove target="_blank" to prevent opening in new tab
+    formElement.target = 'zapier-hidden-iframe'; // Target the hidden iframe
     formElement.style.display = 'none';
     
     // Add each field as a separate form field to ensure Google Sheets compatibility
@@ -79,11 +95,14 @@ export const triggerZapierWebhook = async (
     // Add form to DOM, submit, then remove
     document.body.appendChild(formElement);
     formElement.submit();
+    
+    // Clean up after a delay
     setTimeout(() => {
+      document.body.removeChild(iframe);
       document.body.removeChild(formElement);
     }, 5000);
     
-    debugLog += `All three approaches attempted. Check Zapier logs to confirm receipt.\n`;
+    debugLog += `All approaches attempted. Check Zapier logs to confirm receipt.\n`;
     
     return { success: true, debugLog };
   } catch (error) {
