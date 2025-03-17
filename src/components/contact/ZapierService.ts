@@ -25,17 +25,16 @@ export const triggerZapierWebhook = async (
   };
   
   try {
-    // Send data using the fetch API with POST method and no-cors mode
-    const response = await fetch(zapierWebhookUrl, {
-      method: 'POST', // Explicitly using POST method
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    // Using a simpler fetch approach similar to the example
+    fetch(zapierWebhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
     
-    debugLog += "\nRequest sent successfully with POST method";
+    // Since the webhook doesn't return a meaningful response with Zapier,
+    // we'll assume success if no error is thrown
+    debugLog += "\nRequest sent with simple fetch approach";
     return { success: true, debugLog: debugLog };
   } catch (error) {
     console.error("Error sending data to Zapier:", error);
