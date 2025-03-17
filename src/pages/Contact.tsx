@@ -77,7 +77,6 @@ const Contact = () => {
         debugLog += zapierDebugLog;
         
         // Show success message and dialog regardless of technical success
-        // Due to CORS issues, we often can't verify actual success but the webhook may still go through
         setShowThankYouDialog(true);
         
         // Reset form
@@ -90,14 +89,12 @@ const Contact = () => {
         
         toast({
           title: "Message Sent",
-          description: "Your message has been submitted. It may take some time to process.",
+          description: "Your message has been submitted through multiple methods. Check Zapier to confirm receipt.",
         });
         
-        // Show debug dialog automatically in case there were issues
+        // Always show debug dialog since we're using new approaches
         setDebugInfo(debugLog);
-        if (!success) {
-          setShowDebugDialog(true);
-        }
+        setShowDebugDialog(true);
       } else {
         debugLog += `Zapier not configured\n`;
         // If Zapier is not configured, inform the user
