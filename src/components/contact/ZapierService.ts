@@ -27,27 +27,10 @@ export const triggerZapierWebhook = async (
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
   
   try {
-    // Direct fetch approach - This is the most reliable for Zapier/Google Sheets
-    debugLog += `Attempting direct fetch to Zapier webhook\n`;
+    // First attempt: Standard fetch with no-cors mode
+    debugLog += `Attempting standard fetch with no-cors mode\n`;
     
     try {
-      const response = await fetch(zapierWebhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      });
-      
-      if (response.ok) {
-        debugLog += `Direct fetch successful with status: ${response.status}\n`;
-      } else {
-        debugLog += `Direct fetch returned status: ${response.status}\n`;
-      }
-    } catch (fetchError) {
-      debugLog += `Direct fetch failed, switching to no-cors mode: ${fetchError}\n`;
-      
-      // Fallback to no-cors mode
       await fetch(zapierWebhookUrl, {
         method: 'POST',
         mode: 'no-cors',
@@ -57,38 +40,50 @@ export const triggerZapierWebhook = async (
         body: JSON.stringify(payload)
       });
       
-      debugLog += `no-cors fetch request sent\n`;
+      debugLog += `Fetch request sent with no-cors mode\n`;
+    } catch (fetchError) {
+      debugLog += `Fetch attempt failed: ${fetchError}\n`;
     }
     
-    // Form data approach as a backup - more compatible with Google Sheets
-    debugLog += `Using form data approach as backup\n`;
+    // Second attempt: Using JSONP-like approach
+    const jsonpUrl = `${zapierWebhookUrl}?data=${encodeURIComponent(JSON.stringify(payload))}`;
+    debugLog += `Attempting JSONP-like approach with URL: ${jsonpUrl}\n`;
     
-    // Create a form data object to ensure proper Google Sheets mapping
-    const formData = new FormData();
+    // Create a script element to load the URL
+    const script = document.createElement('script');
+    script.src = jsonpUrl;
+    document.body.appendChild(script);
     
-    // Add each field to form data - this format works better with Google Sheets
+    // Remove script after a short delay
+    setTimeout(() => {
+      document.body.removeChild(script);
+    }, 5000);
+    
+    // Modified third attempt: Form submission approach without opening new tab
+    debugLog += `Attempting form submission approach as backup\n`;
+    const formElement = document.createElement('form');
+    formElement.method = 'POST';
+    formElement.action = zapierWebhookUrl;
+    // Remove target="_blank" to prevent opening in new tab
+    formElement.style.display = 'none';
+    
+    // Add each field as a separate form field to ensure Google Sheets compatibility
     Object.entries(payload).forEach(([key, value]) => {
-      formData.append(key, typeof value === 'string' ? value : JSON.stringify(value));
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = typeof value === 'string' ? value : JSON.stringify(value);
+      formElement.appendChild(input);
     });
     
-    // Send the form data via XHR
-    const sendFormXHR = new Promise<void>((resolve) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', zapierWebhookUrl, true);
-      xhr.onload = () => {
-        debugLog += `Form XHR completed with status: ${xhr.status}\n`;
-        resolve();
-      };
-      xhr.onerror = () => {
-        debugLog += `Form XHR failed\n`;
-        resolve();
-      };
-      xhr.send(formData);
-    });
+    // Add form to DOM, submit, then remove
+    document.body.appendChild(formElement);
+    formElement.submit();
+    setTimeout(() => {
+      document.body.removeChild(formElement);
+    }, 5000);
     
-    await sendFormXHR;
-    
-    debugLog += `All approaches attempted. Check Zapier logs to confirm receipt.\n`;
+    debugLog += `All three approaches attempted. Check Zapier logs to confirm receipt.\n`;
     
     return { success: true, debugLog };
   } catch (error) {
