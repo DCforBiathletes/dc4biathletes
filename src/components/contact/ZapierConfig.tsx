@@ -58,28 +58,35 @@ export const ZapierConfig = ({
           <Alert className="bg-blue-50 border-blue-200">
             <AlertTitle className="text-blue-800">Google Sheets Integration</AlertTitle>
             <AlertDescription className="text-blue-700">
-              <p className="mb-2">The form now sends data compatible with your Google Sheets script. Make sure your script expects the following fields:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>pageTitle - Title of the submission</li>
-                <li>pageURL - URL where the form was submitted</li>
-                <li>name - Submitter's name</li>
-                <li>email - Submitter's email</li>
-                <li>subject - Message subject</li>
-                <li>message - The message content</li>
+              <p className="mb-2">When setting up your Zap to connect to Google Sheets:</p>
+              <ol className="list-decimal pl-5 space-y-1">
+                <li>Use "Webhooks by Zapier" as your trigger</li>
+                <li>Select "Catch Hook" as the event</li>
+                <li>For the action, choose "Google Sheets"</li>
+                <li>Select "Create Spreadsheet Row" as the action event</li>
+                <li>Configure columns to match these field names:</li>
+              </ol>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li><strong>name</strong> - Submitter's name</li>
+                <li><strong>email</strong> - Submitter's email</li>
+                <li><strong>subject</strong> - Message subject</li>
+                <li><strong>message</strong> - The message content</li>
+                <li><strong>timestamp</strong> - Submission time</li>
+                <li><strong>source</strong> - Source of submission</li>
+                <li><strong>pageTitle</strong> - Title of the submission</li>
+                <li><strong>pageURL</strong> - URL where the form was submitted</li>
               </ul>
             </AlertDescription>
           </Alert>
           
           <div className="space-y-2">
-            <h4 className="text-sm font-medium">How to Set Up:</h4>
-            <ol className="text-sm space-y-1 list-decimal pl-4">
-              <li>Create a new Zap in Zapier</li>
-              <li>Select "Webhooks by Zapier" as your trigger</li>
-              <li>Choose "Catch Hook" as the event</li>
-              <li>Copy the webhook URL provided by Zapier</li>
-              <li>Paste it in the field above</li>
-              <li>Continue setting up your Zap to connect to Google Sheets</li>
-            </ol>
+            <h4 className="text-sm font-medium">Common Google Sheets Issues:</h4>
+            <ul className="text-sm space-y-1 list-disc pl-4">
+              <li>Make sure column names in your sheet exactly match the field names listed above</li>
+              <li>In Zapier, map each webhook field to the corresponding Google Sheets column</li>
+              <li>For timestamp fields, you may need to format the date in Zapier</li>
+              <li>If data is missing, check that all fields are properly mapped in your Zap</li>
+            </ul>
           </div>
         </div>
         

@@ -12,7 +12,7 @@ export const triggerZapierWebhook = async (
 ): Promise<{ success: boolean; debugLog: string }> => {
   let debugLog = `Sending data to Zapier webhook: ${zapierWebhookUrl}\n`;
   
-  // Create the payload with flattened structure (no nested objects) for better Zapier compatibility
+  // Create the payload with Google Sheets friendly format
   const payload = {
     name: formData.name,
     email: formData.email,
@@ -27,7 +27,25 @@ export const triggerZapierWebhook = async (
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
   
   try {
-    // Attempt #1: Using fetch with JSONP-like approach
+    // First attempt: Standard fetch with no-cors mode
+    debugLog += `Attempting standard fetch with no-cors mode\n`;
+    
+    try {
+      await fetch(zapierWebhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+      
+      debugLog += `Fetch request sent with no-cors mode\n`;
+    } catch (fetchError) {
+      debugLog += `Fetch attempt failed: ${fetchError}\n`;
+    }
+    
+    // Second attempt: Using JSONP-like approach
     const jsonpUrl = `${zapierWebhookUrl}?data=${encodeURIComponent(JSON.stringify(payload))}`;
     debugLog += `Attempting JSONP-like approach with URL: ${jsonpUrl}\n`;
     
@@ -41,7 +59,7 @@ export const triggerZapierWebhook = async (
       document.body.removeChild(script);
     }, 5000);
     
-    // Also try a form submission approach as backup
+    // Third attempt: Form submission approach
     debugLog += `Attempting form submission approach as backup\n`;
     const formElement = document.createElement('form');
     formElement.method = 'POST';
@@ -49,7 +67,7 @@ export const triggerZapierWebhook = async (
     formElement.target = '_blank';
     formElement.style.display = 'none';
     
-    // Add each field as a separate form field (no nested objects)
+    // Add each field as a separate form field to ensure Google Sheets compatibility
     Object.entries(payload).forEach(([key, value]) => {
       const input = document.createElement('input');
       input.type = 'hidden';
@@ -65,10 +83,8 @@ export const triggerZapierWebhook = async (
       document.body.removeChild(formElement);
     }, 5000);
     
-    debugLog += `Both approaches attempted. Check Zapier logs to confirm receipt.\n`;
+    debugLog += `All three approaches attempted. Check Zapier logs to confirm receipt.\n`;
     
-    // Return success since we've tried multiple approaches
-    // One of them might work even if we can't confirm due to CORS
     return { success: true, debugLog };
   } catch (error) {
     debugLog += `Error sending data to Zapier: ${error}\n`;
