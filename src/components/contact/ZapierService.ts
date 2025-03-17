@@ -59,12 +59,12 @@ export const triggerZapierWebhook = async (
       document.body.removeChild(script);
     }, 5000);
     
-    // Third attempt: Form submission approach
+    // Modified third attempt: Form submission approach without opening new tab
     debugLog += `Attempting form submission approach as backup\n`;
     const formElement = document.createElement('form');
     formElement.method = 'POST';
     formElement.action = zapierWebhookUrl;
-    formElement.target = '_blank';
+    // Remove target="_blank" to prevent opening in new tab
     formElement.style.display = 'none';
     
     // Add each field as a separate form field to ensure Google Sheets compatibility
