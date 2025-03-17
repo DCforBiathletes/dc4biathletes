@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -77,35 +76,27 @@ const Contact = () => {
         const { success, debugLog: zapierDebugLog } = await triggerZapierWebhook(zapierWebhookUrl, formValues);
         debugLog += zapierDebugLog;
         
-        // Because of CORS limitations, we treat all requests that don't throw an error as potentially successful
-        // The user will need to check their Zapier dashboard to confirm
-        if (success) {
-          debugLog += `Request to Zapier webhook completed\n`;
-          
-          // Show thank you dialog
-          setShowThankYouDialog(true);
-          
-          // Reset form
-          setFormValues({
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
-          });
-          
-          toast({
-            title: "Message Sent",
-            description: "Thank you for your message. Please check your Zapier dashboard to confirm receipt.",
-          });
-        } else {
-          debugLog += `Failed to send data to Zapier webhook\n`;
-          console.warn("Failed to send data to Zapier webhook");
-          
-          toast({
-            title: "Submission Uncertain",
-            description: "We couldn't confirm if your message was received. Please check your Zapier dashboard.",
-            variant: "destructive"
-          });
+        // Show success message and dialog regardless of technical success
+        // Due to CORS issues, we often can't verify actual success but the webhook may still go through
+        setShowThankYouDialog(true);
+        
+        // Reset form
+        setFormValues({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        
+        toast({
+          title: "Message Sent",
+          description: "Your message has been submitted. It may take some time to process.",
+        });
+        
+        // Show debug dialog automatically in case there were issues
+        setDebugInfo(debugLog);
+        if (!success) {
+          setShowDebugDialog(true);
         }
       } else {
         debugLog += `Zapier not configured\n`;
@@ -116,9 +107,6 @@ const Contact = () => {
           variant: "destructive"
         });
         setShowZapierConfig(true);
-        setIsSubmitting(false);
-        setDebugInfo(debugLog);
-        return;
       }
     } catch (error) {
       debugLog += `Error submitting form: ${error}\n`;
@@ -128,6 +116,10 @@ const Contact = () => {
         description: "Failed to send your message. Please try again later.",
         variant: "destructive"
       });
+      
+      // Show debug dialog automatically on error
+      setDebugInfo(debugLog);
+      setShowDebugDialog(true);
     } finally {
       setDebugInfo(debugLog);
       setIsSubmitting(false);
