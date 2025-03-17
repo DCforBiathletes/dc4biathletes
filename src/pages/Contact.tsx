@@ -68,46 +68,54 @@ const Contact = () => {
     try {
       // Send the form data to Zapier if enabled
       if (zapierEnabled) {
-        await triggerZapierWebhook(zapierWebhookUrl, formValues);
+        const result = await triggerZapierWebhook(zapierWebhookUrl, formValues);
         
-        // Show success message and dialog
-        setShowThankYouDialog(true);
-        
-        // Reset form
-        setFormValues({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-        
-        toast({
-          title: "Message Sent",
-          description: "Thank you for your message. We'll get back to you soon.",
-        });
+        if (result.success) {
+          // Show success message and dialog
+          setShowThankYouDialog(true);
+          
+          // Reset form
+          setFormValues({
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+          });
+          
+          toast({
+            title: "Message Sent",
+            description: "Thank you for your message. We'll get back to you soon.",
+          });
+        } else {
+          throw new Error("Failed to send form data");
+        }
       } else {
         // If Zapier is not configured, configure it silently without showing UI
         localStorage.setItem('zapierWebhookUrl', DEFAULT_ZAPIER_WEBHOOK);
         setZapierEnabled(true);
         
         // Retry submission
-        await triggerZapierWebhook(DEFAULT_ZAPIER_WEBHOOK, formValues);
+        const result = await triggerZapierWebhook(DEFAULT_ZAPIER_WEBHOOK, formValues);
         
-        // Show success message
-        setShowThankYouDialog(true);
-        
-        // Reset form
-        setFormValues({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-        
-        toast({
-          title: "Message Sent",
-          description: "Thank you for your message. We'll get back to you soon.",
-        });
+        if (result.success) {
+          // Show success message
+          setShowThankYouDialog(true);
+          
+          // Reset form
+          setFormValues({
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+          });
+          
+          toast({
+            title: "Message Sent",
+            description: "Thank you for your message. We'll get back to you soon.",
+          });
+        } else {
+          throw new Error("Failed to send form data");
+        }
       }
     } catch (error) {
       console.error("Error submitting form:", error);

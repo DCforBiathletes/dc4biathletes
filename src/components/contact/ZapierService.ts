@@ -10,8 +10,6 @@ export const triggerZapierWebhook = async (
   zapierWebhookUrl: string,
   formData: FormValues
 ): Promise<{ success: boolean; debugLog: string }> => {
-  let debugLog = `Sending data to Zapier webhook\n`;
-  
   // Create the payload with Google Sheets friendly format
   const payload = {
     name: formData.name,
@@ -25,16 +23,25 @@ export const triggerZapierWebhook = async (
   };
   
   try {
-    // Send data using the fetch API with no-cors mode to avoid CORS issues
+    // Use native fetch with no-cors to avoid any debug windows
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    
     await fetch(zapierWebhookUrl, {
       method: 'POST',
-      mode: 'no-cors',
+      mode: 'no-cors', // Prevents CORS issues
+      cache: 'no-cache',
+      credentials: 'omit', // Don't send cookies
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload)
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(payload),
+      signal: controller.signal
     });
     
+    clearTimeout(timeoutId);
     return { success: true, debugLog: "Form submission sent successfully" };
   } catch (error) {
     console.error("Error sending data to Zapier:", error);
