@@ -1,4 +1,3 @@
-
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,6 +34,8 @@ const Contact = () => {
   const [showZapierConfig, setShowZapierConfig] = useState(false);
   const [zapierWebhookUrl, setZapierWebhookUrl] = useState(DEFAULT_ZAPIER_WEBHOOK);
   const [zapierEnabled, setZapierEnabled] = useState(true); // Pre-enabled since we have a default
+  const [debugInfo, setDebugInfo] = useState<string>("");
+  const [showDebugDialog, setShowDebugDialog] = useState(false);
 
   useEffect(() => {
     // Check if zapier webhook URL exists in localStorage
@@ -78,30 +79,58 @@ const Contact = () => {
   const triggerZapierWebhook = async (formData: typeof formValues) => {
     if (!zapierWebhookUrl) return false;
     
+    // Create the payload
+    const payload = {
+      pageTitle: "Contact Form Submission", 
+      pageURL: window.location.href,
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      timestamp: new Date().toISOString(),
+      source: window.location.origin,
+    };
+    
+    let debugLog = `Sending data to Zapier webhook: ${zapierWebhookUrl}\n`;
+    debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
+    
     try {
-      console.log("Sending data to Zapier webhook");
-      const response = await fetch(zapierWebhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "no-cors", // Handle CORS issues
-        body: JSON.stringify({
-          pageTitle: "Contact Form Submission", 
-          pageURL: window.location.href,
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          timestamp: new Date().toISOString(),
-          source: window.location.origin,
-        }),
-      });
+      console.log("Sending data to Zapier webhook:", zapierWebhookUrl);
+      console.log("Payload:", payload);
       
-      console.log("Data sent to Zapier webhook");
-      return true;
+      // Use XMLHttpRequest for better debugging since fetch with no-cors doesn't provide response details
+      return new Promise<boolean>((resolve) => {
+        const xhr = new XMLHttpRequest();
+        
+        xhr.onreadystatechange = function() {
+          debugLog += `XHR State Change: ReadyState: ${xhr.readyState}, Status: ${xhr.status}\n`;
+          
+          if (xhr.readyState === 4) {
+            debugLog += `Response received. Status: ${xhr.status}\n`;
+            if (xhr.status >= 200 && xhr.status < 300) {
+              debugLog += `Success! Response: ${xhr.responseText}\n`;
+              console.log("Successfully sent data to Zapier");
+              resolve(true);
+            } else {
+              debugLog += `Error! Response: ${xhr.responseText}\n`;
+              console.error("Failed to send data to Zapier", xhr.status, xhr.statusText);
+              resolve(false);
+            }
+            setDebugInfo(debugLog);
+          }
+        };
+        
+        // Also try without no-cors to see actual response
+        xhr.open("POST", zapierWebhookUrl, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(payload));
+        
+        debugLog += "XHR request sent\n";
+      });
     } catch (error) {
+      debugLog += `Error sending data to Zapier: ${error}\n`;
       console.error("Error sending data to Zapier:", error);
+      setDebugInfo(debugLog);
       return false;
     }
   };
@@ -109,14 +138,19 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    let debugLog = `Form submission started\n`;
+    debugLog += `Form values: ${JSON.stringify(formValues, null, 2)}\n`;
     
     try {
       // Send the form data to Zapier if enabled
       if (zapierEnabled) {
+        debugLog += `Zapier enabled. Webhook URL: ${zapierWebhookUrl}\n`;
         const zapierSuccess = await triggerZapierWebhook(formValues);
         if (zapierSuccess) {
+          debugLog += `Successfully sent data to Zapier webhook\n`;
           console.log("Successfully sent data to Zapier webhook");
         } else {
+          debugLog += `Failed to send data to Zapier webhook\n`;
           console.warn("Failed to send data to Zapier webhook");
           // If Zapier fails but it's the only option, we should show an error
           if (!zapierWebhookUrl) {
@@ -124,6 +158,7 @@ const Contact = () => {
           }
         }
       } else {
+        debugLog += `Zapier not configured\n`;
         // If Zapier is not configured, inform the user
         toast({
           title: "Configuration Required",
@@ -132,6 +167,7 @@ const Contact = () => {
         });
         setShowZapierConfig(true);
         setIsSubmitting(false);
+        setDebugInfo(debugLog);
         return;
       }
       
@@ -149,6 +185,7 @@ const Contact = () => {
         message: ''
       });
     } catch (error) {
+      debugLog += `Error submitting form: ${error}\n`;
       console.error("Error submitting form:", error);
       toast({
         title: "Error",
@@ -156,6 +193,7 @@ const Contact = () => {
         variant: "destructive"
       });
     } finally {
+      setDebugInfo(debugLog);
       setIsSubmitting(false);
     }
   };
@@ -187,14 +225,24 @@ const Contact = () => {
           <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
             <div className="mb-6 flex justify-between items-center">
               <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => setShowZapierConfig(true)}
-                className="text-xs"
-              >
-                Configure Zapier
-              </Button>
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setShowZapierConfig(true)}
+                  className="text-xs"
+                >
+                  Configure Zapier
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setShowDebugDialog(true)}
+                  className="text-xs"
+                >
+                  Debug Info
+                </Button>
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -366,6 +414,45 @@ const Contact = () => {
             </Button>
             <Button onClick={saveZapierWebhook}>
               Save Webhook
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showDebugDialog} onOpenChange={setShowDebugDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Zapier Debug Information</DialogTitle>
+            <DialogDescription>
+              This information can help troubleshoot issues with the Zapier integration.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            <div className="bg-black/90 text-green-400 p-4 rounded font-mono text-xs overflow-auto max-h-[400px]">
+              <pre>{debugInfo || "No debug information available yet. Submit the form to generate logs."}</pre>
+            </div>
+            
+            <Alert className="bg-amber-50 border-amber-200">
+              <AlertTitle className="text-amber-800">Troubleshooting Tips</AlertTitle>
+              <AlertDescription className="text-amber-700">
+                <ol className="list-decimal pl-5 space-y-1">
+                  <li>Verify your Zapier webhook URL is correct</li>
+                  <li>Check if your Zap is turned on in Zapier</li>
+                  <li>Make sure your sample data format matches what Google Sheets expects</li>
+                  <li>Check the Zapier History to see if it received the webhook call</li>
+                  <li>Try redeploying your Zap with a new test trigger</li>
+                </ol>
+              </AlertDescription>
+            </Alert>
+          </div>
+          
+          <DialogFooter>
+            <Button onClick={() => setShowDebugDialog(false)}>
+              Close
+            </Button>
+            <Button variant="outline" onClick={() => navigator.clipboard.writeText(debugInfo)}>
+              Copy Debug Info
             </Button>
           </DialogFooter>
         </DialogContent>
