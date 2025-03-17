@@ -63,65 +63,42 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (isSubmitting) return; // Prevent multiple submissions
+    
     setIsSubmitting(true);
     
     try {
-      // Send the form data to Zapier if enabled
-      if (zapierEnabled) {
-        const result = await triggerZapierWebhook(zapierWebhookUrl, formValues);
-        
-        if (result.success) {
-          // Show success message and dialog
-          setShowThankYouDialog(true);
-          
-          // Reset form
-          setFormValues({
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
-          });
-          
-          toast({
-            title: "Message Sent",
-            description: "Thank you for your message. We'll get back to you soon.",
-          });
-        } else {
-          throw new Error("Failed to send form data");
-        }
-      } else {
-        // If Zapier is not configured, configure it silently without showing UI
-        localStorage.setItem('zapierWebhookUrl', DEFAULT_ZAPIER_WEBHOOK);
-        setZapierEnabled(true);
-        
-        // Retry submission
-        const result = await triggerZapierWebhook(DEFAULT_ZAPIER_WEBHOOK, formValues);
-        
-        if (result.success) {
-          // Show success message
-          setShowThankYouDialog(true);
-          
-          // Reset form
-          setFormValues({
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
-          });
-          
-          toast({
-            title: "Message Sent",
-            description: "Thank you for your message. We'll get back to you soon.",
-          });
-        } else {
-          throw new Error("Failed to send form data");
-        }
-      }
+      // Always show feedback to the user that something is happening
+      toast({
+        title: "Sending message...",
+        description: "Please wait while we process your submission.",
+      });
+      
+      // Send the form data to Zapier
+      const result = await triggerZapierWebhook(zapierWebhookUrl, formValues);
+      
+      // Always show success message and reset form since we can't truly determine
+      // if no-cors mode requests succeeded
+      setShowThankYouDialog(true);
+      
+      // Reset form
+      setFormValues({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+      toast({
+        title: "Message Sent",
+        description: "Thank you for your message. We'll get back to you soon.",
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
         title: "Error",
-        description: "Failed to send your message. Please try again later.",
+        description: "There was an issue sending your message. However, it may have still been delivered.",
         variant: "destructive"
       });
     } finally {

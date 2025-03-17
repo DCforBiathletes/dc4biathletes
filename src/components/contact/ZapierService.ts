@@ -23,26 +23,19 @@ export const triggerZapierWebhook = async (
   };
   
   try {
-    // Use native fetch with no-cors to avoid any debug windows
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-    
-    await fetch(zapierWebhookUrl, {
+    // Use fetch without expecting a response due to no-cors mode
+    const response = await fetch(zapierWebhookUrl, {
       method: 'POST',
-      mode: 'no-cors', // Prevents CORS issues
-      cache: 'no-cache',
-      credentials: 'omit', // Don't send cookies
+      mode: 'no-cors', // This prevents CORS issues but also means we won't get a proper response
       headers: {
         'Content-Type': 'application/json',
       },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(payload),
-      signal: controller.signal
+      body: JSON.stringify(payload)
     });
     
-    clearTimeout(timeoutId);
-    return { success: true, debugLog: "Form submission sent successfully" };
+    // Since we're using no-cors mode, we won't get a proper response object we can check
+    // We'll assume success if we reach this point (no exception thrown)
+    return { success: true, debugLog: "Form submission likely sent successfully" };
   } catch (error) {
     console.error("Error sending data to Zapier:", error);
     return { success: false, debugLog: `Error: ${error}` };

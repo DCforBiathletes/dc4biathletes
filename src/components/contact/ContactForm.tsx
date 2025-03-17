@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
 
 interface ContactFormProps {
   formValues: {
@@ -44,6 +43,7 @@ export const ContactForm = ({
               className="bg-white/80 border-primary/20 focus:border-accent"
               value={formValues.name}
               onChange={handleInputChange}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -58,6 +58,7 @@ export const ContactForm = ({
               className="bg-white/80 border-primary/20 focus:border-accent"
               value={formValues.email}
               onChange={handleInputChange}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -71,6 +72,7 @@ export const ContactForm = ({
               className="bg-white/80 border-primary/20 focus:border-accent"
               value={formValues.subject}
               onChange={handleInputChange}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -84,6 +86,7 @@ export const ContactForm = ({
               className="w-full min-h-[150px] bg-white/80 border-primary/20 focus:border-accent focus-visible:ring-accent/50"
               value={formValues.message}
               onChange={handleInputChange}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -92,8 +95,10 @@ export const ContactForm = ({
             className="w-full bg-accent hover:bg-accent/90 text-white shadow-lg hover:shadow-xl transition-all"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Sending..." : "Send Message"} 
-            <Send className="ml-2 w-4 h-4" />
+            {isSubmitting ? 
+              <>Sending... <Send className="ml-2 w-4 h-4 animate-pulse" /></> : 
+              <>Send Message <Send className="ml-2 w-4 h-4" /></>
+            } 
           </Button>
         </form>
       </div>
