@@ -12,16 +12,16 @@ export const triggerZapierWebhook = async (
 ): Promise<{ success: boolean; debugLog: string }> => {
   let debugLog = `Sending data to Zapier webhook: ${zapierWebhookUrl}\n`;
   
-  // Create the payload
+  // Create the payload with flattened structure (no nested objects) for better Zapier compatibility
   const payload = {
-    pageTitle: "Contact Form Submission",
-    pageURL: window.location.href,
     name: formData.name,
     email: formData.email,
     subject: formData.subject,
     message: formData.message,
     timestamp: new Date().toISOString(),
     source: window.location.origin,
+    pageTitle: "Contact Form Submission",
+    pageURL: window.location.href
   };
   
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
@@ -49,7 +49,7 @@ export const triggerZapierWebhook = async (
     formElement.target = '_blank';
     formElement.style.display = 'none';
     
-    // Add form fields
+    // Add each field as a separate form field (no nested objects)
     Object.entries(payload).forEach(([key, value]) => {
       const input = document.createElement('input');
       input.type = 'hidden';
