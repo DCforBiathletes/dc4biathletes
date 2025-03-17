@@ -63,42 +63,57 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    if (isSubmitting) return; // Prevent multiple submissions
-    
     setIsSubmitting(true);
     
     try {
-      // Always show feedback to the user that something is happening
-      toast({
-        title: "Sending message...",
-        description: "Please wait while we process your submission.",
-      });
-      
-      // Send the form data to Zapier
-      const result = await triggerZapierWebhook(zapierWebhookUrl, formValues);
-      
-      // Always show success message and reset form since we can't truly determine
-      // if no-cors mode requests succeeded
-      setShowThankYouDialog(true);
-      
-      // Reset form
-      setFormValues({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      
-      toast({
-        title: "Message Sent",
-        description: "Thank you for your message. We'll get back to you soon.",
-      });
+      // Send the form data to Zapier if enabled
+      if (zapierEnabled) {
+        await triggerZapierWebhook(zapierWebhookUrl, formValues);
+        
+        // Show success message and dialog
+        setShowThankYouDialog(true);
+        
+        // Reset form
+        setFormValues({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        
+        toast({
+          title: "Message Sent",
+          description: "Thank you for your message. We'll get back to you soon.",
+        });
+      } else {
+        // If Zapier is not configured, configure it silently without showing UI
+        localStorage.setItem('zapierWebhookUrl', DEFAULT_ZAPIER_WEBHOOK);
+        setZapierEnabled(true);
+        
+        // Retry submission
+        await triggerZapierWebhook(DEFAULT_ZAPIER_WEBHOOK, formValues);
+        
+        // Show success message
+        setShowThankYouDialog(true);
+        
+        // Reset form
+        setFormValues({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        
+        toast({
+          title: "Message Sent",
+          description: "Thank you for your message. We'll get back to you soon.",
+        });
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
         title: "Error",
-        description: "There was an issue sending your message. However, it may have still been delivered.",
+        description: "Failed to send your message. Please try again later.",
         variant: "destructive"
       });
     } finally {
