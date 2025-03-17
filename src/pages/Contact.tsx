@@ -1,23 +1,11 @@
-import { Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+
 import { useState, useEffect } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert";
+import { useToast } from "@/components/ui/use-toast";
+import { ContactForm } from "@/components/contact/ContactForm";
+import { ZapierConfig } from "@/components/contact/ZapierConfig";
+import { ThankYouDialog } from "@/components/contact/ThankYouDialog";
+import { DebugDialog } from "@/components/contact/DebugDialog";
+import { triggerZapierWebhook, FormValues } from "@/components/contact/ZapierService";
 
 const DEFAULT_ZAPIER_WEBHOOK = "https://hooks.zapier.com/hooks/catch/9911481/2lfcqob/";
 
@@ -25,7 +13,7 @@ const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showThankYouDialog, setShowThankYouDialog] = useState(false);
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<FormValues>({
     name: '',
     email: '',
     subject: '',
@@ -76,65 +64,6 @@ const Contact = () => {
     }
   };
 
-  const triggerZapierWebhook = async (formData: typeof formValues) => {
-    if (!zapierWebhookUrl) return false;
-    
-    // Create the payload
-    const payload = {
-      pageTitle: "Contact Form Submission", 
-      pageURL: window.location.href,
-      name: formData.name,
-      email: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-      timestamp: new Date().toISOString(),
-      source: window.location.origin,
-    };
-    
-    let debugLog = `Sending data to Zapier webhook: ${zapierWebhookUrl}\n`;
-    debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
-    
-    try {
-      console.log("Sending data to Zapier webhook:", zapierWebhookUrl);
-      console.log("Payload:", payload);
-      
-      // Use XMLHttpRequest for better debugging since fetch with no-cors doesn't provide response details
-      return new Promise<boolean>((resolve) => {
-        const xhr = new XMLHttpRequest();
-        
-        xhr.onreadystatechange = function() {
-          debugLog += `XHR State Change: ReadyState: ${xhr.readyState}, Status: ${xhr.status}\n`;
-          
-          if (xhr.readyState === 4) {
-            debugLog += `Response received. Status: ${xhr.status}\n`;
-            if (xhr.status >= 200 && xhr.status < 300) {
-              debugLog += `Success! Response: ${xhr.responseText}\n`;
-              console.log("Successfully sent data to Zapier");
-              resolve(true);
-            } else {
-              debugLog += `Error! Response: ${xhr.responseText}\n`;
-              console.error("Failed to send data to Zapier", xhr.status, xhr.statusText);
-              resolve(false);
-            }
-            setDebugInfo(debugLog);
-          }
-        };
-        
-        // Also try without no-cors to see actual response
-        xhr.open("POST", zapierWebhookUrl, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify(payload));
-        
-        debugLog += "XHR request sent\n";
-      });
-    } catch (error) {
-      debugLog += `Error sending data to Zapier: ${error}\n`;
-      console.error("Error sending data to Zapier:", error);
-      setDebugInfo(debugLog);
-      return false;
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -145,8 +74,10 @@ const Contact = () => {
       // Send the form data to Zapier if enabled
       if (zapierEnabled) {
         debugLog += `Zapier enabled. Webhook URL: ${zapierWebhookUrl}\n`;
-        const zapierSuccess = await triggerZapierWebhook(formValues);
-        if (zapierSuccess) {
+        const { success, debugLog: zapierDebugLog } = await triggerZapierWebhook(zapierWebhookUrl, formValues);
+        debugLog += zapierDebugLog;
+        
+        if (success) {
           debugLog += `Successfully sent data to Zapier webhook\n`;
           console.log("Successfully sent data to Zapier webhook");
         } else {
@@ -221,242 +152,35 @@ const Contact = () => {
       </section>
 
       <section className="py-12 px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-gradient-to-br from-white to-primary/5 border border-primary/20 rounded-2xl shadow-lg p-8">
-            <div className="mb-6 flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-primary">Send us a Message</h2>
-              <div className="flex gap-2">
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => setShowZapierConfig(true)}
-                  className="text-xs"
-                >
-                  Configure Zapier
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => setShowDebugDialog(true)}
-                  className="text-xs"
-                >
-                  Debug Info
-                </Button>
-              </div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-primary/90">Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="Your name"
-                  required
-                  className="bg-white/80 border-primary/20 focus:border-accent"
-                  value={formValues.name}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-primary/90">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Your email"
-                  required
-                  className="bg-white/80 border-primary/20 focus:border-accent"
-                  value={formValues.email}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="subject" className="text-primary/90">Subject</Label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  placeholder="Message subject"
-                  required
-                  className="bg-white/80 border-primary/20 focus:border-accent"
-                  value={formValues.subject}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="message" className="text-primary/90">Message</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Your message"
-                  required
-                  className="w-full min-h-[150px] bg-white/80 border-primary/20 focus:border-accent focus-visible:ring-accent/50"
-                  value={formValues.message}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <Button 
-                type="submit" 
-                className="w-full bg-accent hover:bg-accent/90 text-white shadow-lg hover:shadow-xl transition-all"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Send Message"} 
-                <Send className="ml-2 w-4 h-4" />
-              </Button>
-              
-              {zapierEnabled && (
-                <div className="mt-2 text-xs text-center text-primary/70">
-                  <span className="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
-                    Zapier integration active
-                  </span>
-                </div>
-              )}
-            </form>
-          </div>
-        </div>
+        <ContactForm 
+          formValues={formValues}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isSubmitting={isSubmitting}
+          zapierEnabled={zapierEnabled}
+          setShowZapierConfig={setShowZapierConfig}
+          setShowDebugDialog={setShowDebugDialog}
+        />
       </section>
 
-      <Dialog open={showThankYouDialog} onOpenChange={setShowThankYouDialog}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-center text-2xl">Thank You!</DialogTitle>
-            <DialogDescription className="text-center">
-              Your message has been sent successfully. We appreciate your interest in DC4Biathletes and will respond to your inquiry as soon as possible.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex justify-center my-4">
-            <div className="bg-green-100 rounded-full p-3">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-12 w-12 text-green-600" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M5 13l4 4L19 7" 
-                />
-              </svg>
-            </div>
-          </div>
-          <DialogFooter className="sm:justify-center">
-            <Button 
-              onClick={() => setShowThankYouDialog(false)}
-              className="bg-accent hover:bg-accent/90"
-            >
-              Close
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ThankYouDialog 
+        showThankYouDialog={showThankYouDialog}
+        setShowThankYouDialog={setShowThankYouDialog}
+      />
 
-      <Dialog open={showZapierConfig} onOpenChange={setShowZapierConfig}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Configure Zapier Integration</DialogTitle>
-            <DialogDescription>
-              Enter your Zapier webhook URL to send form submissions to Google Sheets or other apps.
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="webhookUrl">Zapier Webhook URL</Label>
-              <Input
-                id="webhookUrl"
-                placeholder="https://hooks.zapier.com/hooks/catch/..."
-                value={zapierWebhookUrl}
-                onChange={(e) => setZapierWebhookUrl(e.target.value)}
-              />
-              <p className="text-sm text-muted-foreground">
-                Create a Zap in Zapier with the "Webhooks by Zapier" trigger, then paste the webhook URL here.
-              </p>
-            </div>
-            
-            <Alert className="bg-blue-50 border-blue-200">
-              <AlertTitle className="text-blue-800">Google Sheets Integration</AlertTitle>
-              <AlertDescription className="text-blue-700">
-                <p className="mb-2">The form now sends data compatible with your Google Sheets script. Make sure your script expects the following fields:</p>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>pageTitle - Title of the submission</li>
-                  <li>pageURL - URL where the form was submitted</li>
-                  <li>name - Submitter's name</li>
-                  <li>email - Submitter's email</li>
-                  <li>subject - Message subject</li>
-                  <li>message - The message content</li>
-                </ul>
-              </AlertDescription>
-            </Alert>
-            
-            <div className="space-y-2">
-              <h4 className="text-sm font-medium">How to Set Up:</h4>
-              <ol className="text-sm space-y-1 list-decimal pl-4">
-                <li>Create a new Zap in Zapier</li>
-                <li>Select "Webhooks by Zapier" as your trigger</li>
-                <li>Choose "Catch Hook" as the event</li>
-                <li>Copy the webhook URL provided by Zapier</li>
-                <li>Paste it in the field above</li>
-                <li>Continue setting up your Zap to connect to Google Sheets</li>
-              </ol>
-            </div>
-          </div>
-          
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setShowZapierConfig(false)}>
-              Cancel
-            </Button>
-            <Button onClick={saveZapierWebhook}>
-              Save Webhook
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ZapierConfig 
+        showZapierConfig={showZapierConfig}
+        setShowZapierConfig={setShowZapierConfig}
+        zapierWebhookUrl={zapierWebhookUrl}
+        setZapierWebhookUrl={setZapierWebhookUrl}
+        saveZapierWebhook={saveZapierWebhook}
+      />
 
-      <Dialog open={showDebugDialog} onOpenChange={setShowDebugDialog}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Zapier Debug Information</DialogTitle>
-            <DialogDescription>
-              This information can help troubleshoot issues with the Zapier integration.
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4 py-4">
-            <div className="bg-black/90 text-green-400 p-4 rounded font-mono text-xs overflow-auto max-h-[400px]">
-              <pre>{debugInfo || "No debug information available yet. Submit the form to generate logs."}</pre>
-            </div>
-            
-            <Alert className="bg-amber-50 border-amber-200">
-              <AlertTitle className="text-amber-800">Troubleshooting Tips</AlertTitle>
-              <AlertDescription className="text-amber-700">
-                <ol className="list-decimal pl-5 space-y-1">
-                  <li>Verify your Zapier webhook URL is correct</li>
-                  <li>Check if your Zap is turned on in Zapier</li>
-                  <li>Make sure your sample data format matches what Google Sheets expects</li>
-                  <li>Check the Zapier History to see if it received the webhook call</li>
-                  <li>Try redeploying your Zap with a new test trigger</li>
-                </ol>
-              </AlertDescription>
-            </Alert>
-          </div>
-          
-          <DialogFooter>
-            <Button onClick={() => setShowDebugDialog(false)}>
-              Close
-            </Button>
-            <Button variant="outline" onClick={() => navigator.clipboard.writeText(debugInfo)}>
-              Copy Debug Info
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <DebugDialog 
+        showDebugDialog={showDebugDialog}
+        setShowDebugDialog={setShowDebugDialog}
+        debugInfo={debugInfo}
+      />
     </div>
   );
 };
