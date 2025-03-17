@@ -59,19 +59,12 @@ export const triggerZapierWebhook = async (
       document.body.removeChild(script);
     }, 5000);
     
-    // Third attempt: Form submission approach - But now using an iframe instead of _blank
+    // Third attempt: Form submission approach
     debugLog += `Attempting form submission approach as backup\n`;
-    
-    // Create an invisible iframe for the form submission
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-    
-    // Create the form inside the iframe's document
     const formElement = document.createElement('form');
     formElement.method = 'POST';
     formElement.action = zapierWebhookUrl;
-    // Remove target="_blank" to prevent opening in a new tab
+    formElement.target = '_blank';
     formElement.style.display = 'none';
     
     // Add each field as a separate form field to ensure Google Sheets compatibility
@@ -83,20 +76,14 @@ export const triggerZapierWebhook = async (
       formElement.appendChild(input);
     });
     
-    // Append form to the iframe, submit, then clean up
-    if (iframe.contentDocument) {
-      iframe.contentDocument.body.appendChild(formElement);
-      formElement.submit();
-      
-      // Clean up after a delay
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 5000);
-    } else {
-      debugLog += `Failed to access iframe document\n`;
-    }
+    // Add form to DOM, submit, then remove
+    document.body.appendChild(formElement);
+    formElement.submit();
+    setTimeout(() => {
+      document.body.removeChild(formElement);
+    }, 5000);
     
-    debugLog += `All approaches attempted. Check Zapier logs to confirm receipt.\n`;
+    debugLog += `All three approaches attempted. Check Zapier logs to confirm receipt.\n`;
     
     return { success: true, debugLog };
   } catch (error) {
