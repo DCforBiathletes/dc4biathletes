@@ -45,55 +45,36 @@ export const triggerZapierWebhook = async (
       debugLog += `Fetch attempt failed: ${fetchError}\n`;
     }
     
-    // Second attempt: Using JSONP-like approach
-    const jsonpUrl = `${zapierWebhookUrl}?data=${encodeURIComponent(JSON.stringify(payload))}`;
-    debugLog += `Attempting JSONP-like approach with URL: ${jsonpUrl}\n`;
+    // Second attempt: Using server-side data parameter - without creating visible DOM elements
+    debugLog += `Attempting URL parameter approach\n`;
     
-    // Create a script element to load the URL
-    const script = document.createElement('script');
-    script.src = jsonpUrl;
-    document.body.appendChild(script);
-    
-    // Remove script after a short delay
-    setTimeout(() => {
-      document.body.removeChild(script);
-    }, 5000);
-    
-    // Third attempt: Form submission approach - But now using an iframe instead of _blank
-    debugLog += `Attempting form submission approach as backup\n`;
-    
-    // Create an invisible iframe for the form submission
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-    
-    // Create the form inside the iframe's document
-    const formElement = document.createElement('form');
-    formElement.method = 'POST';
-    formElement.action = zapierWebhookUrl;
-    // Remove target="_blank" to prevent opening in a new tab
-    formElement.style.display = 'none';
-    
-    // Add each field as a separate form field to ensure Google Sheets compatibility
-    Object.entries(payload).forEach(([key, value]) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = typeof value === 'string' ? value : JSON.stringify(value);
-      formElement.appendChild(input);
-    });
-    
-    // Append form to the iframe, submit, then clean up
-    if (iframe.contentDocument) {
-      iframe.contentDocument.body.appendChild(formElement);
-      formElement.submit();
+    try {
+      // Create a URL object with the parameters
+      const url = new URL(zapierWebhookUrl);
+      url.searchParams.append('data', JSON.stringify(payload));
       
-      // Clean up after a delay
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 5000);
-    } else {
-      debugLog += `Failed to access iframe document\n`;
+      // Use a simple image method that doesn't trigger visible elements
+      const img = new Image();
+      img.style.display = 'none';
+      img.src = url.toString();
+      
+      debugLog += `Image approach sent\n`;
+    } catch (imgError) {
+      debugLog += `Image approach failed: ${imgError}\n`;
+    }
+    
+    // Third attempt: XHR approach as final backup
+    debugLog += `Attempting XHR approach as final backup\n`;
+    
+    try {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', zapierWebhookUrl, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(payload));
+      
+      debugLog += `XHR approach sent\n`;
+    } catch (xhrError) {
+      debugLog += `XHR approach failed: ${xhrError}\n`;
     }
     
     debugLog += `All approaches attempted. Check Zapier logs to confirm receipt.\n`;

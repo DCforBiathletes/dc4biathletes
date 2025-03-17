@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -170,19 +169,23 @@ const Contact = () => {
         setShowThankYouDialog={setShowThankYouDialog}
       />
 
-      <ZapierConfig 
-        showZapierConfig={showZapierConfig}
-        setShowZapierConfig={setShowZapierConfig}
-        zapierWebhookUrl={zapierWebhookUrl}
-        setZapierWebhookUrl={setZapierWebhookUrl}
-        saveZapierWebhook={saveZapierWebhook}
-      />
-
-      <DebugDialog 
-        showDebugDialog={showDebugDialog}
-        setShowDebugDialog={setShowDebugDialog}
-        debugInfo={debugInfo}
-      />
+      {showZapierConfig && (
+        <ZapierConfig 
+          showZapierConfig={showZapierConfig}
+          setShowZapierConfig={setShowZapierConfig}
+          zapierWebhookUrl={zapierWebhookUrl}
+          setZapierWebhookUrl={setZapierWebhookUrl}
+          saveZapierWebhook={saveZapierWebhook}
+        />
+      )}
+      
+      {showDebugDialog && (
+        <DebugDialog 
+          showDebugDialog={showDebugDialog}
+          setShowDebugDialog={setShowDebugDialog}
+          debugInfo={debugInfo}
+        />
+      )}
     </div>
   );
 };
