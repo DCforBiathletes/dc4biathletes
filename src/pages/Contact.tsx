@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -126,6 +127,7 @@ const Contact = () => {
         variant: "destructive"
       });
     } finally {
+      // Store debug info but don't show the dialog
       setDebugInfo(debugLog);
       setIsSubmitting(false);
     }
