@@ -27,32 +27,27 @@ export const triggerZapierWebhook = async (
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
   
   try {
-    // Primary approach: XMLHttpRequest in background
-    debugLog += `Attempting XMLHttpRequest in background\n`;
-    
-    // Create a Promise-based XMLHttpRequest
-    const sendXHR = new Promise<void>((resolve) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', zapierWebhookUrl, true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.onload = () => {
-        debugLog += `XHR completed with status: ${xhr.status}\n`;
-        resolve();
-      };
-      xhr.onerror = () => {
-        debugLog += `XHR failed, but continuing with backup methods\n`;
-        resolve();
-      };
-      xhr.send(JSON.stringify(payload));
-    });
-    
-    // Wait for XHR to complete
-    await sendXHR;
-    
-    // Backup approach: Fetch with no-cors mode
-    debugLog += `Attempting fetch with no-cors mode as backup\n`;
+    // Direct fetch approach - This is the most reliable for Zapier/Google Sheets
+    debugLog += `Attempting direct fetch to Zapier webhook\n`;
     
     try {
+      const response = await fetch(zapierWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+      
+      if (response.ok) {
+        debugLog += `Direct fetch successful with status: ${response.status}\n`;
+      } else {
+        debugLog += `Direct fetch returned status: ${response.status}\n`;
+      }
+    } catch (fetchError) {
+      debugLog += `Direct fetch failed, switching to no-cors mode: ${fetchError}\n`;
+      
+      // Fallback to no-cors mode
       await fetch(zapierWebhookUrl, {
         method: 'POST',
         mode: 'no-cors',
@@ -62,45 +57,36 @@ export const triggerZapierWebhook = async (
         body: JSON.stringify(payload)
       });
       
-      debugLog += `Fetch request sent with no-cors mode\n`;
-    } catch (fetchError) {
-      debugLog += `Fetch attempt failed: ${fetchError}\n`;
+      debugLog += `no-cors fetch request sent\n`;
     }
     
-    // Second backup: Using invisible iframe for submission instead of opening a new tab
-    debugLog += `Creating hidden iframe for form submission\n`;
+    // Form data approach as a backup - more compatible with Google Sheets
+    debugLog += `Using form data approach as backup\n`;
     
-    // Create an invisible iframe
-    const iframe = document.createElement('iframe');
-    iframe.name = 'zapier-hidden-iframe';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
+    // Create a form data object to ensure proper Google Sheets mapping
+    const formData = new FormData();
     
-    // Create a form targeting the iframe
-    const formElement = document.createElement('form');
-    formElement.method = 'POST';
-    formElement.action = zapierWebhookUrl;
-    formElement.target = 'zapier-hidden-iframe'; // Target the hidden iframe
-    formElement.style.display = 'none';
-    
-    // Add each field as a separate form field to ensure Google Sheets compatibility
+    // Add each field to form data - this format works better with Google Sheets
     Object.entries(payload).forEach(([key, value]) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = typeof value === 'string' ? value : JSON.stringify(value);
-      formElement.appendChild(input);
+      formData.append(key, typeof value === 'string' ? value : JSON.stringify(value));
     });
     
-    // Add form to DOM, submit, then remove
-    document.body.appendChild(formElement);
-    formElement.submit();
+    // Send the form data via XHR
+    const sendFormXHR = new Promise<void>((resolve) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', zapierWebhookUrl, true);
+      xhr.onload = () => {
+        debugLog += `Form XHR completed with status: ${xhr.status}\n`;
+        resolve();
+      };
+      xhr.onerror = () => {
+        debugLog += `Form XHR failed\n`;
+        resolve();
+      };
+      xhr.send(formData);
+    });
     
-    // Clean up after a delay
-    setTimeout(() => {
-      document.body.removeChild(iframe);
-      document.body.removeChild(formElement);
-    }, 5000);
+    await sendFormXHR;
     
     debugLog += `All approaches attempted. Check Zapier logs to confirm receipt.\n`;
     
