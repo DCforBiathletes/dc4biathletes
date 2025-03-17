@@ -45,6 +45,10 @@ export const ThankYouDialog = ({
             </svg>
           </div>
         </div>
+        <div className="text-sm text-muted-foreground text-center mb-4">
+          <p>Your information has been sent to our Zapier workflow.</p>
+          <p>We'll get back to you as soon as possible!</p>
+        </div>
         <DialogFooter className="sm:justify-center">
           <Button 
             onClick={() => setShowThankYouDialog(false)}

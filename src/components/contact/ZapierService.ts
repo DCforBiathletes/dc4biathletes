@@ -30,33 +30,25 @@ export const triggerZapierWebhook = async (
     console.log("Sending data to Zapier webhook:", zapierWebhookUrl);
     console.log("Payload:", payload);
     
-    // Use XMLHttpRequest for better debugging since fetch with no-cors doesn't provide response details
-    return new Promise<{ success: boolean; debugLog: string }>((resolve) => {
-      const xhr = new XMLHttpRequest();
-      
-      xhr.onreadystatechange = function() {
-        debugLog += `XHR State Change: ReadyState: ${xhr.readyState}, Status: ${xhr.status}\n`;
-        
-        if (xhr.readyState === 4) {
-          debugLog += `Response received. Status: ${xhr.status}\n`;
-          if (xhr.status >= 200 && xhr.status < 300) {
-            debugLog += `Success! Response: ${xhr.responseText}\n`;
-            console.log("Successfully sent data to Zapier");
-            resolve({ success: true, debugLog });
-          } else {
-            debugLog += `Error! Response: ${xhr.responseText}\n`;
-            console.error("Failed to send data to Zapier", xhr.status, xhr.statusText);
-            resolve({ success: false, debugLog });
-          }
-        }
-      };
-      
-      xhr.open("POST", zapierWebhookUrl, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(JSON.stringify(payload));
-      
-      debugLog += "XHR request sent\n";
+    // Use fetch with no-cors mode to handle CORS issues
+    debugLog += `Using fetch with no-cors mode\n`;
+    
+    await fetch(zapierWebhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "no-cors", // This prevents CORS errors but means we can't read the response
+      body: JSON.stringify(payload),
     });
+    
+    // Since we can't check status with no-cors, we assume success
+    debugLog += `Request sent with no-cors mode. Cannot verify actual response due to CORS limitations.\n`;
+    debugLog += `Zapier webhooks typically return 200 even if the Zap fails internally.\n`;
+    debugLog += `Please check your Zapier account to confirm the webhook was triggered.\n`;
+    
+    console.log("Request to Zapier webhook completed");
+    return { success: true, debugLog };
   } catch (error) {
     debugLog += `Error sending data to Zapier: ${error}\n`;
     console.error("Error sending data to Zapier:", error);
