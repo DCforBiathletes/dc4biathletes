@@ -25,9 +25,9 @@ export const triggerZapierWebhook = async (
   };
   
   try {
-    // Send data using the fetch API with no-cors mode to avoid CORS issues
-    await fetch(zapierWebhookUrl, {
-      method: 'POST',
+    // Send data using the fetch API with POST method and no-cors mode
+    const response = await fetch(zapierWebhookUrl, {
+      method: 'POST', // Explicitly using POST method
       mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
@@ -35,9 +35,11 @@ export const triggerZapierWebhook = async (
       body: JSON.stringify(payload)
     });
     
-    return { success: true, debugLog: "Form submission sent successfully" };
+    debugLog += "\nRequest sent successfully with POST method";
+    return { success: true, debugLog: debugLog };
   } catch (error) {
     console.error("Error sending data to Zapier:", error);
-    return { success: false, debugLog: `Error: ${error}` };
+    debugLog += `\nError: ${error}`;
+    return { success: false, debugLog: debugLog };
   }
 };
