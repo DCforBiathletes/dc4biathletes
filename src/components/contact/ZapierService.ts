@@ -25,29 +25,16 @@ export const triggerZapierWebhook = async (
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
   
   try {
-    // For Google Apps Script, we need to use 'no-cors' mode
     debugLog += `Sending fetch request to webhook\n`;
     
-    // Use URLSearchParams for Google Apps Script which works better than JSON for GET deployments
-    const params = new URLSearchParams();
-    Object.entries(payload).forEach(([key, value]) => {
-      params.append(key, value as string);
-    });
-    
-    // Add a cache-busting parameter to prevent caching
-    params.append('_cb', Date.now().toString());
-    
-    // Construct the full URL with query parameters
-    const fullUrl = `${webhookUrl}?${params.toString()}`;
-    debugLog += `Full URL with params: ${fullUrl}\n`;
-    
-    // Send data using fetch with GET method and no-cors mode for Google Apps Script
-    const response = await fetch(fullUrl, {
-      method: 'GET',
-      mode: 'no-cors', // This is crucial for Google Apps Script
+    // For Google Apps Script, we need to send JSON payload in POST request
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      mode: 'no-cors', // Still using no-cors for cross-origin requests
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify(payload)
     });
     
     // When using no-cors mode, we can't access response properties
