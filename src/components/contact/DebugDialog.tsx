@@ -41,7 +41,7 @@ export const DebugDialog = ({
           </div>
           
           <Alert className="bg-amber-50 border-amber-200">
-            <AlertTitle className="text-amber-800">Troubleshooting EmailJS Recipient Error</AlertTitle>
+            <AlertTitle className="text-amber-800">Troubleshooting EmailJS Configuration</AlertTitle>
             <AlertDescription className="text-amber-700">
               <p className="font-semibold mb-2">To fix "The recipients address is empty" error:</p>
               <ol className="list-decimal pl-5 space-y-2">
@@ -49,27 +49,27 @@ export const DebugDialog = ({
                   <ul className="list-disc pl-5 mt-1">
                     <li>Log into your EmailJS dashboard at emailjs.com</li>
                     <li>Go to Email Templates → Select template_1u4cu5f</li>
-                    <li>Under "To email" field, enter a default recipient email</li>
-                    <li>Save the template</li>
+                    <li>Make sure BOTH "From email" and "To email" fields are properly configured</li>
+                    <li>For "From email", either set a default value OR ensure it uses a parameter (e.g., {{from_email}})</li>
+                    <li>For "To email", you MUST set a default recipient email or use a parameter name</li>
+                    <li>Save the template after making changes</li>
                   </ul>
                 </li>
-                <li><strong>Alternative: Required Parameters in Code:</strong>
+                <li><strong>Important Parameter Names in Code:</strong>
                   <ul className="list-disc pl-5 mt-1">
-                    <li>Your template might expect specific parameter names:</li>
-                    <li><code>to_email</code></li>
-                    <li><code>recipient</code></li>
-                    <li><code>email_to</code></li>
-                    <li>One of these should match what your template expects</li>
+                    <li>Sender parameters: from_name, from_email, name, email</li>
+                    <li>Recipient parameters: to_email, recipient, email_to</li>
+                    <li>Message parameters: subject, message</li>
+                    <li>These must match what your template expects exactly</li>
                   </ul>
                 </li>
-                <li><strong>Tips for Your Specific Template:</strong>
+                <li><strong>Check Template Variables:</strong>
                   <ul className="list-disc pl-5 mt-1">
-                    <li>Check your EmailJS template "To email" field name</li>
-                    <li>Use the exact same parameter name in your code</li>
-                    <li>Make sure any email address is properly formatted</li>
+                    <li>In your template, look for variables like {{from_email}}, {{to_email}}</li>
+                    <li>Ensure these EXACTLY match the parameter names in your code</li>
+                    <li>Case sensitivity matters! "From_Email" is different from "from_email"</li>
                   </ul>
                 </li>
-                <li>If still having issues, create a new template in EmailJS and test with basic settings first</li>
               </ol>
             </AlertDescription>
           </Alert>

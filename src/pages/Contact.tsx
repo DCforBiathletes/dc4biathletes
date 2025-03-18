@@ -46,20 +46,29 @@ const Contact = () => {
       emailjs.init("vPrSFwIfO2--Bf-TN");
       debugLog += `EmailJS initialized with public key vPrSFwIfO2--Bf-TN\n`;
       
-      // Create template parameters - use emailjs expected parameter names exactly
+      // Create template parameters with explicit from_email and from_name
+      // Note: EmailJS expects certain parameter names based on your template configuration
       const templateParams = {
+        // Sender information (From fields)
         from_name: formValues.name,
         from_email: formValues.email,
         reply_to: formValues.email,
+        email: formValues.email, // Some templates use just 'email'
+        name: formValues.name,   // Some templates use just 'name'
+        
+        // Recipient information (To fields)
         to_name: "Support Team",
-        to_email: "support@example.com", // Fixed email address
-        message_subject: formValues.subject, // Try different parameter names
-        message_html: formValues.message,   // Try different parameter names
-        message: formValues.message,       // Keep original parameter too
-        subject: formValues.subject,       // Keep original parameter too
-        // Additional parameters that EmailJS might expect
+        to_email: "support@example.com",
         recipient: "support@example.com",
         email_to: "support@example.com",
+        
+        // Message content
+        subject: formValues.subject,
+        message_subject: formValues.subject,
+        message: formValues.message,
+        message_html: formValues.message,
+        
+        // Additional metadata
         timestamp: new Date().toISOString(),
         pageURL: window.location.href
       };
@@ -176,3 +185,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
