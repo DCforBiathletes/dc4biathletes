@@ -45,7 +45,7 @@ export const DebugDialog = ({
             <AlertDescription className="text-amber-700">
               <ol className="list-decimal pl-5 space-y-1">
                 <li>Verify your EmailJS service ID (service_dr8f4vk) and template ID (template_1u4cu5f) are correct</li>
-                <li>Confirm your EmailJS public key (lDpLIJ8bFE9QDxwPo) is valid</li>
+                <li>Confirm your EmailJS public key (vPrSFwIfO2--Bf-TN) is valid</li>
                 <li>Make sure the EmailJS service is active in your EmailJS dashboard</li>
                 <li>Check template variables match what your template expects (from_name, from_email, subject, message)</li>
                 <li>For "Account not found" errors, verify your EmailJS account is active and the public key is correct</li>

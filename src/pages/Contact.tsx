@@ -54,9 +54,9 @@ const Contact = () => {
       
       debugLog += `Sending email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
       
-      // Initialize EmailJS with public key first
-      emailjs.init("lDpLIJ8bFE9QDxwPo");
-      debugLog += `EmailJS initialized with public key\n`;
+      // Initialize EmailJS with the CORRECT public key
+      emailjs.init("vPrSFwIfO2--Bf-TN");
+      debugLog += `EmailJS initialized with public key vPrSFwIfO2--Bf-TN\n`;
       
       // Send email with service ID and template ID (no user ID parameter)
       const result = await emailjs.send(
