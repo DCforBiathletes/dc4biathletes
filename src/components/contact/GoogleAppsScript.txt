@@ -11,17 +11,37 @@ function doPost(e) {
   }
   
   try {
-    // Check if data is coming from form submission with a 'data' parameter
+    // Check if data is coming as a parameter or in the post data
     var data;
     
     if (e.parameter && e.parameter.data) {
-      // Form submission with data parameter
-      data = JSON.parse(e.parameter.data);
-      Logger.log("Form data received: " + JSON.stringify(data));
+      // Extract the data parameter and parse it as JSON
+      try {
+        data = JSON.parse(e.parameter.data);
+        Logger.log("Form data parameter parsed: " + JSON.stringify(data));
+      } catch (parseError) {
+        Logger.log("Error parsing data parameter: " + parseError);
+        Logger.log("Raw data parameter: " + e.parameter.data);
+        return ContentService.createTextOutput(JSON.stringify({ 
+          error: "Invalid JSON in data parameter", 
+          details: parseError.toString() 
+        }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
     } else if (e.postData && e.postData.contents) {
       // Direct JSON POST
-      data = JSON.parse(e.postData.contents);
-      Logger.log("JSON data received: " + JSON.stringify(data));
+      try {
+        data = JSON.parse(e.postData.contents);
+        Logger.log("JSON data received: " + JSON.stringify(data));
+      } catch (parseError) {
+        Logger.log("Error parsing JSON: " + parseError);
+        Logger.log("Raw postData: " + e.postData.contents);
+        return ContentService.createTextOutput(JSON.stringify({ 
+          error: "Invalid JSON in request body", 
+          details: parseError.toString() 
+        }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
     } else {
       Logger.log("Error: No parsable data found in request");
       return ContentService.createTextOutput(JSON.stringify({ 

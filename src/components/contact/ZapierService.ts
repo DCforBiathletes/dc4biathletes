@@ -25,75 +25,101 @@ export const triggerZapierWebhook = async (
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
   
   try {
-    // Use FormData instead of direct JSON
-    const formDataObj = new FormData();
-    formDataObj.append('data', JSON.stringify(payload));
+    // Try direct JSON POST first
+    debugLog += `Sending JSON directly to Google Apps Script\n`;
     
-    debugLog += `Sending form data to Google Apps Script\n`;
-    
-    // Use fetch with FormData
     const response = await fetch(webhookUrl, {
       method: 'POST',
-      body: formDataObj,
-      mode: 'no-cors' // This prevents CORS issues but doesn't return a proper response
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      // No no-cors here to get proper responses, but handle potential CORS errors
     }).catch(error => {
-      debugLog += `Fetch error: ${error}\n`;
+      debugLog += `Fetch error with direct JSON: ${error}\n`;
       throw error;
     });
     
-    debugLog += `Request sent (no response details available due to no-cors mode)\n`;
-    
-    // Since we're using no-cors, we can't actually check the response status
-    // So we'll just assume success if we get here
-    return { success: true, debugLog };
+    if (response.ok) {
+      debugLog += `Request successful with JSON approach\n`;
+      return { success: true, debugLog };
+    } else {
+      debugLog += `Request failed with status: ${response.status}\n`;
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
   } catch (error) {
-    debugLog += `Error: ${error}\n`;
-    
-    // Create a backup approach using a form submission to an iframe
-    debugLog += `Attempting backup form submission...\n`;
+    debugLog += `Error with direct JSON approach: ${error}\n`;
+    debugLog += `Falling back to URL-encoded form submission...\n`;
     
     try {
-      // Create a form element
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = webhookUrl;
-      form.target = '_blank'; // This prevents page navigation
-      form.style.display = 'none';
+      // Use URL-encoded form data as fallback
+      const formDataParams = new URLSearchParams();
+      formDataParams.append('data', JSON.stringify(payload));
       
-      // Add data as a hidden input field
-      const dataInput = document.createElement('input');
-      dataInput.type = 'hidden';
-      dataInput.name = 'data';
-      dataInput.value = JSON.stringify(payload);
-      form.appendChild(dataInput);
+      debugLog += `Sending URL-encoded form data to Google Apps Script\n`;
       
-      // Create a hidden iframe to catch the response
-      const iframe = document.createElement('iframe');
-      iframe.name = '_blank';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formDataParams,
+        mode: 'no-cors', // Use no-cors for this fallback approach
+      }).catch(error => {
+        debugLog += `Fetch error with form data: ${error}\n`;
+        throw error;
+      });
       
-      debugLog += `Submitting backup form to Google Apps Script\n`;
+      debugLog += `Form data request sent (no response details available due to no-cors mode)\n`;
       
-      // Add form to document, submit it, and then remove it
-      document.body.appendChild(form);
-      form.submit();
-      
-      // Set a timeout to consider the submission successful
-      // since we can't easily get the response from the iframe
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      debugLog += `Backup form submitted successfully\n`;
-      
-      // Clean up
-      document.body.removeChild(form);
-      document.body.removeChild(iframe);
-      
+      // Since we're using no-cors, we can't check response status
       return { success: true, debugLog };
-    } catch (backupError) {
-      debugLog += `Backup submission error: ${backupError}\n`;
-      console.error("Error sending data to webhook:", backupError);
-      return { success: false, debugLog };
+    } catch (finalError) {
+      debugLog += `All approaches failed. Final error: ${finalError}\n`;
+      debugLog += `Attempting last-resort iframe approach...\n`;
+      
+      try {
+        // Create a form element for iframe submission as last resort
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = webhookUrl;
+        form.target = '_blank'; // This prevents page navigation
+        form.style.display = 'none';
+        
+        // Add data as a hidden input field
+        const dataInput = document.createElement('input');
+        dataInput.type = 'hidden';
+        dataInput.name = 'data';
+        dataInput.value = JSON.stringify(payload);
+        form.appendChild(dataInput);
+        
+        // Create a hidden iframe to catch the response
+        const iframe = document.createElement('iframe');
+        iframe.name = '_blank';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        
+        debugLog += `Submitting iframe form to Google Apps Script\n`;
+        
+        // Add form to document, submit it, and then remove it
+        document.body.appendChild(form);
+        form.submit();
+        
+        // Set a timeout to consider the submission successful
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        debugLog += `Iframe form submitted successfully\n`;
+        
+        // Clean up
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+        
+        return { success: true, debugLog };
+      } catch (iframeError) {
+        debugLog += `Iframe submission error: ${iframeError}\n`;
+        console.error("Error sending data to webhook:", iframeError);
+        return { success: false, debugLog };
+      }
     }
   }
 };
