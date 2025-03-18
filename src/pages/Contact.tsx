@@ -6,7 +6,7 @@ import { ThankYouDialog } from "@/components/contact/ThankYouDialog";
 import { DebugDialog } from "@/components/contact/DebugDialog";
 import { triggerZapierWebhook, FormValues } from "@/components/contact/ZapierService";
 
-const DEFAULT_ZAPIER_WEBHOOK = "https://hooks.zapier.com/hooks/catch/9911481/2lfcqob/";
+const GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw8GgwXKXhttUUxS40U_qPZF2cCyVtzbNxBcSYPtBH-zClOoj5OGO8DF6AmGXZDEh2b6g/exec";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -19,21 +19,17 @@ const Contact = () => {
     message: ''
   });
   const [showZapierConfig, setShowZapierConfig] = useState(false);
-  const [zapierWebhookUrl, setZapierWebhookUrl] = useState(DEFAULT_ZAPIER_WEBHOOK);
-  const [zapierEnabled, setZapierEnabled] = useState(true); // Pre-enabled since we have a default
+  const [webhookUrl, setWebhookUrl] = useState(GOOGLE_WEBHOOK_URL);
+  const [webhookEnabled, setWebhookEnabled] = useState(true); // Always enabled with our direct webhook
   const [debugInfo, setDebugInfo] = useState<string>("");
   const [showDebugDialog, setShowDebugDialog] = useState(false);
 
   useEffect(() => {
-    // Check if zapier webhook URL exists in localStorage
-    const savedWebhookUrl = localStorage.getItem('zapierWebhookUrl');
+    const savedWebhookUrl = localStorage.getItem('webhookUrl');
     if (savedWebhookUrl) {
-      setZapierWebhookUrl(savedWebhookUrl);
-      setZapierEnabled(true);
-    } else if (DEFAULT_ZAPIER_WEBHOOK) {
-      // If no saved webhook but we have a default, save it
-      localStorage.setItem('zapierWebhookUrl', DEFAULT_ZAPIER_WEBHOOK);
-      setZapierEnabled(true);
+      setWebhookUrl(savedWebhookUrl);
+    } else {
+      localStorage.setItem('webhookUrl', GOOGLE_WEBHOOK_URL);
     }
   }, []);
 
@@ -45,14 +41,14 @@ const Contact = () => {
     }));
   };
 
-  const saveZapierWebhook = () => {
-    if (zapierWebhookUrl) {
-      localStorage.setItem('zapierWebhookUrl', zapierWebhookUrl);
-      setZapierEnabled(true);
+  const saveWebhookConfig = () => {
+    if (webhookUrl) {
+      localStorage.setItem('webhookUrl', webhookUrl);
+      setWebhookEnabled(true);
       setShowZapierConfig(false);
       toast({
-        title: "Zapier Webhook Saved",
-        description: "Your form submissions will now be sent to Zapier.",
+        title: "Webhook Saved",
+        description: "Your form submissions will now be sent to the configured webhook.",
       });
     } else {
       toast({
@@ -68,55 +64,25 @@ const Contact = () => {
     setIsSubmitting(true);
     let debugLog = `Form submission started\n`;
     debugLog += `Form values: ${JSON.stringify(formValues, null, 2)}\n`;
+    debugLog += `Using webhook URL: ${webhookUrl}\n`;
     
     try {
-      // Send the form data to Zapier if enabled
-      if (zapierEnabled) {
-        debugLog += `Zapier enabled. Webhook URL: ${zapierWebhookUrl}\n`;
-        const { success, debugLog: zapierDebugLog } = await triggerZapierWebhook(zapierWebhookUrl, formValues);
-        debugLog += zapierDebugLog;
-        
-        // Show success message and dialog
-        setShowThankYouDialog(true);
-        
-        // Reset form
-        setFormValues({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-        
-        toast({
-          title: "Message Sent",
-          description: "Thank you for your message. We'll get back to you soon.",
-        });
-      } else {
-        // If Zapier is not configured, configure it silently without showing UI
-        debugLog += `Zapier not configured, using default\n`;
-        localStorage.setItem('zapierWebhookUrl', DEFAULT_ZAPIER_WEBHOOK);
-        setZapierEnabled(true);
-        
-        // Retry submission
-        const { success, debugLog: zapierDebugLog } = await triggerZapierWebhook(DEFAULT_ZAPIER_WEBHOOK, formValues);
-        debugLog += zapierDebugLog;
-        
-        // Show success message
-        setShowThankYouDialog(true);
-        
-        // Reset form
-        setFormValues({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-        
-        toast({
-          title: "Message Sent",
-          description: "Thank you for your message. We'll get back to you soon.",
-        });
-      }
+      const { success, debugLog: submitDebugLog } = await triggerZapierWebhook(webhookUrl, formValues);
+      debugLog += submitDebugLog;
+      
+      setShowThankYouDialog(true);
+      
+      setFormValues({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+      toast({
+        title: "Message Sent",
+        description: "Thank you for your message. We'll get back to you soon.",
+      });
     } catch (error) {
       debugLog += `Error submitting form: ${error}\n`;
       console.error("Error submitting form:", error);
@@ -159,7 +125,7 @@ const Contact = () => {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           isSubmitting={isSubmitting}
-          zapierEnabled={zapierEnabled}
+          zapierEnabled={webhookEnabled}
         />
       </section>
 
@@ -171,9 +137,9 @@ const Contact = () => {
       <ZapierConfig 
         showZapierConfig={showZapierConfig}
         setShowZapierConfig={setShowZapierConfig}
-        zapierWebhookUrl={zapierWebhookUrl}
-        setZapierWebhookUrl={setZapierWebhookUrl}
-        saveZapierWebhook={saveZapierWebhook}
+        zapierWebhookUrl={webhookUrl}
+        setZapierWebhookUrl={setWebhookUrl}
+        saveZapierWebhook={saveWebhookConfig}
       />
 
       <DebugDialog 
