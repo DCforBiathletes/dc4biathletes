@@ -42,29 +42,31 @@ const Contact = () => {
     debugLog += `Form values: ${JSON.stringify(formValues, null, 2)}\n`;
     
     try {
+      // Initialize EmailJS with the public key BEFORE sending email
+      emailjs.init("vPrSFwIfO2--Bf-TN");
+      debugLog += `EmailJS initialized with public key vPrSFwIfO2--Bf-TN\n`;
+      
       // Add timestamp and page URL to the template parameters
       const templateParams = {
         from_name: formValues.name,
         from_email: formValues.email,
+        reply_to: formValues.email, // Essential for EmailJS
+        to_name: "Support Team", // Add recipient name
+        to_email: "recipient@example.com", // Default recipient - replace with actual
         subject: formValues.subject,
         message: formValues.message,
-        to_email: "recipient@example.com", // Add a default recipient (replace with your actual recipient)
-        reply_to: formValues.email, // Add reply_to parameter
         timestamp: new Date().toISOString(),
         pageURL: window.location.href
       };
       
       debugLog += `Sending email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
       
-      // Initialize EmailJS with the CORRECT public key
-      emailjs.init("vPrSFwIfO2--Bf-TN");
-      debugLog += `EmailJS initialized with public key vPrSFwIfO2--Bf-TN\n`;
-      
-      // Send email with service ID and template ID (no user ID parameter)
+      // Use the full method signature with all parameters explicitly defined
       const result = await emailjs.send(
-        'service_dr8f4vk',
-        'template_1u4cu5f',
-        templateParams
+        'service_dr8f4vk',              // Service ID
+        'template_1u4cu5f',             // Template ID
+        templateParams,                 // Template parameters
+        'vPrSFwIfO2--Bf-TN'            // User/Public Key (added again for clarity)
       );
       
       debugLog += `EmailJS response: ${JSON.stringify(result, null, 2)}\n`;

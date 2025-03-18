@@ -48,11 +48,17 @@ export const DebugDialog = ({
                 <li>Confirm your EmailJS public key (vPrSFwIfO2--Bf-TN) is valid</li>
                 <li>Make sure the EmailJS service is active in your EmailJS dashboard</li>
                 <li>Check template variables match what your template expects (from_name, from_email, subject, message)</li>
-                <li><strong>Ensure your EmailJS template has a recipient set OR add a to_email parameter in templateParams</strong></li>
-                <li>For "The recipients address is empty" errors, add to_email and reply_to parameters to templateParams</li>
-                <li>For "Account not found" errors, verify your EmailJS account is active and the public key is correct</li>
+                <li><strong>CRITICAL: For "The recipients address is empty" errors:</strong>
+                  <ul className="list-disc pl-5 mt-1">
+                    <li>Either configure a default recipient in your EmailJS template</li>
+                    <li>OR ensure you're passing both to_email AND reply_to parameters</li>
+                    <li>Check your EmailJS template for required recipient fields</li>
+                    <li>Check if your template is expecting to_name parameter as well</li>
+                  </ul>
+                </li>
+                <li>Verify your EmailJS account has remaining email quota</li>
                 <li>Try testing the service directly from the EmailJS dashboard</li>
-                <li>Check if your EmailJS account requires additional validation</li>
+                <li>If all else fails, try creating a new template and service in EmailJS</li>
               </ol>
             </AlertDescription>
           </Alert>
