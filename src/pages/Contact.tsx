@@ -46,27 +46,32 @@ const Contact = () => {
       emailjs.init("vPrSFwIfO2--Bf-TN");
       debugLog += `EmailJS initialized with public key vPrSFwIfO2--Bf-TN\n`;
       
-      // Add timestamp and page URL to the template parameters
+      // Create template parameters - use emailjs expected parameter names exactly
       const templateParams = {
         from_name: formValues.name,
         from_email: formValues.email,
-        reply_to: formValues.email, // Essential for EmailJS
-        to_name: "Support Team", // Add recipient name
-        to_email: "recipient@example.com", // Default recipient - replace with actual
-        subject: formValues.subject,
-        message: formValues.message,
+        reply_to: formValues.email,
+        to_name: "Support Team",
+        to_email: "support@example.com", // Fixed email address
+        message_subject: formValues.subject, // Try different parameter names
+        message_html: formValues.message,   // Try different parameter names
+        message: formValues.message,       // Keep original parameter too
+        subject: formValues.subject,       // Keep original parameter too
+        // Additional parameters that EmailJS might expect
+        recipient: "support@example.com",
+        email_to: "support@example.com",
         timestamp: new Date().toISOString(),
         pageURL: window.location.href
       };
       
       debugLog += `Sending email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
       
-      // Use the full method signature with all parameters explicitly defined
+      // Use the complete method signature with all parameters
       const result = await emailjs.send(
-        'service_dr8f4vk',              // Service ID
-        'template_1u4cu5f',             // Template ID
-        templateParams,                 // Template parameters
-        'vPrSFwIfO2--Bf-TN'            // User/Public Key (added again for clarity)
+        'service_dr8f4vk',             // Service ID
+        'template_1u4cu5f',            // Template ID
+        templateParams,                // Template parameters
+        'vPrSFwIfO2--Bf-TN'           // Public Key
       );
       
       debugLog += `EmailJS response: ${JSON.stringify(result, null, 2)}\n`;

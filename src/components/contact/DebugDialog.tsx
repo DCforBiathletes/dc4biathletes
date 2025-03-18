@@ -41,24 +41,35 @@ export const DebugDialog = ({
           </div>
           
           <Alert className="bg-amber-50 border-amber-200">
-            <AlertTitle className="text-amber-800">Troubleshooting Tips</AlertTitle>
+            <AlertTitle className="text-amber-800">Troubleshooting EmailJS Recipient Error</AlertTitle>
             <AlertDescription className="text-amber-700">
-              <ol className="list-decimal pl-5 space-y-1">
-                <li>Verify your EmailJS service ID (service_dr8f4vk) and template ID (template_1u4cu5f) are correct</li>
-                <li>Confirm your EmailJS public key (vPrSFwIfO2--Bf-TN) is valid</li>
-                <li>Make sure the EmailJS service is active in your EmailJS dashboard</li>
-                <li>Check template variables match what your template expects (from_name, from_email, subject, message)</li>
-                <li><strong>CRITICAL: For "The recipients address is empty" errors:</strong>
+              <p className="font-semibold mb-2">To fix "The recipients address is empty" error:</p>
+              <ol className="list-decimal pl-5 space-y-2">
+                <li><strong>Required EmailJS Template Configuration:</strong>
                   <ul className="list-disc pl-5 mt-1">
-                    <li>Either configure a default recipient in your EmailJS template</li>
-                    <li>OR ensure you're passing both to_email AND reply_to parameters</li>
-                    <li>Check your EmailJS template for required recipient fields</li>
-                    <li>Check if your template is expecting to_name parameter as well</li>
+                    <li>Log into your EmailJS dashboard at emailjs.com</li>
+                    <li>Go to Email Templates → Select template_1u4cu5f</li>
+                    <li>Under "To email" field, enter a default recipient email</li>
+                    <li>Save the template</li>
                   </ul>
                 </li>
-                <li>Verify your EmailJS account has remaining email quota</li>
-                <li>Try testing the service directly from the EmailJS dashboard</li>
-                <li>If all else fails, try creating a new template and service in EmailJS</li>
+                <li><strong>Alternative: Required Parameters in Code:</strong>
+                  <ul className="list-disc pl-5 mt-1">
+                    <li>Your template might expect specific parameter names:</li>
+                    <li><code>to_email</code></li>
+                    <li><code>recipient</code></li>
+                    <li><code>email_to</code></li>
+                    <li>One of these should match what your template expects</li>
+                  </ul>
+                </li>
+                <li><strong>Tips for Your Specific Template:</strong>
+                  <ul className="list-disc pl-5 mt-1">
+                    <li>Check your EmailJS template "To email" field name</li>
+                    <li>Use the exact same parameter name in your code</li>
+                    <li>Make sure any email address is properly formatted</li>
+                  </ul>
+                </li>
+                <li>If still having issues, create a new template in EmailJS and test with basic settings first</li>
               </ol>
             </AlertDescription>
           </Alert>
