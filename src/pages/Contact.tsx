@@ -6,7 +6,7 @@ import { ThankYouDialog } from "@/components/contact/ThankYouDialog";
 import { DebugDialog } from "@/components/contact/DebugDialog";
 import { triggerZapierWebhook, FormValues } from "@/components/contact/ZapierService";
 
-const GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwN625SeGbH1el28WwKLhzcL8BB2WFcAZKE8mSIVCPbgwodsfXJFqule6_IYc6HbMR3wQ/exec";
+const GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzjZ_Wkt6vkJV4xQ22avlQHtwmXuY-oG3B396W8sYMybqzwSq0RS2s1KP_qPwP-HEG_PA/exec";
 
 const Contact = () => {
   const { toast } = useToast();
