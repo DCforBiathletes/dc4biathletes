@@ -44,19 +44,24 @@ const Contact = () => {
     try {
       // Add timestamp and page URL to the template parameters
       const templateParams = {
-        ...formValues,
+        from_name: formValues.name,
+        from_email: formValues.email,
+        subject: formValues.subject,
+        message: formValues.message,
         timestamp: new Date().toISOString(),
         pageURL: window.location.href
       };
       
       debugLog += `Sending email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
       
+      // Before sending, initialize EmailJS with your user ID
+      emailjs.init("lDpLIJ8bFE9QDxwPo");
+      
       // Replace with your actual EmailJS service ID, template ID, and user ID
       const result = await emailjs.send(
         'service_50i0s9j', // Your EmailJS service ID
         'template_ylcijzb', // Your EmailJS template ID
-        templateParams,
-        'lDpLIJ8bFE9QDxwPo' // Your EmailJS user ID
+        templateParams
       );
       
       debugLog += `EmailJS response: ${JSON.stringify(result, null, 2)}\n`;

@@ -48,7 +48,8 @@ export const DebugDialog = ({
                 <li>Make sure your EmailJS account is active and verified</li>
                 <li>Check if your template variables match the parameters being sent</li>
                 <li>Ensure your email service provider (Gmail, etc.) is properly connected</li>
-                <li>Look for any rate limiting or quota issues in your EmailJS dashboard</li>
+                <li>For "Account not found" errors, verify you've initialized EmailJS with <code>emailjs.init()</code></li>
+                <li>Make sure your template field names match the data you're sending (e.g., from_name, from_email, etc.)</li>
               </ol>
             </AlertDescription>
           </Alert>
