@@ -12,15 +12,12 @@ export const triggerZapierWebhook = async (
 ): Promise<{ success: boolean; debugLog: string }> => {
   let debugLog = `Sending data to webhook: ${webhookUrl}\n`;
   
-  // Create the payload
+  // Create the payload with the exact format specified
   const payload = {
     name: formData.name,
     email: formData.email,
     subject: formData.subject,
     message: formData.message,
-    timestamp: new Date().toISOString(),
-    source: window.location.origin,
-    pageTitle: "Contact Form Submission",
     pageURL: window.location.href
   };
   
