@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -70,29 +71,43 @@ const Contact = () => {
       const { success, debugLog: submitDebugLog } = await triggerZapierWebhook(webhookUrl, formValues);
       debugLog += submitDebugLog;
       
-      setShowThankYouDialog(true);
+      // Show debug dialog after submission for troubleshooting
+      setDebugInfo(debugLog);
+      setShowDebugDialog(true);
       
-      setFormValues({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      
-      toast({
-        title: "Message Sent",
-        description: "Thank you for your message. We'll get back to you soon.",
-      });
+      if (success) {
+        setShowThankYouDialog(true);
+        
+        setFormValues({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        
+        toast({
+          title: "Message Sent",
+          description: "Thank you for your message. We'll get back to you soon.",
+        });
+      } else {
+        toast({
+          title: "Warning",
+          description: "Message sent, but there might be issues. Check the debug information.",
+          variant: "destructive"
+        });
+      }
     } catch (error) {
       debugLog += `Error submitting form: ${error}\n`;
       console.error("Error submitting form:", error);
+      setDebugInfo(debugLog);
+      setShowDebugDialog(true);
+      
       toast({
         title: "Error",
         description: "Failed to send your message. Please try again later.",
         variant: "destructive"
       });
     } finally {
-      setDebugInfo(debugLog);
       setIsSubmitting(false);
     }
   };
@@ -127,6 +142,15 @@ const Contact = () => {
           isSubmitting={isSubmitting}
           zapierEnabled={webhookEnabled}
         />
+        
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => setShowDebugDialog(true)}
+            className="text-sm text-white/70 hover:text-white transition-colors underline"
+          >
+            Debug Mode
+          </button>
+        </div>
       </section>
 
       <ThankYouDialog 

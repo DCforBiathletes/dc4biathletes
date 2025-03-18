@@ -12,38 +12,46 @@ export const triggerZapierWebhook = async (
 ): Promise<{ success: boolean; debugLog: string }> => {
   let debugLog = `Sending data to webhook: ${webhookUrl}\n`;
   
-  // Create the payload with the exact format specified
+  // Format data for Google Apps Script
   const payload = {
     name: formData.name,
     email: formData.email,
     subject: formData.subject,
     message: formData.message,
+    timestamp: new Date().toISOString(),
     pageURL: window.location.href
   };
   
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
   
   try {
-    // Send data using fetch with POST method
+    // For Google Apps Script, we need to use 'no-cors' mode
     debugLog += `Sending fetch request to webhook\n`;
     
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload)
+    // Use URLSearchParams for Google Apps Script which works better than JSON for GET deployments
+    const params = new URLSearchParams();
+    Object.entries(payload).forEach(([key, value]) => {
+      params.append(key, value as string);
     });
     
-    debugLog += `Response status: ${response.status}\n`;
+    // Add a cache-busting parameter to prevent caching
+    params.append('_cb', Date.now().toString());
     
-    // Try to get response text if available
-    try {
-      const responseText = await response.text();
-      debugLog += `Response: ${responseText}\n`;
-    } catch (responseError) {
-      debugLog += `Could not read response: ${responseError}\n`;
-    }
+    // Construct the full URL with query parameters
+    const fullUrl = `${webhookUrl}?${params.toString()}`;
+    debugLog += `Full URL with params: ${fullUrl}\n`;
+    
+    // Send data using fetch with GET method and no-cors mode for Google Apps Script
+    const response = await fetch(fullUrl, {
+      method: 'GET',
+      mode: 'no-cors', // This is crucial for Google Apps Script
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    
+    // When using no-cors mode, we can't access response properties
+    debugLog += `Request sent with no-cors mode, unable to access response details\n`;
     
     return { success: true, debugLog };
   } catch (error) {
