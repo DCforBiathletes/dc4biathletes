@@ -27,11 +27,17 @@ export const triggerZapierWebhook = async (
   try {
     debugLog += `Sending fetch request to webhook\n`;
     
-    // Use ContentType application/json for Google Apps Script doPost method
-    // The script expects data in postData.contents
-    const response = await fetch(webhookUrl, {
+    // For Google Apps Script, add parameter=true to force e.parameter to exist
+    const urlWithParam = webhookUrl.includes('?') 
+      ? `${webhookUrl}&parameter=true` 
+      : `${webhookUrl}?parameter=true`;
+    
+    debugLog += `Using URL with parameter: ${urlWithParam}\n`;
+    
+    // First try with regular fetch
+    const response = await fetch(urlWithParam, {
       method: 'POST',
-      mode: 'cors', // Try regular cors mode first
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -54,8 +60,15 @@ export const triggerZapierWebhook = async (
     debugLog += `Attempting fallback with no-cors mode...\n`;
     
     try {
+      // Add parameter to URL for fallback too
+      const urlWithParam = webhookUrl.includes('?') 
+        ? `${webhookUrl}&parameter=true` 
+        : `${webhookUrl}?parameter=true`;
+      
+      debugLog += `Using fallback URL with parameter: ${urlWithParam}\n`;
+      
       // Fallback to no-cors mode if the regular request fails
-      await fetch(webhookUrl, {
+      await fetch(urlWithParam, {
         method: 'POST',
         mode: 'no-cors', 
         headers: {
