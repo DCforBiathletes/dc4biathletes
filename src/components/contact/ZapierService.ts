@@ -24,65 +24,56 @@ export const triggerZapierWebhook = async (
   
   debugLog += `Payload: ${JSON.stringify(payload, null, 2)}\n`;
   
+  // Create a form element
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = webhookUrl;
+  form.target = '_blank'; // This prevents page navigation
+  form.style.display = 'none';
+  
+  // Add data as a hidden input field
+  const dataInput = document.createElement('input');
+  dataInput.type = 'hidden';
+  dataInput.name = 'data';
+  dataInput.value = JSON.stringify(payload);
+  form.appendChild(dataInput);
+  
+  // Create a hidden iframe to catch the response
+  const iframe = document.createElement('iframe');
+  iframe.name = '_blank';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  
+  debugLog += `Submitting form to Google Apps Script\n`;
+  
   try {
-    debugLog += `Sending fetch request to webhook\n`;
+    // Add form to document, submit it, and then remove it
+    document.body.appendChild(form);
+    form.submit();
     
-    // For Google Apps Script, add parameter=true to force e.parameter to exist
-    const urlWithParam = webhookUrl.includes('?') 
-      ? `${webhookUrl}&parameter=true` 
-      : `${webhookUrl}?parameter=true`;
+    // Set a timeout to consider the submission successful
+    // since we can't easily get the response from the iframe
+    await new Promise(resolve => setTimeout(resolve, 2000));
     
-    debugLog += `Using URL with parameter: ${urlWithParam}\n`;
+    debugLog += `Form submitted successfully\n`;
     
-    // First try with regular fetch
-    const response = await fetch(urlWithParam, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload)
-    });
+    // Clean up
+    document.body.removeChild(form);
+    document.body.removeChild(iframe);
     
-    debugLog += `Response received. Status: ${response.status}\n`;
-    
-    try {
-      const responseData = await response.json();
-      debugLog += `Response data: ${JSON.stringify(responseData)}\n`;
-      return { success: true, debugLog };
-    } catch (parseError) {
-      debugLog += `Could not parse response as JSON. Response might be empty or not JSON format.\n`;
-      // If we got here but still received a successful status code, consider it a success
-      return { success: response.ok, debugLog };
-    }
+    return { success: true, debugLog };
   } catch (error) {
     debugLog += `Error: ${error}\n`;
-    debugLog += `Attempting fallback with no-cors mode...\n`;
     
-    try {
-      // Add parameter to URL for fallback too
-      const urlWithParam = webhookUrl.includes('?') 
-        ? `${webhookUrl}&parameter=true` 
-        : `${webhookUrl}?parameter=true`;
-      
-      debugLog += `Using fallback URL with parameter: ${urlWithParam}\n`;
-      
-      // Fallback to no-cors mode if the regular request fails
-      await fetch(urlWithParam, {
-        method: 'POST',
-        mode: 'no-cors', 
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      });
-      
-      debugLog += `Fallback request sent with no-cors mode. Cannot access response details.\n`;
-      return { success: true, debugLog };
-    } catch (fallbackError) {
-      debugLog += `Fallback also failed: ${fallbackError}\n`;
-      console.error("Error sending data to webhook:", fallbackError);
-      return { success: false, debugLog };
+    // Clean up
+    if (document.body.contains(form)) {
+      document.body.removeChild(form);
     }
+    if (document.body.contains(iframe)) {
+      document.body.removeChild(iframe);
+    }
+    
+    console.error("Error sending data to webhook:", error);
+    return { success: false, debugLog };
   }
 };
