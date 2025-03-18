@@ -11,7 +11,7 @@ function doPost(e) {
   }
   
   try {
-    // Check if data is coming from form submission (HTML form) or direct JSON POST
+    // Check if data is coming from form submission with a 'data' parameter
     var data;
     
     if (e.parameter && e.parameter.data) {
