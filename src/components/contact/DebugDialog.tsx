@@ -29,9 +29,9 @@ export const DebugDialog = ({
     <Dialog open={showDebugDialog} onOpenChange={setShowDebugDialog}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Zapier Debug Information</DialogTitle>
+          <DialogTitle>EmailJS Debug Information</DialogTitle>
           <DialogDescription>
-            This information can help troubleshoot issues with the Zapier integration.
+            This information can help troubleshoot issues with the EmailJS integration.
           </DialogDescription>
         </DialogHeader>
         
@@ -44,11 +44,11 @@ export const DebugDialog = ({
             <AlertTitle className="text-amber-800">Troubleshooting Tips</AlertTitle>
             <AlertDescription className="text-amber-700">
               <ol className="list-decimal pl-5 space-y-1">
-                <li>Verify your Zapier webhook URL is correct</li>
-                <li>Check if your Zap is turned on in Zapier</li>
-                <li>Make sure your sample data format matches what Google Sheets expects</li>
-                <li>Check the Zapier History to see if it received the webhook call</li>
-                <li>Try redeploying your Zap with a new test trigger</li>
+                <li>Verify your EmailJS service ID, template ID, and user ID are correct</li>
+                <li>Make sure your EmailJS account is active and verified</li>
+                <li>Check if your template variables match the parameters being sent</li>
+                <li>Ensure your email service provider (Gmail, etc.) is properly connected</li>
+                <li>Look for any rate limiting or quota issues in your EmailJS dashboard</li>
               </ol>
             </AlertDescription>
           </Alert>

@@ -75,19 +75,32 @@ const Contact = () => {
         description: "Thank you for your message. We'll get back to you soon.",
       });
     } catch (error) {
-      debugLog += `Error sending email: ${error}\n`;
+      // Improved error logging
+      const errorDetails = JSON.stringify(error, Object.getOwnPropertyNames(error), 2);
+      debugLog += `Error sending email: ${errorDetails}\n`;
       console.error("Error sending email:", error);
+      
+      // Check if the error has a message property and display it
+      let errorMessage = "Failed to send your message. Please try again later.";
+      if (error instanceof Error) {
+        errorMessage += ` Error: ${error.message}`;
+      } else if (typeof error === 'object' && error !== null) {
+        // Try to extract useful information from the error object
+        const errorObj = error as any;
+        if (errorObj.text) errorMessage += ` Details: ${errorObj.text}`;
+        if (errorObj.status) errorMessage += ` (Status: ${errorObj.status})`;
+      }
       
       toast({
         title: "Error",
-        description: "Failed to send your message. Please try again later.",
+        description: errorMessage,
         variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
       setDebugInfo(debugLog);
       
-      // Optionally show debug info after each submission to help troubleshoot
+      // Show debug info after each submission to help troubleshoot
       setShowDebugDialog(true);
     }
   };
