@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -7,7 +6,7 @@ import { ThankYouDialog } from "@/components/contact/ThankYouDialog";
 import { DebugDialog } from "@/components/contact/DebugDialog";
 import { triggerZapierWebhook, FormValues } from "@/components/contact/ZapierService";
 
-const GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby90xtz4gioLoGqr9MI41oH1dVxGOITVBdFHb9tL9S1bM7pRAahAd1V_gMuWH-cY6qyfg/exec";
+const GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx_lBHUCadlrNbZM6YiTNYzSWiS88NRwfB1CrN316ACm5DAlsN84TIC8Rd7uNTC4HESnQ/exec";
 
 const Contact = () => {
   const { toast } = useToast();
