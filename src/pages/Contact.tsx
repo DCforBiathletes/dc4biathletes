@@ -57,10 +57,10 @@ const Contact = () => {
       // Before sending, initialize EmailJS with your user ID
       emailjs.init("lDpLIJ8bFE9QDxwPo");
       
-      // Replace with your actual EmailJS service ID, template ID, and user ID
+      // Updated with the correct EmailJS service ID and template ID
       const result = await emailjs.send(
-        'service_50i0s9j', // Your EmailJS service ID
-        'template_ylcijzb', // Your EmailJS template ID
+        'service_dr8f4vk', // Updated EmailJS service ID
+        'template_1u4cu5f', // Updated EmailJS template ID
         templateParams
       );
       
