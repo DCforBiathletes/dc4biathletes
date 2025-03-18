@@ -128,12 +128,15 @@ const Contact = () => {
         description: errorMessage,
         variant: "destructive"
       });
+      
+      // Show debug dialog when there's an error
+      setShowDebugDialog(true);
     } finally {
       setIsSubmitting(false);
       setDebugInfo(debugLog);
       
-      // Always show debug info after each submission to help troubleshoot
-      setShowDebugDialog(true);
+      // Remove automatic display of debug info after each submission
+      // Only show when there's an error or user manually opens it
     }
   };
 
