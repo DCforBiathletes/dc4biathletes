@@ -44,12 +44,13 @@ export const DebugDialog = ({
             <AlertTitle className="text-amber-800">Troubleshooting Tips</AlertTitle>
             <AlertDescription className="text-amber-700">
               <ol className="list-decimal pl-5 space-y-1">
-                <li>Verify your EmailJS service ID, template ID, and user ID are correct</li>
-                <li>Make sure your EmailJS account is active and verified</li>
-                <li>Check if your template variables match the parameters being sent</li>
-                <li>Ensure your email service provider (Gmail, etc.) is properly connected</li>
-                <li>For "Account not found" errors, verify you've initialized EmailJS with <code>emailjs.init()</code></li>
-                <li>Make sure your template field names match the data you're sending (e.g., from_name, from_email, etc.)</li>
+                <li>Verify your EmailJS service ID (service_dr8f4vk) and template ID (template_1u4cu5f) are correct</li>
+                <li>Confirm your EmailJS public key (lDpLIJ8bFE9QDxwPo) is valid</li>
+                <li>Make sure the EmailJS service is active in your EmailJS dashboard</li>
+                <li>Check template variables match what your template expects (from_name, from_email, subject, message)</li>
+                <li>For "Account not found" errors, verify your EmailJS account is active and the public key is correct</li>
+                <li>Try testing the service directly from the EmailJS dashboard</li>
+                <li>Check if your EmailJS account requires additional validation</li>
               </ol>
             </AlertDescription>
           </Alert>

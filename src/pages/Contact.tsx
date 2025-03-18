@@ -54,13 +54,14 @@ const Contact = () => {
       
       debugLog += `Sending email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
       
-      // Before sending, initialize EmailJS with your user ID
+      // Initialize EmailJS with public key first
       emailjs.init("lDpLIJ8bFE9QDxwPo");
+      debugLog += `EmailJS initialized with public key\n`;
       
-      // Updated with the correct EmailJS service ID and template ID
+      // Send email with service ID and template ID (no user ID parameter)
       const result = await emailjs.send(
-        'service_dr8f4vk', // Updated EmailJS service ID
-        'template_1u4cu5f', // Updated EmailJS template ID
+        'service_dr8f4vk',
+        'template_1u4cu5f',
         templateParams
       );
       
@@ -105,7 +106,7 @@ const Contact = () => {
       setIsSubmitting(false);
       setDebugInfo(debugLog);
       
-      // Show debug info after each submission to help troubleshoot
+      // Always show debug info after each submission to help troubleshoot
       setShowDebugDialog(true);
     }
   };
