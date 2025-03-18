@@ -48,6 +48,8 @@ const Contact = () => {
         from_email: formValues.email,
         subject: formValues.subject,
         message: formValues.message,
+        to_email: "recipient@example.com", // Add a default recipient (replace with your actual recipient)
+        reply_to: formValues.email, // Add reply_to parameter
         timestamp: new Date().toISOString(),
         pageURL: window.location.href
       };
