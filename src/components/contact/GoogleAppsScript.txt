@@ -1,0 +1,93 @@
+
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  
+  Logger.log("Request received: " + JSON.stringify(e));
+  
+  if (!e) {
+    Logger.log("Error: No request data received");
+    return ContentService.createTextOutput(JSON.stringify({ error: "No request data received" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  try {
+    // Check if data is coming from form submission (HTML form) or direct JSON POST
+    var data;
+    
+    if (e.parameter && e.parameter.data) {
+      // Form submission with data parameter
+      data = JSON.parse(e.parameter.data);
+      Logger.log("Form data received: " + JSON.stringify(data));
+    } else if (e.postData && e.postData.contents) {
+      // Direct JSON POST
+      data = JSON.parse(e.postData.contents);
+      Logger.log("JSON data received: " + JSON.stringify(data));
+    } else {
+      Logger.log("Error: No parsable data found in request");
+      return ContentService.createTextOutput(JSON.stringify({ 
+        error: "No parsable data found", 
+        request: JSON.stringify(e) 
+      }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // Add data to spreadsheet
+    sheet.appendRow([
+      new Date(),
+      data.name || "No Name",
+      data.email || "No Email",
+      data.subject || "No Subject",
+      data.message || "No Message",
+      data.timestamp || "No Timestamp",
+      data.pageURL || "No Page URL"
+    ]);
+    
+    // Return success response
+    return ContentService.createTextOutput(JSON.stringify({ 
+      success: true, 
+      message: "Data successfully received and processed" 
+    }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (err) {
+    Logger.log("Error processing request: " + err.message);
+    Logger.log("Request data: " + JSON.stringify(e));
+    
+    // Add error to sheet for debugging
+    sheet.appendRow([
+      new Date(),
+      "ERROR",
+      err.message,
+      JSON.stringify(e),
+      "",
+      "",
+      ""
+    ]);
+    
+    return ContentService.createTextOutput(JSON.stringify({ 
+      error: "Error processing request", 
+      details: err.message 
+    }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// This allows the script to work with CORS requests
+function doOptions(e) {
+  var lock = LockService.getScriptLock();
+  lock.tryLock(10000);
+  
+  var headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "86400"
+  };
+  
+  return ContentService.createTextOutput("")
+    .setMimeType(ContentService.MimeType.TEXT)
+    .setHeader("Access-Control-Allow-Origin", "*")
+    .setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+    .setHeader("Access-Control-Allow-Headers", "Content-Type")
+    .setHeader("Access-Control-Max-Age", "86400");
+}
