@@ -47,20 +47,20 @@ const Contact = () => {
       debugLog += `EmailJS initialized with public key vPrSFwIfO2--Bf-TN\n`;
       
       // Create template parameters with explicit from_email and from_name
-      // Note: EmailJS expects certain parameter names based on your template configuration
+      // These MUST match your EmailJS template variable names exactly
       const templateParams = {
-        // Sender information (From fields)
+        // Sender information (very important for the "From" field)
         from_name: formValues.name,
-        from_email: formValues.email,
+        from_email: formValues.email, // This is crucial - must be used in template {{from_email}}
         reply_to: formValues.email,
-        email: formValues.email, // Some templates use just 'email'
-        name: formValues.name,   // Some templates use just 'name'
+        email: formValues.email,      // Alternative parameter some templates use
+        name: formValues.name,        // Alternative parameter some templates use
         
-        // Recipient information (To fields)
+        // Recipient information 
         to_name: "Support Team",
-        to_email: "support@example.com",
-        recipient: "support@example.com",
-        email_to: "support@example.com",
+        to_email: "support@example.com", // Set this in your EmailJS template
+        recipient: "support@example.com", // Alternative parameter
+        email_to: "support@example.com",  // Alternative parameter
         
         // Message content
         subject: formValues.subject,
@@ -74,6 +74,8 @@ const Contact = () => {
       };
       
       debugLog += `Sending email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
+      debugLog += `IMPORTANT: Your EmailJS template MUST have a value for the "From email" field.\n`;
+      debugLog += `Either set a static email or use the {{from_email}} variable in your template.\n`;
       
       // Use the complete method signature with all parameters
       const result = await emailjs.send(
@@ -108,6 +110,12 @@ const Contact = () => {
       let errorMessage = "Failed to send your message. Please try again later.";
       if (error instanceof Error) {
         errorMessage += ` Error: ${error.message}`;
+        
+        // Add specific checks for common EmailJS errors
+        if (error.message.includes("recipients address is empty")) {
+          debugLog += `SOLUTION: Configure your EmailJS template to have a default value for both "From email" and "To email" fields.\n`;
+          debugLog += `Log into EmailJS, go to Email Templates, select template_1u4cu5f, and add these values.\n`;
+        }
       } else if (typeof error === 'object' && error !== null) {
         // Try to extract useful information from the error object
         const errorObj = error as any;
@@ -185,4 +193,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
