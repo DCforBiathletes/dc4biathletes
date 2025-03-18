@@ -45,16 +45,25 @@ export const DebugDialog = ({
             <AlertDescription className="text-amber-700">
               <p className="font-semibold mb-2">To fix "The recipients address is empty" error:</p>
               <ol className="list-decimal pl-5 space-y-2">
+                <li><strong>EmailJS Template "From" Field Must Be Set:</strong>
+                  <ul className="list-disc pl-5 mt-1">
+                    <li>In your EmailJS template, the "From email" field must not be empty</li>
+                    <li>Either set a static email (e.g., noreply@yourcompany.com) or use a template variable</li>
+                    <li>If using a variable like {'{{from_email}}'}, ensure your code sends a parameter with that exact name</li>
+                  </ul>
+                </li>
+                
                 <li><strong>Required EmailJS Template Configuration:</strong>
                   <ul className="list-disc pl-5 mt-1">
                     <li>Log into your EmailJS dashboard at emailjs.com</li>
                     <li>Go to Email Templates → Select template_1u4cu5f</li>
                     <li>Make sure BOTH "From email" and "To email" fields are properly configured</li>
-                    <li>For "From email", either set a default value OR ensure it uses a parameter (e.g., {{from_email}})</li>
+                    <li>For "From email", either set a default value OR ensure it uses a parameter (e.g., {'{{from_email}}'})</li>
                     <li>For "To email", you MUST set a default recipient email or use a parameter name</li>
                     <li>Save the template after making changes</li>
                   </ul>
                 </li>
+                
                 <li><strong>Important Parameter Names in Code:</strong>
                   <ul className="list-disc pl-5 mt-1">
                     <li>Sender parameters: from_name, from_email, name, email</li>
@@ -65,7 +74,7 @@ export const DebugDialog = ({
                 </li>
                 <li><strong>Check Template Variables:</strong>
                   <ul className="list-disc pl-5 mt-1">
-                    <li>In your template, look for variables like {{from_email}}, {{to_email}}</li>
+                    <li>In your template, look for variables like {'{{from_email}}'}, {'{{to_email}}'}</li>
                     <li>Ensure these EXACTLY match the parameter names in your code</li>
                     <li>Case sensitivity matters! "From_Email" is different from "from_email"</li>
                   </ul>
