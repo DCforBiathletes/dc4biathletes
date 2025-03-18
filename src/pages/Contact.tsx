@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ContactForm } from "@/components/contact/ContactForm";
-import { ZapierConfig } from "@/components/contact/ZapierConfig";
 import { ThankYouDialog } from "@/components/contact/ThankYouDialog";
 import { DebugDialog } from "@/components/contact/DebugDialog";
-import { triggerZapierWebhook, FormValues } from "@/components/contact/ZapierService";
+import emailjs from 'emailjs-com';
 
-const GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzIgejpU1UpQmCTCpoZV31zCftfzdrm6kz1SYXvSV3c1sBdU8e4pyEk_yYSmjEAZFAO1Q/exec";
+// Define the form values interface
+interface FormValues {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
 
 const Contact = () => {
   const { toast } = useToast();
@@ -18,20 +24,8 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  const [showZapierConfig, setShowZapierConfig] = useState(false);
-  const [webhookUrl, setWebhookUrl] = useState(GOOGLE_WEBHOOK_URL);
-  const [webhookEnabled, setWebhookEnabled] = useState(true); // Always enabled with our direct webhook
   const [debugInfo, setDebugInfo] = useState<string>("");
   const [showDebugDialog, setShowDebugDialog] = useState(false);
-
-  useEffect(() => {
-    const savedWebhookUrl = localStorage.getItem('webhookUrl');
-    if (savedWebhookUrl) {
-      setWebhookUrl(savedWebhookUrl);
-    } else {
-      localStorage.setItem('webhookUrl', GOOGLE_WEBHOOK_URL);
-    }
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -41,65 +35,48 @@ const Contact = () => {
     }));
   };
 
-  const saveWebhookConfig = () => {
-    if (webhookUrl) {
-      localStorage.setItem('webhookUrl', webhookUrl);
-      setWebhookEnabled(true);
-      setShowZapierConfig(false);
-      toast({
-        title: "Webhook Saved",
-        description: "Your form submissions will now be sent to the configured webhook.",
-      });
-    } else {
-      toast({
-        title: "Error",
-        description: "Please enter a valid webhook URL",
-        variant: "destructive"
-      });
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    let debugLog = `Form submission started\n`;
+    let debugLog = `Form submission started with EmailJS\n`;
     debugLog += `Form values: ${JSON.stringify(formValues, null, 2)}\n`;
-    debugLog += `Using webhook URL: ${webhookUrl}\n`;
     
     try {
-      const { success, debugLog: submitDebugLog } = await triggerZapierWebhook(webhookUrl, formValues);
-      debugLog += submitDebugLog;
+      // Add timestamp and page URL to the template parameters
+      const templateParams = {
+        ...formValues,
+        timestamp: new Date().toISOString(),
+        pageURL: window.location.href
+      };
       
-      // Show debug dialog after submission for troubleshooting
-      setDebugInfo(debugLog);
-      setShowDebugDialog(true);
+      debugLog += `Sending email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
       
-      if (success) {
-        setShowThankYouDialog(true);
-        
-        setFormValues({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-        
-        toast({
-          title: "Message Sent",
-          description: "Thank you for your message. We'll get back to you soon.",
-        });
-      } else {
-        toast({
-          title: "Warning",
-          description: "Message sent, but there might be issues. Check the debug information.",
-          variant: "destructive"
-        });
-      }
+      // Replace with your actual EmailJS service ID, template ID, and user ID
+      const result = await emailjs.send(
+        'service_50i0s9j', // Your EmailJS service ID
+        'template_ylcijzb', // Your EmailJS template ID
+        templateParams,
+        'lDpLIJ8bFE9QDxwPo' // Your EmailJS user ID
+      );
+      
+      debugLog += `EmailJS response: ${JSON.stringify(result, null, 2)}\n`;
+      
+      // Show success message and reset form
+      setShowThankYouDialog(true);
+      setFormValues({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+      toast({
+        title: "Message Sent",
+        description: "Thank you for your message. We'll get back to you soon.",
+      });
     } catch (error) {
-      debugLog += `Error submitting form: ${error}\n`;
-      console.error("Error submitting form:", error);
-      setDebugInfo(debugLog);
-      setShowDebugDialog(true);
+      debugLog += `Error sending email: ${error}\n`;
+      console.error("Error sending email:", error);
       
       toast({
         title: "Error",
@@ -108,6 +85,10 @@ const Contact = () => {
       });
     } finally {
       setIsSubmitting(false);
+      setDebugInfo(debugLog);
+      
+      // Optionally show debug info after each submission to help troubleshoot
+      setShowDebugDialog(true);
     }
   };
 
@@ -139,7 +120,7 @@ const Contact = () => {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           isSubmitting={isSubmitting}
-          zapierEnabled={webhookEnabled}
+          zapierEnabled={true} // Keep this for compatibility with the component props
         />
         
         <div className="mt-8 flex justify-center">
@@ -155,14 +136,6 @@ const Contact = () => {
       <ThankYouDialog 
         showThankYouDialog={showThankYouDialog}
         setShowThankYouDialog={setShowThankYouDialog}
-      />
-
-      <ZapierConfig 
-        showZapierConfig={showZapierConfig}
-        setShowZapierConfig={setShowZapierConfig}
-        zapierWebhookUrl={webhookUrl}
-        setZapierWebhookUrl={setWebhookUrl}
-        saveZapierWebhook={saveWebhookConfig}
       />
 
       <DebugDialog 
