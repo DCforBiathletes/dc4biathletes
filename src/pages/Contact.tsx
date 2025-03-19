@@ -73,19 +73,29 @@ const Contact = () => {
         pageURL: window.location.href
       };
       
-      debugLog += `Sending email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
-      debugLog += `IMPORTANT: Your EmailJS template MUST have a value for the "From email" field.\n`;
-      debugLog += `Either set a static email or use the {{from_email}} variable in your template.\n`;
+      debugLog += `Sending auto-reply email with params: ${JSON.stringify(templateParams, null, 2)}\n`;
       
-      // Use the complete method signature with all parameters
-      const result = await emailjs.send(
+      // Send auto-reply email using the original template
+      const autoReplyResult = await emailjs.send(
         'service_dr8f4vk',             // Service ID
-        'template_1u4cu5f',            // Template ID
+        'template_1u4cu5f',            // Template ID for auto-reply
         templateParams,                // Template parameters
         'vPrSFwIfO2--Bf-TN'           // Public Key
       );
       
-      debugLog += `EmailJS response: ${JSON.stringify(result, null, 2)}\n`;
+      debugLog += `Auto-reply EmailJS response: ${JSON.stringify(autoReplyResult, null, 2)}\n`;
+      
+      // Now send the forwarded content using the new template
+      debugLog += `Sending forwarded content email with the same params\n`;
+      
+      const forwardResult = await emailjs.send(
+        'service_dr8f4vk',             // Service ID
+        'template_of0oytb',            // New Template ID for forwarding
+        templateParams,                // Template parameters
+        'vPrSFwIfO2--Bf-TN'           // Public Key
+      );
+      
+      debugLog += `Forward EmailJS response: ${JSON.stringify(forwardResult, null, 2)}\n`;
       
       // Show success message and reset form
       setShowThankYouDialog(true);
@@ -114,7 +124,7 @@ const Contact = () => {
         // Add specific checks for common EmailJS errors
         if (error.message.includes("recipients address is empty")) {
           debugLog += `SOLUTION: Configure your EmailJS template to have a default value for both "From email" and "To email" fields.\n`;
-          debugLog += `Log into EmailJS, go to Email Templates, select template_1u4cu5f, and add these values.\n`;
+          debugLog += `Log into EmailJS, go to Email Templates, select template_1u4cu5f and template_of0oytb, and add these values.\n`;
         }
       } else if (typeof error === 'object' && error !== null) {
         // Try to extract useful information from the error object
