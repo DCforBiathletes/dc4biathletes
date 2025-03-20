@@ -1,3 +1,4 @@
+
 import { Newspaper, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -37,9 +38,9 @@ The visit to Östersund marked a significant step in promoting the DC4Biathletes
 
 const News = () => {
   return (
-    <div className="min-h-screen pt-16 bg-[#06374f]">
-      {/* Hero Section */}
-      <section className="py-20 px-4 relative">
+    <div className="min-h-screen bg-[#06374f]">
+      {/* Hero Section - Added mt-16 to push content below fixed navbar */}
+      <section className="pt-24 pb-20 px-4 relative">
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
