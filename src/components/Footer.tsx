@@ -106,9 +106,9 @@ const Footer = () => {
         {/* EU Flag and Funding Statement */}
         <div className="mt-6 flex flex-col items-center space-y-3">
           <img
-            src="/lovable-uploads/93b6911e-0b2a-4a2c-bb08-fa878fd487df.png"
-            alt="European Union Flag"
-            className="h-12 w-auto"
+            src="/lovable-uploads/be65740a-d714-4e3d-93bb-62fd5925b62a.png"
+            alt="Co-funded by the European Union"
+            className="h-auto w-auto max-w-xs"
           />
           <p className="text-xs text-primary/60 max-w-2xl text-center">
             Co-funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor the granting authority can be held responsible for them.
