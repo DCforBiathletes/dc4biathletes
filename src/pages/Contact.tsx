@@ -144,9 +144,6 @@ const Contact = () => {
     } finally {
       setIsSubmitting(false);
       setDebugInfo(debugLog);
-      
-      // Remove automatic display of debug info after each submission
-      // Only show when there's an error or user manually opens it
     }
   };
 
@@ -180,15 +177,6 @@ const Contact = () => {
           isSubmitting={isSubmitting}
           zapierEnabled={true} // Keep this for compatibility with the component props
         />
-        
-        <div className="mt-8 flex justify-center">
-          <button
-            onClick={() => setShowDebugDialog(true)}
-            className="text-sm text-white/70 hover:text-white transition-colors underline"
-          >
-            Debug Mode
-          </button>
-        </div>
       </section>
 
       <ThankYouDialog 
