@@ -44,19 +44,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/">
-              <img
-                src="./lovable-uploads/70b3aab8-8456-4835-a4f3-616cf7898fd3.png"
-                alt="DC4Biathletes Logo"
-                className="h-12 w-auto"
-              />
-            </Link>
-          </div>
-
-          {/* Privacy Policy Link */}
+        <div className="flex justify-center">
+          {/* Privacy Policy Link - Centered */}
           <div>
             <Link
               to="/privacy-policy"
