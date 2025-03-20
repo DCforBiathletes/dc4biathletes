@@ -1,5 +1,4 @@
 
-import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -55,37 +54,6 @@ const Footer = () => {
                 className="h-12 w-auto"
               />
             </Link>
-          </div>
-
-          {/* Social Media Links */}
-          <div className="flex space-x-6">
-            <a
-              href="https://www.facebook.com/profile.php?id=61574055687627&locale=de_DE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors"
-              aria-label="Facebook"
-            >
-              <Facebook className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.instagram.com/dc4biathletes/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/dc4biathletes-project/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-6 h-6" />
-            </a>
           </div>
 
           {/* Privacy Policy Link */}
