@@ -120,10 +120,10 @@ const News = () => {
           <div className="flex items-center justify-center mb-6">
             <Newspaper className="w-12 h-12 text-accent" />
           </div>
-          <h2 className="text-3xl font-bold text-primary mb-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
             Stay Updated
           </h2>
-          <p className="text-lg text-primary/80 mb-8">
+          <p className="text-lg text-white/80 mb-8">
             Subscribe to our newsletter to receive the latest news and updates
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
