@@ -132,21 +132,24 @@ const News = () => {
             ))}
           </div>
           
-          <div className="mt-12">
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious href="#" className="text-white" />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#" isActive className="text-white">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationNext href="#" className="text-white" />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </div>
+          {/* Only show pagination when there are 2 or more articles */}
+          {newsArticles.length >= 2 && (
+            <div className="mt-12">
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious href="#" className="text-white" />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#" isActive className="text-white">1</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationNext href="#" className="text-white" />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            </div>
+          )}
         </div>
       </section>
 
