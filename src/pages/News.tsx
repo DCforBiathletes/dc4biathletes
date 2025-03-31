@@ -1,4 +1,5 @@
-import { Newspaper, Calendar, ArrowRight } from "lucide-react";
+
+import { Newspaper, Calendar, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +11,9 @@ import {
   PaginationNext, 
   PaginationPrevious 
 } from "@/components/ui/pagination";
+import { useState } from "react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Toggle } from "@/components/ui/toggle";
 
 const newsArticles = [
   {
@@ -36,6 +40,18 @@ The visit to Östersund marked a significant step in promoting the DC4Biathletes
 ];
 
 const News = () => {
+  const [openArticles, setOpenArticles] = useState<number[]>([]);
+
+  const toggleArticle = (id: number) => {
+    setOpenArticles(prev => 
+      prev.includes(id) 
+        ? prev.filter(articleId => articleId !== id) 
+        : [...prev, id]
+    );
+  };
+
+  const isArticleOpen = (id: number) => openArticles.includes(id);
+
   return (
     <div className="min-h-screen bg-[#06374f]">
       {/* Hero Section - Added mt-16 to push content below fixed navbar */}
@@ -86,9 +102,30 @@ const News = () => {
                       </div>
                     </div>
                     <h2 className="text-2xl font-bold text-primary mb-4">{article.title}</h2>
-                    <div className="prose text-primary/80 max-w-none mb-6">
-                      <p className="whitespace-pre-line">{article.content}</p>
-                    </div>
+                    
+                    <Collapsible open={isArticleOpen(article.id)} onOpenChange={() => toggleArticle(article.id)}>
+                      <div className="mb-4">
+                        <p className="text-primary/80">{article.excerpt}</p>
+                      </div>
+                      
+                      <div className="flex justify-end mb-2">
+                        <CollapsibleTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-accent flex items-center gap-1">
+                            {isArticleOpen(article.id) ? (
+                              <>Read less <ChevronUp className="h-4 w-4" /></>
+                            ) : (
+                              <>Read more <ChevronDown className="h-4 w-4" /></>
+                            )}
+                          </Button>
+                        </CollapsibleTrigger>
+                      </div>
+                      
+                      <CollapsibleContent>
+                        <div className="prose text-primary/80 max-w-none">
+                          <p className="whitespace-pre-line">{article.content}</p>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
                   </div>
                 </div>
               </Card>
