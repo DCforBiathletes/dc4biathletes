@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Newspaper } from "lucide-react";
 
@@ -7,7 +6,7 @@ const NewsletterSection: React.FC = () => {
     <section className="py-20 px-4 bg-primary/5">
       <div className="max-w-4xl mx-auto text-center">
         <div className="flex items-center justify-center mb-6">
-          <Newspaper className="w-12 h-12 text-accent" />
+          <Newspaper className="w-12 h-12 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-white mb-4">
           Stay Updated
