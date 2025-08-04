@@ -8,7 +8,7 @@ import Research from "@/pages/Research";
 import Partners from "@/pages/Partners";
 import AppPage from "@/pages/App";
 
-import NewsDetail from "@/pages/NewsDetail";
+
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import { PrivacyPolicyDialog } from "@/components/PrivacyPolicyDialog";
@@ -28,8 +28,6 @@ function App() {
             <Route path="/research" element={<Research />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/app" element={<AppPage />} />
-            <Route path="/news" element={<Index />} />
-            <Route path="/news/:id" element={<NewsDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
