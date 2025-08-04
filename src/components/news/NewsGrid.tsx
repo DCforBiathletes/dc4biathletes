@@ -1,4 +1,3 @@
-
 import React from "react";
 import NewsCard, { NewsArticle } from "./NewsCard";
 import NewsPagination from "./NewsPagination";
