@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - DC4Biathletes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: #06374f;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0698d6, #06374f);
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .news-content {
+            padding: 80px 0;
+            background: white;
+        }
+        .news-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .news-article {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .news-article:hover {
+            transform: translateY(-5px);
+        }
+        .article-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .article-content {
+            padding: 2rem;
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .badge-research {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .badge-events {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .article-date {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #06374f;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        .article-text {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+        .back-link {
+            display: inline-block;
+            background: #0698d6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
+        .back-link:hover {
+            background: #0284c7;
+        }
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+            .news-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <h1>Latest News & Updates</h1>
+            <p>Stay informed about our program developments, success stories, and upcoming events</p>
+        </div>
+    </div>
+
+    <div class="news-content">
+        <div class="container">
+            <a href="/" class="back-link">← Back to Home</a>
+            
+            <div class="news-grid">
+                <article class="news-article">
+                    <img src="/lovable-uploads/e8356e16-b869-4484-837a-8bba2f9f567d.png" alt="Lillehammer Development Camp" class="article-image">
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="badge badge-research">Research</span>
+                            <span class="article-date">January 15, 2025</span>
+                        </div>
+                        <h2 class="article-title">Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer</h2>
+                        <p class="article-text">
+                            A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education.
+                            <br><br>
+                            During our time at the camp, we conducted interviews with several dedicated coaches and held focus groups with passionate and motivated athletes. These conversations provided rich insights into the real-life experiences of managing training, competition, and academic demands.
+                            <br><br>
+                            The results have been both inspiring and eye-opening. These findings are now helping to develop a dedicated platform that will support young biathletes in navigating their dual careers more effectively, giving them the tools they need to thrive in both areas.
+                            <br><br>
+                            Stay tuned: this is just the beginning of something truly impactful for the next generation of biathletes.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="news-article">
+                    <img src="/lovable-uploads/ba54deb2-a7c1-4636-b8b9-5844630c315b.png" alt="IBU Championships" class="article-image">
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="badge badge-events">Events</span>
+                            <span class="article-date">March 10, 2025</span>
+                        </div>
+                        <h2 class="article-title">DC4Biathletes at the IBU Youth and Junior World Championships in Östersund</h2>
+                        <p class="article-text">
+                            From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Östersund, Sweden. The initiative aimed to raise awareness about the importance of dual careers in biathlon and encourage athletes aged 18 and older to participate in the project's survey.
+                            <br><br>
+                            The event provided a valuable opportunity to connect with young biathletes, coaches, and support teams worldwide. A dedicated DC4Biathletes stand was set up, featuring roll-ups, beach flags, and stickers, along with the recognized IBU Academy branding.
+                            <br><br>
+                            To ensure maximum outreach, multiple communication channels were utilized, including personal interactions with athletes, coaches, and team officials, announcements through the official event WhatsApp group, and presentations during workshops organized by the IBU Sustainability Department.
+                            <br><br>
+                            As a result, 110 responses from 31 different countries were collected over the three days, marking a significant step in promoting the DC4Biathletes project within the biathlon community.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
