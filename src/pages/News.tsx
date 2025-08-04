@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const News = () => {
+  console.log("News component rendering...");
   const newsArticles = [
     {
       id: 1,
