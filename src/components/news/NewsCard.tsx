@@ -11,6 +11,7 @@ export interface NewsArticle {
   excerpt: string;
   content: string;
   image: string;
+  author: string;
 }
 
 interface NewsCardProps {

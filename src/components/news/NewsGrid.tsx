@@ -8,7 +8,6 @@ interface NewsGridProps {
 }
 
 const NewsGrid: React.FC<NewsGridProps> = ({ articles }) => {
-
   return (
     <section className="py-12 px-4">
       <div className="max-w-7xl mx-auto">
