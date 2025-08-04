@@ -1,44 +1,40 @@
+import { Book, Users, Trophy } from "lucide-react";
+
 const News = () => {
   return (
-    <div className="min-h-screen bg-[#06374f] pt-16">
+    <div className="min-h-screen pt-16 bg-[#06374f]">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Latest News
+      <section className="py-20 px-4 bg-[#0698d6]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Latest News & Updates
           </h1>
           <p className="text-xl text-white/90 mb-8">
-            Stay informed about our program and success stories
+            Stay informed about our program, success stories, and upcoming events
           </p>
         </div>
       </section>
 
       {/* News Articles */}
-      <section className="py-12 px-4">
+      <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto space-y-8">
-          <div className="bg-white rounded-lg p-8 shadow-lg">
-            <div className="mb-4">
-              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded text-sm">Research</span>
-              <span className="text-gray-500 text-sm ml-4">January 15, 2025</span>
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
+            <h2 className="text-2xl font-bold text-primary mb-4">
               Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer
             </h2>
-            <p className="text-gray-700 leading-relaxed">
-              A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education.
+            <p className="text-primary/80 mb-2">January 15, 2025 | Research</p>
+            <p className="text-primary/80">
+              A team of researchers recently travelled to Lillehammer to collaborate with the Biathlon Development Camp.
             </p>
           </div>
           
-          <div className="bg-white rounded-lg p-8 shadow-lg">
-            <div className="mb-4">
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded text-sm">Events</span>
-              <span className="text-gray-500 text-sm ml-4">March 10, 2025</span>
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              DC4Biathletes at the IBU Youth and Junior World Championships in Östersund
+          <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-lg p-6 shadow-lg">
+            <h2 className="text-2xl font-bold text-primary mb-4">
+              DC4Biathletes at the IBU Youth and Junior World Championships
             </h2>
-            <p className="text-gray-700 leading-relaxed">
-              From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Östersund, Sweden. The initiative aimed to raise awareness about the importance of dual careers in biathlon.
+            <p className="text-primary/80 mb-2">March 10, 2025 | Events</p>
+            <p className="text-primary/80">
+              The DC4Biathletes project was actively promoted at the Championships in Sweden.
             </p>
           </div>
         </div>
