@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-function News() {
+const News = () => {
   return (
     <div className="min-h-screen bg-blue-900 text-white">
       <div className="pt-24 pb-20 px-4">
-        <h1 className="text-4xl font-bold text-center mb-12">Latest News & Updates</h1>
+        <h1 className="text-4xl font-bold text-center mb-12">Latest News</h1>
         
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="bg-white text-black rounded-lg p-6">
@@ -16,7 +16,7 @@ function News() {
               Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer
             </h2>
             <p className="text-gray-700">
-              A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes.
+              A team of researchers recently travelled to Lillehammer to collaborate with the Biathlon Development Camp.
             </p>
           </div>
           
@@ -26,16 +26,16 @@ function News() {
               <span className="text-gray-500 text-sm">March 10, 2025</span>
             </div>
             <h2 className="text-2xl font-bold mb-4">
-              DC4Biathletes at the IBU Youth and Junior World Championships in Östersund
+              DC4Biathletes at the IBU Youth and Junior World Championships
             </h2>
             <p className="text-gray-700">
-              From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Östersund, Sweden.
+              The DC4Biathletes project was actively promoted at the Championships in Sweden.
             </p>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default News;
