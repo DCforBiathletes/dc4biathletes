@@ -123,10 +123,7 @@ const News = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p 
-                    className="text-muted-foreground mb-4 overflow-hidden text-ellipsis"
-                    style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}
-                  >
+                  <p className="text-muted-foreground mb-4">
                     {article.excerpt}
                   </p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
