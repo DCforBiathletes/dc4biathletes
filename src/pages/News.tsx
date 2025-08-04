@@ -8,6 +8,21 @@ import { NewsArticle } from "@/components/news/NewsCard";
 // News articles data
 const newsArticles: NewsArticle[] = [
   {
+    id: 2,
+    title: "Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer",
+    date: "2025-04-15",
+    category: "Research",
+    excerpt: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes.",
+    content: `A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education.
+
+During our time at the camp, we conducted interviews with several dedicated coaches and held focus groups with passionate and motivated athletes. These conversations provided rich insights into the real-life experiences of managing training, competition, and academic demands.
+
+The results have been both inspiring and eye-opening. These findings are now helping to develop a dedicated platform that will support young biathletes in navigating their dual careers more effectively, giving them the tools they need to thrive in both areas.
+
+Stay tuned: this is just the beginning of something truly impactful for the next generation of biathletes.`,
+    image: "/lovable-uploads/68663ed8-5147-47c9-9b3a-cb6468b2e6e1.png",
+  },
+  {
     id: 1,
     title: "DC4Biathletes at the IBU Youth and Junior World Championships in Östersund",
     date: "2025-03-10",
