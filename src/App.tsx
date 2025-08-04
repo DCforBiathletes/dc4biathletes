@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -12,7 +11,6 @@ import { PrivacyPolicyDialog } from "@/components/PrivacyPolicyDialog";
 import "./App.css";
 
 function App() {
-  // Get the base URL from the document or default to "/"
   const baseUrl = document.querySelector('base')?.getAttribute('href') || '/';
 
   return (
