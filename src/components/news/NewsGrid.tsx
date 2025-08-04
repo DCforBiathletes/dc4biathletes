@@ -28,8 +28,6 @@ const NewsGrid: React.FC<NewsGridProps> = ({ articles }) => {
             <NewsCard 
               key={article.id} 
               article={article} 
-              isOpen={isArticleOpen(article.id)} 
-              onToggle={toggleArticle} 
             />
           ))}
         </div>

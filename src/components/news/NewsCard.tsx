@@ -15,8 +15,6 @@ export interface NewsArticle {
 
 interface NewsCardProps {
   article: NewsArticle;
-  isOpen: boolean;
-  onToggle: (id: number) => void;
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
