@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -26,6 +25,5 @@ export default defineConfig(({ mode }) => ({
     sourcemap: true,
     minify: true,
     assetsDir: "assets",
-
   },
 }));
