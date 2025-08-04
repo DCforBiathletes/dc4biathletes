@@ -1,4 +1,4 @@
-function News() {
+export default function News() {
   return (
     <div className="min-h-screen pt-16">
       <h1 className="text-3xl font-bold p-8">Latest News</h1>
@@ -20,5 +20,3 @@ function News() {
     </div>
   );
 }
-
-export default News;
