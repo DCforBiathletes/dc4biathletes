@@ -10,7 +10,7 @@ const newsArticles: NewsArticle[] = [
   {
     id: 2,
     title: "Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer",
-    date: "2025-04-15",
+    date: "2025-01-15",
     category: "Research",
     excerpt: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes.",
     content: `A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education.
