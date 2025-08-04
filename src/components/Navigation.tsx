@@ -11,7 +11,7 @@ const Navigation = () => {
     { name: "Research", path: "/research" },
     { name: "Partners", path: "/partners" },
     { name: "App", path: "/app" },
-    { name: "News", path: "/news" },
+    { name: "News", path: "/news.html" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -41,7 +41,7 @@ const Navigation = () => {
 
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-4 ml-4">
-                {navItems.map((item) => (
+                {navItems.slice(0, 3).map((item) => (
                   <Link
                     key={item.name}
                     to={item.path}
@@ -50,6 +50,18 @@ const Navigation = () => {
                     {item.name}
                   </Link>
                 ))}
+                <a
+                  href="/news.html"
+                  className="text-secondary hover:text-accent transition-colors px-2 py-1"
+                >
+                  News
+                </a>
+                <Link
+                  to="/contact"
+                  className="text-secondary hover:text-accent transition-colors px-2 py-1"
+                >
+                  Contact
+                </Link>
               </div>
             </div>
 
@@ -89,7 +101,7 @@ const Navigation = () => {
           {isOpen && (
             <div className="md:hidden py-4 absolute left-0 right-0 bg-white/80 backdrop-blur-sm shadow-lg border-t">
               <div className="flex flex-col space-y-2">
-                {navItems.map((item) => (
+                {navItems.slice(0, 3).map((item) => (
                   <Link
                     key={item.name}
                     to={item.path}
@@ -99,6 +111,20 @@ const Navigation = () => {
                     {item.name}
                   </Link>
                 ))}
+                <a
+                  href="/news.html"
+                  className="text-secondary hover:text-accent transition-colors px-4 py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  News
+                </a>
+                <Link
+                  to="/contact"
+                  className="text-secondary hover:text-accent transition-colors px-4 py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Contact
+                </Link>
                 
                 {/* Social Media Links in mobile menu */}
                 <div className="flex space-x-4 px-4 py-2">
