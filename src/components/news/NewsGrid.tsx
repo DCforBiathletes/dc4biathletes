@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import NewsCard, { NewsArticle } from "./NewsCard";
 import NewsPagination from "./NewsPagination";
 
@@ -8,17 +8,6 @@ interface NewsGridProps {
 }
 
 const NewsGrid: React.FC<NewsGridProps> = ({ articles }) => {
-  const [openArticles, setOpenArticles] = useState<number[]>([]);
-
-  const toggleArticle = (id: number) => {
-    setOpenArticles(prev => 
-      prev.includes(id) 
-        ? prev.filter(articleId => articleId !== id) 
-        : [...prev, id]
-    );
-  };
-
-  const isArticleOpen = (id: number) => openArticles.includes(id);
 
   return (
     <section className="py-12 px-4">
