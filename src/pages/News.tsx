@@ -17,9 +17,9 @@ const News = () => {
     },
     {
       id: 2,
-      title: "First Research Findings Published",
-      excerpt: "Initial research results show promising outcomes for athletes participating in the dual career program.",
-      content: "Our research team has published the first findings from the dual career study, showing significant positive impacts on both athletic performance and academic achievement among participating athletes. The comprehensive study, conducted over six months, tracked 40 young biathlon athletes who participated in our dual career program. Results indicate a 15% improvement in academic performance and a 12% increase in athletic competition scores compared to control groups. The research also revealed that athletes in the program reported higher levels of life satisfaction and better stress management skills. Dr. Sarah Miller, lead researcher, noted that the integrated approach of combining flexible education with structured athletic training creates a more sustainable pathway for young athletes. These findings will be presented at the International Conference on Sports and Education next month and will inform the expansion of our program to additional countries.",
+      title: "Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer",
+      excerpt: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes.",
+      content: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education. During our time at the camp, we conducted interviews with several dedicated coaches and held focus groups with passionate and motivated athletes. These conversations provided rich insights into the real-life experiences of managing training, competition, and academic demands. The results have been both inspiring and eye-opening. These findings are now helping to develop a dedicated platform that will support young biathletes in navigating their dual careers more effectively, giving them the tools they need to thrive in both areas. Stay tuned: this is just the beginning of something truly impactful for the next generation of biathletes.",
       date: "2025-01-04",
       author: "Research Team",
       category: "Research",
