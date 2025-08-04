@@ -110,16 +110,36 @@ const Index = () => {
       <section className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-primary mb-8">Latest News</h2>
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="p-6 border rounded-lg">
-              <h3 className="text-xl font-bold mb-2">Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer</h3>
-              <p className="text-gray-600 mb-2">January 15, 2025 | Research</p>
-              <p>A team of researchers recently travelled to Lillehammer to collaborate with the Biathlon Development Camp.</p>
+              <img
+                src="/lovable-uploads/e8356e16-b869-4484-837a-8bba2f9f567d.png"
+                alt="Lillehammer Development Camp"
+                className="w-full h-64 object-cover rounded-lg mb-4"
+              />
+              <div className="flex items-center gap-4 mb-3">
+                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Research</span>
+                <span className="text-gray-600 text-sm">January 15, 2025</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer</h3>
+              <p className="text-gray-700 leading-relaxed">
+                A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education. During our time at the camp, we conducted interviews with several dedicated coaches and held focus groups with passionate and motivated athletes. These conversations provided rich insights into the real-life experiences of managing training, competition, and academic demands.
+              </p>
             </div>
             <div className="p-6 border rounded-lg">
-              <h3 className="text-xl font-bold mb-2">DC4Biathletes at the IBU Youth and Junior World Championships</h3>
-              <p className="text-gray-600 mb-2">March 10, 2025 | Events</p>
-              <p>The DC4Biathletes project was actively promoted at the Championships in Sweden.</p>
+              <img
+                src="/lovable-uploads/ba54deb2-a7c1-4636-b8b9-5844630c315b.png"
+                alt="IBU Championships"
+                className="w-full h-64 object-cover rounded-lg mb-4"
+              />
+              <div className="flex items-center gap-4 mb-3">
+                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Events</span>
+                <span className="text-gray-600 text-sm">March 10, 2025</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3">DC4Biathletes at the IBU Youth and Junior World Championships in Östersund</h3>
+              <p className="text-gray-700 leading-relaxed">
+                From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Östersund, Sweden. The initiative aimed to raise awareness about the importance of dual careers in biathlon and encourage athletes aged 18 and older to participate in the project's survey. The event provided a valuable opportunity to connect with young biathletes, coaches, and support teams worldwide.
+              </p>
             </div>
           </div>
         </div>
