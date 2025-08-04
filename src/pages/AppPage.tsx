@@ -1,6 +1,6 @@
 import { Smartphone, BookOpen, BarChart, Users } from "lucide-react";
 
-const App = () => {
+const AppPage = () => {
   return (
     <div className="min-h-screen pt-16 bg-[#06374f]">
       {/* Hero Section with Image */}
@@ -76,4 +76,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default AppPage;

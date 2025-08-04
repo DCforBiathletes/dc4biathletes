@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import Index from "@/pages/Index";
 import Research from "@/pages/Research";
 import Partners from "@/pages/Partners";
-import AppPage from "@/pages/App";
+import AppPage from "@/pages/AppPage";
 import Contact from "@/pages/Contact";
 import News from "@/pages/News";
 import NotFound from "@/pages/NotFound";
