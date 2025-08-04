@@ -1,7 +1,7 @@
-function News() {
+function NewsPage() {
   return (
-    <div className="min-h-screen pt-16 px-4">
-      <h1 className="text-4xl font-bold text-center mb-8">Latest News & Updates</h1>
+    <div>
+      <h1>Latest News</h1>
       <div>
         <h2>Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer</h2>
         <p>January 15, 2025 | Research</p>
@@ -16,4 +16,4 @@ function News() {
   );
 }
 
-export default News;
+export default NewsPage;
