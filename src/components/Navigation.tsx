@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "./ui/button";

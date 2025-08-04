@@ -1,3 +1,4 @@
+import React from "react";
 import { Smartphone, BookOpen, BarChart, Users } from "lucide-react";
 
 const AppPage = () => {
