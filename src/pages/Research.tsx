@@ -1,3 +1,4 @@
+import React from "react";
 import { BookOpen, ScrollText, Download, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";

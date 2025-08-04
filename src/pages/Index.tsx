@@ -1,3 +1,4 @@
+import React from "react";
 import { GraduationCap, Medal, Users, Clipboard, BookOpen, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatisticCard from "@/components/StatisticCard";

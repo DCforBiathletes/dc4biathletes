@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ThankYouDialog } from "@/components/contact/ThankYouDialog";
