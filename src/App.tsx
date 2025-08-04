@@ -6,8 +6,6 @@ import Index from "@/pages/Index";
 import Research from "@/pages/Research";
 import Partners from "@/pages/Partners";
 import AppPage from "@/pages/App";
-
-
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import { PrivacyPolicyDialog } from "@/components/PrivacyPolicyDialog";
