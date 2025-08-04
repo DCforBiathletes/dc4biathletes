@@ -2,6 +2,7 @@ import React from "react";
 import NewsHero from "@/components/news/NewsHero";
 import NewsGrid from "@/components/news/NewsGrid";
 import NewsletterSection from "@/components/news/NewsletterSection";
+
 import { NewsArticle } from "@/components/news/NewsCard";
 
 const newsArticles: NewsArticle[] = [
@@ -35,6 +36,7 @@ const News: React.FC = () => {
       />
       <NewsGrid articles={newsArticles} />
       <NewsletterSection />
+      
     </div>
   );
 };
