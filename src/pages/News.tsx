@@ -1,7 +1,7 @@
 import React from "react";
 import NewsHero from "@/components/news/NewsHero";
 import NewsGrid from "@/components/news/NewsGrid";
-import NewsletterSection from "@/components/news/NewsletterSection";
+
 
 import { NewsArticle } from "@/components/news/NewsCard";
 
@@ -35,7 +35,6 @@ const News: React.FC = () => {
         backgroundImage="/lovable-uploads/68663ed8-5147-47c9-9b3a-cb6468b2e6e1.png"
       />
       <NewsGrid articles={newsArticles} />
-      <NewsletterSection />
       
     </div>
   );
