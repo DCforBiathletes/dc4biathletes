@@ -1,41 +1,45 @@
-import { useState } from "react";
+import React from "react";
 
-const News = () => {
+export default function News() {
   return (
-    <div className="min-h-screen pt-16 bg-[#06374f]">
-      <section className="py-20 px-4 bg-[#0698d6]">
+    <div className="min-h-screen pt-16 bg-blue-900">
+      <div className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Latest News
+          <h1 className="text-5xl font-bold text-white mb-6">
+            Latest News & Updates
           </h1>
         </div>
-      </section>
+      </div>
 
-      <section className="py-20 px-4">
+      <div className="py-12 px-4">
         <div className="max-w-6xl mx-auto space-y-8">
-          <div className="p-6 bg-white rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">
+          <article className="bg-white rounded-lg p-8 shadow-lg">
+            <header className="mb-4">
+              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded text-sm">Research</span>
+              <time className="text-gray-500 text-sm ml-4">January 15, 2025</time>
+            </header>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer
             </h2>
-            <p className="mb-2">January 15, 2025 | Research</p>
-            <p>
-              A team of researchers recently travelled to Lillehammer to collaborate with the Biathlon Development Camp.
+            <p className="text-gray-700">
+              A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes.
             </p>
-          </div>
+          </article>
           
-          <div className="p-6 bg-white rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">
-              DC4Biathletes at the IBU Youth and Junior World Championships
+          <article className="bg-white rounded-lg p-8 shadow-lg">
+            <header className="mb-4">
+              <span className="bg-green-100 text-green-800 px-3 py-1 rounded text-sm">Events</span>
+              <time className="text-gray-500 text-sm ml-4">March 10, 2025</time>
+            </header>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              DC4Biathletes at the IBU Youth and Junior World Championships in Östersund
             </h2>
-            <p className="mb-2">March 10, 2025 | Events</p>
-            <p>
-              The DC4Biathletes project was actively promoted at the Championships in Sweden.
+            <p className="text-gray-700">
+              From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Östersund, Sweden.
             </p>
-          </div>
+          </article>
         </div>
-      </section>
+      </div>
     </div>
   );
-};
-
-export default News;
+}
