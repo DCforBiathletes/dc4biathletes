@@ -8,8 +8,8 @@ const News = () => {
     {
       id: 1,
       title: "DC4Biathletes Project Officially Launched",
-      excerpt: "The innovative dual career program for young biathletes has been officially launched, combining academic excellence with athletic performance.",
-      content: "The DC4Biathletes project has officially launched its innovative dual career program, designed specifically for young biathlon athletes who aspire to excel both in their sport and academic pursuits. This groundbreaking initiative represents a new approach to supporting young athletes in balancing their sporting ambitions with educational goals. The program offers flexible study schedules, online learning options, and specialized mentorship to help athletes maintain high academic standards while pursuing excellence in biathlon. Our comprehensive support system includes academic advisors, sports psychologists, and career counselors who work together to ensure each athlete can achieve their full potential in both domains. The launch event was attended by representatives from multiple European universities and biathlon federations, highlighting the strong institutional support for this innovative approach.",
+      excerpt: "The innovative dual career program for young biathletes has been officially launched.",
+      content: "The DC4Biathletes project has officially launched its innovative dual career program for young biathlon athletes. This initiative supports athletes in balancing sporting ambitions with educational goals through flexible study schedules and specialized mentorship.",
       date: "2025-01-04",
       author: "DC4Biathletes Team",
       category: "Project Launch",
@@ -18,8 +18,8 @@ const News = () => {
     {
       id: 2,
       title: "Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer",
-      excerpt: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes.",
-      content: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education. During our time at the camp, we conducted interviews with several dedicated coaches and held focus groups with passionate and motivated athletes. These conversations provided rich insights into the real-life experiences of managing training, competition, and academic demands. The results have been both inspiring and eye-opening. These findings are now helping to develop a dedicated platform that will support young biathletes in navigating their dual careers more effectively, giving them the tools they need to thrive in both areas. Stay tuned: this is just the beginning of something truly impactful for the next generation of biathletes.",
+      excerpt: "A team of researchers recently travelled to Lillehammer to collaborate with the Biathlon Development Camp.",
+      content: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp. During our time at the camp, we conducted interviews with coaches and held focus groups with athletes. These conversations provided rich insights into managing training, competition, and academic demands.",
       date: "2025-01-04",
       author: "Research Team",
       category: "Research",
@@ -40,7 +40,6 @@ const News = () => {
 
   return (
     <div className="min-h-screen pt-16 bg-gradient-to-br from-primary/5 to-accent/5">
-      {/* Hero Section */}
       <section className="py-20 px-4 bg-primary">
         <div className="max-w-4xl mx-auto text-center">
           <Link 
@@ -59,7 +58,6 @@ const News = () => {
         </div>
       </section>
 
-      {/* News Articles */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -101,7 +99,6 @@ const News = () => {
         </div>
       </section>
 
-      {/* Newsletter Section */}
       <section className="py-20 px-4 bg-primary/5">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-primary mb-6">
