@@ -1,45 +1,10 @@
-import { Calendar, ArrowLeft, User } from "lucide-react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { ArrowLeft } from "lucide-react";
 
 const News = () => {
-  const newsArticles = [
-    {
-      id: 1,
-      title: "DC4Biathletes Project Officially Launched",
-      excerpt: "The innovative dual career program for young biathletes has been officially launched.",
-      content: "The DC4Biathletes project has officially launched its innovative dual career program for young biathlon athletes. This initiative supports athletes in balancing sporting ambitions with educational goals through flexible study schedules and specialized mentorship.",
-      date: "2025-01-04",
-      author: "DC4Biathletes Team",
-      category: "Project Launch",
-      image: "/lovable-uploads/70b3aab8-8456-4835-a4f3-616cf7898fd3.png"
-    },
-    {
-      id: 2,
-      title: "Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer",
-      excerpt: "A team of researchers recently travelled to Lillehammer to collaborate with the Biathlon Development Camp.",
-      content: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp. During our time at the camp, we conducted interviews with coaches and held focus groups with athletes. These conversations provided rich insights into managing training, competition, and academic demands.",
-      date: "2025-01-04",
-      author: "Research Team",
-      category: "Research",
-      image: "/lovable-uploads/e8356e16-b869-4484-837a-8bba2f9f567d.png"
-    }
-  ];
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case "Project Launch":
-        return "bg-primary text-primary-foreground";
-      case "Research":
-        return "bg-emerald-100 text-emerald-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-br from-primary/5 to-accent/5">
+    <div className="min-h-screen pt-16">
       <section className="py-20 px-4 bg-primary">
         <div className="max-w-4xl mx-auto text-center">
           <Link 
@@ -60,62 +25,20 @@ const News = () => {
 
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {newsArticles.map((article) => (
-              <Card key={article.id} className="group hover:shadow-lg transition-all duration-300 border border-primary/10">
-                <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 rounded-t-lg overflow-hidden">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <Badge className={getCategoryColor(article.category)}>
-                      {article.category}
-                    </Badge>
-                    <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                      <Calendar className="w-4 h-4" />
-                      {new Date(article.date).toLocaleDateString()}
-                    </div>
-                  </div>
-                  <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors">
-                    {article.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-muted-foreground mb-4">
-                    {article.content}
-                  </p>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <User className="w-4 h-4" />
-                    {article.author}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-4 bg-primary/5">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-primary mb-6">
-            Stay Updated
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8">
-            Subscribe to our newsletter to receive the latest news and updates about the DC4Biathletes project
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/50"
-            />
-            <button className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium">
-              Subscribe
-            </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-lg border">
+              <h2 className="text-xl font-bold mb-4">DC4Biathletes Project Officially Launched</h2>
+              <p className="text-gray-600 mb-4">2025-01-04</p>
+              <p className="mb-4">The DC4Biathletes project has officially launched its innovative dual career program for young biathlon athletes.</p>
+              <p className="text-sm text-gray-500">By: DC4Biathletes Team</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg border">
+              <h2 className="text-xl font-bold mb-4">Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer</h2>
+              <p className="text-gray-600 mb-4">2025-01-04</p>
+              <p className="mb-4">A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp.</p>
+              <p className="text-sm text-gray-500">By: Research Team</p>
+            </div>
           </div>
         </div>
       </section>
