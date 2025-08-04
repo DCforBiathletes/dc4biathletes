@@ -64,7 +64,7 @@ const News = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {newsArticles.map((article) => (
-              <Card key={article.id} className="group hover:shadow-lg transition-all duration-300 border border-primary/10 flex flex-col h-full">
+              <Card key={article.id} className="group hover:shadow-lg transition-all duration-300 border border-primary/10">
                 <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 rounded-t-lg overflow-hidden">
                   <img
                     src={article.image}
@@ -86,8 +86,8 @@ const News = () => {
                     {article.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="pt-0 flex flex-col flex-1">
-                  <p className="text-muted-foreground mb-4 flex-1">
+                <CardContent className="pt-0">
+                  <p className="text-muted-foreground mb-4">
                     {article.content}
                   </p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
