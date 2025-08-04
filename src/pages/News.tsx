@@ -86,7 +86,7 @@ const News = () => {
                     {article.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="pt-0 flex-grow flex flex-col">
+                <CardContent className="pt-0 flex flex-col flex-grow">
                   <p className="text-muted-foreground mb-4 flex-grow">
                     {article.content}
                   </p>
