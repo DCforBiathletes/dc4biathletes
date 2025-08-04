@@ -7,7 +7,6 @@ import About from "@/pages/About";
 import Research from "@/pages/Research";
 import Partners from "@/pages/Partners";
 import AppPage from "@/pages/App";
-import NewsPage from "@/pages/NewsPage";
 
 import NewsDetail from "@/pages/NewsDetail";
 import Contact from "@/pages/Contact";
