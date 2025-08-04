@@ -7,68 +7,32 @@ const News = () => {
   const newsArticles = [
     {
       id: 1,
-      title: "DC4Biathletes Project Launches Revolutionary Training Program",
-      excerpt: "A groundbreaking initiative combining academic excellence with athletic performance for young biathletes across Europe.",
+      title: "DC4Biathletes Project Officially Launched",
+      excerpt: "The innovative dual career program for young biathletes has been officially launched, combining academic excellence with athletic performance.",
       content: "The DC4Biathletes project has officially launched its innovative dual career program, designed specifically for young biathlon athletes who aspire to excel both in their sport and academic pursuits.",
       date: "2024-03-15",
       author: "DC4Biathletes Team",
-      category: "Program Launch",
+      category: "Project Launch",
       image: "/lovable-uploads/70b3aab8-8456-4835-a4f3-616cf7898fd3.png"
     },
     {
       id: 2,
-      title: "Partnership with European Universities Established",
-      excerpt: "Strategic partnerships formed with leading educational institutions to support student-athletes in their academic journey.",
-      content: "We are excited to announce partnerships with several prestigious European universities, providing our athletes with flexible study options and specialized support programs.",
-      date: "2024-03-10",
-      author: "Partnership Team",
-      category: "Partnership",
-      image: "/lovable-uploads/aa70bb33-4a8b-4d31-afcb-5e18ccd78873.png"
-    },
-    {
-      id: 3,
-      title: "First Cohort of Athletes Selected",
-      excerpt: "Twenty talented young biathletes from across Europe have been selected for the inaugural program.",
-      content: "After a rigorous selection process, we have chosen our first cohort of 20 dedicated young athletes who will pioneer this dual career pathway.",
-      date: "2024-03-05",
-      author: "Selection Committee",
-      category: "Athletes",
-      image: "/lovable-uploads/b8b2a470-2d02-4dff-bbfb-8dc75c8f8976.png"
-    },
-    {
-      id: 4,
-      title: "Research Study on Dual Career Athletes Begins",
-      excerpt: "Comprehensive research initiative to study the impact of combined academic and athletic programs on young athletes.",
-      content: "Our research team has begun an extensive study to analyze the effects of dual career programs on athletic performance, academic achievement, and overall well-being.",
+      title: "First Research Findings Published",
+      excerpt: "Initial research results show promising outcomes for athletes participating in the dual career program.",
+      content: "Our research team has published the first findings from the dual career study, showing significant positive impacts on both athletic performance and academic achievement among participating athletes.",
       date: "2024-02-28",
       author: "Research Team",
       category: "Research",
       image: "/lovable-uploads/e8356e16-b869-4484-837a-8bba2f9f567d.png"
-    },
-    {
-      id: 5,
-      title: "Mobile App Development Underway",
-      excerpt: "A dedicated mobile application is being developed to support athletes in managing their dual career journey.",
-      content: "Our development team is creating a comprehensive mobile app that will help athletes track their progress, access resources, and connect with mentors and peers.",
-      date: "2024-02-20",
-      author: "Development Team",
-      category: "Technology",
-      image: "/lovable-uploads/93b6911e-0b2a-4a2c-bb08-fa878fd487df.png"
     }
   ];
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "Program Launch":
+      case "Project Launch":
         return "bg-primary text-primary-foreground";
-      case "Partnership":
-        return "bg-accent text-accent-foreground";
-      case "Athletes":
-        return "bg-secondary text-secondary-foreground";
       case "Research":
         return "bg-emerald-100 text-emerald-800";
-      case "Technology":
-        return "bg-purple-100 text-purple-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
