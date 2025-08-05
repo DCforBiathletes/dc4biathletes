@@ -5,17 +5,17 @@ export const SocialLinks: React.FC = () => {
   const socialLinks = [
     {
       href: "https://www.facebook.com/profile.php?id=61574055687627&locale=de_DE",
-      icon: Facebook,
+      Icon: Facebook,
       label: "Facebook"
     },
     {
       href: "https://www.instagram.com/dc4biathletes/",
-      icon: Instagram,
+      Icon: Instagram,
       label: "Instagram"
     },
     {
       href: "https://www.linkedin.com/company/dc4biathletes-project/",
-      icon: Linkedin,
+      Icon: Linkedin,
       label: "LinkedIn"
     }
   ];
@@ -31,7 +31,7 @@ export const SocialLinks: React.FC = () => {
           className="text-primary hover:text-primary/80 transition-colors"
           aria-label={link.label}
         >
-          <link.icon className="w-5 h-5" />
+          <link.Icon className="w-5 h-5" />
         </a>
       ))}
     </div>
