@@ -10,11 +10,11 @@ const News = () => {
       content: "The DC4Biathletes project has officially launched, marking a significant milestone in supporting dual career athletes in biathlon sports. This innovative initiative aims to bridge the gap between athletic excellence and academic achievement."
     },
     {
-      title: "Gathering Insights from Biathletes at Lillehammer",
+      title: "Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer",
       date: "August 4, 2025", 
       author: "Research Team",
       image: "/lovable-uploads/f0b3e3c3-b86b-4d71-84ec-8735e98ae1aa.png",
-      content: "Researchers travelled to Lillehammer to collaborate with the Biathlon Development Camp, gathering valuable insights from athletes about balancing sports and academic careers. The findings will inform our support framework."
+      content: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education. During our time at the camp, we conducted interviews with several dedicated coaches and held focus groups with passionate and motivated athletes. These conversations provided rich insights into the real-life experiences of managing training, competition, and academic demands. The results have been both inspiring and eye-opening. These findings are now helping to develop a dedicated platform that will support young biathletes in navigating their dual careers more effectively, giving them the tools they need to thrive in both areas. Stay tuned: this is just the beginning of something truly impactful for the next generation of biathletes."
     }
   ];
 
