@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 interface Logo {
   logoUrl: string;
@@ -17,7 +17,7 @@ export const PartnerLogos: React.FC<PartnerLogosProps> = ({ partners }) => {
       <div className="flex flex-wrap justify-center items-center gap-8">
         {partners.map((partner, index) => (
           <div key={index} className="h-16 flex items-center">
-            <img
+            <LazyImage
               src={partner.logoUrl}
               alt={`${partner.name} Logo`}
               className="max-h-full w-auto max-w-[120px] object-contain"
