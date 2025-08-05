@@ -6,7 +6,7 @@ const News = () => {
       title: "DC4Biathletes Project Officially Launched",
       date: "August 4, 2025",
       author: "DC4Biathletes Team",
-      image: "/lovable-uploads/099cd1db-83da-471c-b765-b7d78b2e840f.png",
+      image: "/lovable-uploads/bb790a7d-2299-4e75-acb4-c8d38183773f.png",
       content: "The DC4Biathletes project has officially launched, marking a significant milestone in supporting dual career athletes in biathlon sports. This innovative initiative aims to bridge the gap between athletic excellence and academic achievement."
     },
     {
