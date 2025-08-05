@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Research from "@/pages/Research";
+import Research from "./pages/Research";
 
 function App() {
   return (
