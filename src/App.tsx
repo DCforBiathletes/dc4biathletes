@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   return (
@@ -10,10 +10,10 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <h1 className="text-xl font-bold text-gray-900">DC4Biathletes</h1>
             <div className="flex space-x-4">
-              <a href="/" className="text-gray-700 hover:text-blue-600">Home</a>
-              <a href="/research" className="text-gray-700 hover:text-blue-600">Research</a>
-              <a href="/news" className="text-gray-700 hover:text-blue-600">News</a>
-              <a href="/contact" className="text-gray-700 hover:text-blue-600">Contact</a>
+              <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
+              <Link to="/research" className="text-gray-700 hover:text-blue-600">Research</Link>
+              <Link to="/news" className="text-gray-700 hover:text-blue-600">News</Link>
+              <Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact</Link>
             </div>
           </div>
         </nav>
