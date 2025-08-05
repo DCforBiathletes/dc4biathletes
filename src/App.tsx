@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Navigation from "@/components/Navigation";
 // import Footer from "@/components/Footer";
-import Index from "@/pages/Index";
+// import Index from "@/pages/Index";
 import Research from "@/pages/Research";
 import Partners from "@/pages/Partners";
 import AppPage from "@/pages/AppPage";
 // import Contact from "@/pages/Contact";
 
 import NotFound from "@/pages/NotFound";
-import { PrivacyPolicyDialog } from "@/components/PrivacyPolicyDialog";
+// import { PrivacyPolicyDialog } from "@/components/PrivacyPolicyDialog";
 import "./App.css";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         {/* <Navigation /> */}
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<div>Test</div>} />
             <Route path="/research" element={<Research />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/app" element={<AppPage />} />
@@ -30,7 +30,7 @@ function App() {
           </Routes>
         </main>
         {/* <Footer /> */}
-        <PrivacyPolicyDialog />
+        {/* <PrivacyPolicyDialog /> */}
       </div>
     </Router>
   );
