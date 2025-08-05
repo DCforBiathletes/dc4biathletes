@@ -1,44 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Toaster } from "@/components/ui/toaster";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import Home from "@/pages/Home";
-import NotFound from "@/pages/NotFound";
-import About from "@/pages/About";
-import AppPage from "@/pages/AppPage";
-import Contact from "@/pages/Contact";
-import News from "@/pages/News";
-import NewsDetail from "@/pages/NewsDetail";
-import Partners from "@/pages/Partners";
-import Research from "@/pages/Research";
-import Workshops from "@/pages/Workshops";
-import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import React from 'react';
+import TestComponent from './TestComponent';
 
 function App() {
-  return (
-    <Router>
-      <div className="min-h-screen flex flex-col">
-        <Navigation />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/research" element={<Research />} />
-            <Route path="/partners" element={<Partners />} />
-            <Route path="/app" element={<AppPage />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/news/:slug" element={<NewsDetail />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/workshops" element={<Workshops />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-        <Toaster />
-      </div>
-    </Router>
-  );
+  return <TestComponent />;
 }
 
 export default App;
