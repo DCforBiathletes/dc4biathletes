@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Home from "@/pages/Home";
 import About from "@/pages/About";
 import AppPage from "@/pages/AppPage";
 import Contact from "@/pages/Contact";
@@ -20,7 +21,7 @@ function App() {
         <Navigation />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<AppPage />} />
+            <Route path="/" element={<Home />} />
             <Route path="/research" element={<Research />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/app" element={<AppPage />} />
