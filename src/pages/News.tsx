@@ -1,29 +1,20 @@
 import React from "react";
 
 const News = () => {
-  const lillehammer = "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp - a key part of the Erasmus+ funded project DC4Biathletes. The aim? To better understand the challenges and opportunities faced by young biathletes who are balancing both sport and education.";
-  const lillehammer2 = " During our time at the camp, we conducted interviews with several dedicated coaches and held focus groups with passionate and motivated athletes. These conversations provided rich insights into the real-life experiences of managing training, competition, and academic demands.";
-  const lillehammer3 = " The results have been both inspiring and eye-opening. These findings are now helping to develop a dedicated platform that will support young biathletes in navigating their dual careers more effectively, giving them the tools they need to thrive in both areas. Stay tuned: this is just the beginning of something truly impactful for the next generation of biathletes.";
-
-  const ostersund = "From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Ostersund, Sweden. The initiative aimed to raise awareness about the importance of dual careers in biathlon and encourage athletes aged 18 and older to participate in the project survey.";
-  const ostersund2 = " The event provided a valuable opportunity to connect with young biathletes, coaches, and support teams worldwide. A dedicated DC4Biathletes stand was set up, featuring roll-ups, beach flags, and stickers, along with the recognized IBU Academy branding.";
-  const ostersund3 = " To ensure maximum outreach, multiple communication channels were utilized, including personal interactions with athletes, coaches, and team officials, announcements through the official event WhatsApp group, and presentations during workshops organized by the IBU Sustainability Department.";
-  const ostersund4 = " As a result, 110 responses from 31 different countries were collected over the three days, marking a significant step in promoting the DC4Biathletes project within the biathlon community.";
-
   const newsItems = [
     {
       title: "Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer",
       date: "August 4, 2025", 
       author: "Research Team",
       image: "/lovable-uploads/f0b3e3c3-b86b-4d71-84ec-8735e98ae1aa.png",
-      content: lillehammer + lillehammer2 + lillehammer3
+      content: "A team of researchers recently travelled to Lillehammer (NOR) to collaborate with the Biathlon Development Camp. The aim was to better understand the challenges faced by young biathletes balancing sport and education. During our time at the camp, we conducted interviews with coaches and held focus groups with athletes. These conversations provided rich insights into managing training, competition, and academic demands. The results have been inspiring and eye-opening. These findings are helping to develop a platform that will support young biathletes in navigating their dual careers more effectively."
     },
     {
       title: "DC4Biathletes at the IBU Youth and Junior World Championships in Ostersund",
       date: "March 3, 2025",
       author: "DC4Biathletes Team",
       image: "/lovable-uploads/bb790a7d-2299-4e75-acb4-c8d38183773f.png",
-      content: ostersund + ostersund2 + ostersund3 + ostersund4
+      content: "From 1 to 3 March 2025, the DC4Biathletes project was promoted at the IBU Youth and Junior World Championships in Ostersund, Sweden. The initiative aimed to raise awareness about dual careers in biathlon and encourage athletes to participate in the project survey. A dedicated DC4Biathletes stand was set up with roll-ups, beach flags, and stickers. Multiple communication channels were utilized including personal interactions and WhatsApp announcements. As a result, 110 responses from 31 different countries were collected over three days."
     }
   ];
 
