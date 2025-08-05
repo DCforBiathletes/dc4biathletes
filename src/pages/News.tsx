@@ -1,4 +1,6 @@
 import React from "react";
+import projectLaunchImage from "@/assets/news-project-launch.jpg";
+import lillehammerTrainingImage from "@/assets/news-lillehammer-training.jpg";
 
 const News = () => {
   const newsItems = [
@@ -6,12 +8,14 @@ const News = () => {
       title: "DC4Biathletes Project Officially Launched",
       date: "August 4, 2025",
       author: "DC4Biathletes Team",
+      image: projectLaunchImage,
       content: "The DC4Biathletes project has officially launched, marking a significant milestone in supporting dual career athletes in biathlon sports. This innovative initiative aims to bridge the gap between athletic excellence and academic achievement."
     },
     {
       title: "Gathering Insights from Biathletes at Lillehammer",
       date: "August 4, 2025", 
       author: "Research Team",
+      image: lillehammerTrainingImage,
       content: "Researchers travelled to Lillehammer to collaborate with the Biathlon Development Camp, gathering valuable insights from athletes about balancing sports and academic careers. The findings will inform our support framework."
     }
   ];
@@ -37,16 +41,25 @@ const News = () => {
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto space-y-8">
             {newsItems.map((item, index) => (
-              <div key={index} className="bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl p-8 shadow-lg">
-                <div className="flex flex-col gap-4">
-                  <h2 className="text-2xl font-bold text-[#06374f] mb-4">{item.title}</h2>
-                  <p className="text-[#06374f]/70 mb-4 flex items-center gap-2">
-                    <span className="inline-block w-2 h-2 bg-[#06374f] rounded-full"></span>
-                    {item.date} - {item.author}
-                  </p>
-                  <p className="text-[#06374f]/80 leading-relaxed">
-                    {item.content}
-                  </p>
+              <div key={index} className="bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden shadow-lg">
+                <div className="relative h-48 w-full">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-8">
+                  <div className="flex flex-col gap-4">
+                    <h2 className="text-2xl font-bold text-[#06374f] mb-4">{item.title}</h2>
+                    <p className="text-[#06374f]/70 mb-4 flex items-center gap-2">
+                      <span className="inline-block w-2 h-2 bg-[#06374f] rounded-full"></span>
+                      {item.date} - {item.author}
+                    </p>
+                    <p className="text-[#06374f]/80 leading-relaxed">
+                      {item.content}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
