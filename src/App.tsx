@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+// import Navigation from "@/components/Navigation";
+// import Footer from "@/components/Footer";
 import Index from "@/pages/Index";
 import Research from "@/pages/Research";
 import Partners from "@/pages/Partners";
@@ -17,7 +17,7 @@ function App() {
   return (
     <Router basename={baseUrl}>
       <div className="flex flex-col min-h-screen">
-        <Navigation />
+        {/* <Navigation /> */}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Index />} />
@@ -29,7 +29,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <Footer />
+        {/* <Footer /> */}
         <PrivacyPolicyDialog />
       </div>
     </Router>
