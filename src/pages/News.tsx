@@ -40,15 +40,8 @@ const News = () => {
           <div className="max-w-4xl mx-auto space-y-8">
             {newsItems.map((item, index) => (
               <div key={index} className="bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden shadow-lg">
-                <div className="relative h-48 w-full">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-8">
-                  <div className="flex flex-col gap-4">
+                <div className="p-8 flex gap-6 items-start">
+                  <div className="flex-1">
                     <h2 className="text-2xl font-bold text-[#06374f] mb-4">{item.title}</h2>
                     <p className="text-[#06374f]/70 mb-4 flex items-center gap-2">
                       <span className="inline-block w-2 h-2 bg-[#06374f] rounded-full"></span>
@@ -57,6 +50,13 @@ const News = () => {
                     <p className="text-[#06374f]/80 leading-relaxed">
                       {item.content}
                     </p>
+                  </div>
+                  <div className="flex-shrink-0 w-48 h-32">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
                   </div>
                 </div>
               </div>
