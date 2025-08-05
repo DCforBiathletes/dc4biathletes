@@ -1,10 +1,7 @@
-import React from 'react';
-
 function App() {
   return (
     <div>
-      <h1>DC4Biathletes</h1>
-      <p>Minimal working app</p>
+      <h1>Test</h1>
     </div>
   );
 }
