@@ -2,22 +2,22 @@ import React from 'react';
 
 function News() {
   return (
-    <div className="min-h-screen bg-[#06374f] pt-16">
+    <div className="min-h-screen pt-16 bg-[#06374f] w-full">
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center justify-center text-center px-4">
-        <div className="max-w-4xl mx-auto relative z-10">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Latest News</h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+      <section className="relative py-32 w-full">
+        <div className="relative z-10 container mx-auto text-center px-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Latest News</h1>
+          <p className="text-xl text-white/90 mb-8">
             Stay updated with the latest developments, research insights, and success stories from the DC4Biathletes project
           </p>
         </div>
       </section>
 
       {/* News Content */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-12 px-4 w-full">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto space-y-8">
-            <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-primary mb-4">DC4Biathletes Project Officially Launched</h2>
               <p className="text-primary/70 mb-4 flex items-center gap-2">
                 <span className="inline-block w-2 h-2 bg-primary rounded-full"></span>
@@ -28,7 +28,7 @@ function News() {
               </p>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-primary mb-4">Gathering Insights from Biathletes at Lillehammer</h2>
               <p className="text-primary/70 mb-4 flex items-center gap-2">
                 <span className="inline-block w-2 h-2 bg-primary/60 rounded-full"></span>
