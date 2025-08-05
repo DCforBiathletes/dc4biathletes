@@ -5,7 +5,6 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
-        {/* Minimal Navigation */}
         <nav className="bg-white shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <h1 className="text-xl font-bold text-gray-900">DC4Biathletes</h1>
@@ -31,7 +30,6 @@ function App() {
           </Routes>
         </main>
 
-        {/* Minimal Footer */}
         <footer className="bg-gray-100 border-t mt-auto">
           <div className="max-w-7xl mx-auto px-4 py-8 text-center">
             <p className="text-gray-600">© 2024 DC4Biathletes. All rights reserved.</p>
