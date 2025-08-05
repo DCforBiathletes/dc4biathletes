@@ -1,32 +1,21 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function News() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto pt-24 px-4">
-        <h1 className="text-3xl font-bold text-foreground mb-8">Latest News</h1>
+    <div className="min-h-screen bg-gray-100 text-black p-8">
+      <div className="container mx-auto pt-16">
+        <h1 className="text-4xl font-bold text-black mb-8">Latest News</h1>
         
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl">DC4Biathletes Project Officially Launched</CardTitle>
-              <p className="text-muted-foreground">August 4, 2025 - DC4Biathletes Team</p>
-            </CardHeader>
-            <CardContent>
-              <p className="text-foreground">The DC4Biathletes project has officially launched.</p>
-            </CardContent>
-          </Card>
+        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-sm">
+          <h2 className="text-xl font-semibold text-black mb-2">DC4Biathletes Project Officially Launched</h2>
+          <p className="text-gray-600 mb-3">August 4, 2025 - DC4Biathletes Team</p>
+          <p className="text-gray-800">The DC4Biathletes project has officially launched.</p>
+        </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl">Gathering Insights from Biathletes at Lillehammer</CardTitle>
-              <p className="text-muted-foreground">August 4, 2025 - Research Team</p>
-            </CardHeader>
-            <CardContent>
-              <p className="text-foreground">Researchers travelled to Lillehammer to collaborate with the Biathlon Development Camp.</p>
-            </CardContent>
-          </Card>
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+          <h2 className="text-xl font-semibold text-black mb-2">Gathering Insights from Biathletes at Lillehammer</h2>
+          <p className="text-gray-600 mb-3">August 4, 2025 - Research Team</p>
+          <p className="text-gray-800">Researchers travelled to Lillehammer to collaborate with the Biathlon Development Camp.</p>
         </div>
       </div>
     </div>
