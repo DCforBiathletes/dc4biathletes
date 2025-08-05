@@ -1,6 +1,4 @@
 import React from "react";
-import projectLaunchImage from "@/assets/news-project-launch.jpg";
-import lillehammerTrainingImage from "@/assets/news-lillehammer-training.jpg";
 
 const News = () => {
   const newsItems = [
@@ -8,14 +6,14 @@ const News = () => {
       title: "DC4Biathletes Project Officially Launched",
       date: "August 4, 2025",
       author: "DC4Biathletes Team",
-      image: projectLaunchImage,
+      image: "/lovable-uploads/099cd1db-83da-471c-b765-b7d78b2e840f.png",
       content: "The DC4Biathletes project has officially launched, marking a significant milestone in supporting dual career athletes in biathlon sports. This innovative initiative aims to bridge the gap between athletic excellence and academic achievement."
     },
     {
       title: "Gathering Insights from Biathletes at Lillehammer",
       date: "August 4, 2025", 
       author: "Research Team",
-      image: lillehammerTrainingImage,
+      image: "/lovable-uploads/147d7c36-3d03-4bbd-b016-79c2ed106f99.png",
       content: "Researchers travelled to Lillehammer to collaborate with the Biathlon Development Camp, gathering valuable insights from athletes about balancing sports and academic careers. The findings will inform our support framework."
     }
   ];
