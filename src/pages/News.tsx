@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function News() {
+function News() {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="pt-24 px-4">
@@ -23,3 +23,5 @@ export default function News() {
     </div>
   );
 }
+
+export default News;
