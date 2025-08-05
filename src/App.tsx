@@ -1,8 +1,15 @@
-import React from 'react';
-import TestComponent from './TestComponent';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Research from "@/pages/Research";
 
 function App() {
-  return <TestComponent />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Research />} />
+        <Route path="*" element={<div>Not Found</div>} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
