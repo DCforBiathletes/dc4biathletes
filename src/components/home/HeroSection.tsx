@@ -1,11 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Users, Smartphone } from "lucide-react";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-primary to-primary/80">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="relative py-20 px-4 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <LazyImage
+          src="/lovable-uploads/a6457d6b-454b-40aa-accd-fac43ae26997.png"
+          alt="Biathletes training at shooting range"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary/60"></div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto text-center">
         <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-6">
           DC4Biathletes
         </h1>
