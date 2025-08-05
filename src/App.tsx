@@ -13,7 +13,6 @@ import Research from "@/pages/Research";
 import Workshops from "@/pages/Workshops";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 
-
 function App() {
   return (
     <Router>
