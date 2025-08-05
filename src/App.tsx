@@ -3,11 +3,35 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 // Minimal working components
-const HomePage = () => <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">Working Test</div>;
-const NewsPage = () => <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">News Page</div>;
-const PartnersPage = () => <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">Partners Page</div>;
-const AppPage = () => <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">App Page</div>;
-const NotFoundPage = () => <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">404 - Page Not Found</div>;
+const HomePage = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">
+    Working Test
+  </div>
+);
+
+const NewsPage = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">
+    News Page
+  </div>
+);
+
+const PartnersPage = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">
+    Partners Page
+  </div>
+);
+
+const AppPage = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">
+    App Page
+  </div>
+);
+
+const NotFoundPage = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#06374f] text-white text-2xl">
+    404 - Page Not Found
+  </div>
+);
 
 function App() {
   const baseUrl = document.querySelector('base')?.getAttribute('href') || '/';
