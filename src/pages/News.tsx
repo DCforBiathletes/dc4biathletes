@@ -3,11 +3,11 @@ import React from "react";
 const News = () => {
   const newsItems = [
     {
-      title: "DC4Biathletes Project Officially Launched",
-      date: "August 4, 2025",
+      title: "DC4Biathletes at the IBU Youth and Junior World Championships in Östersund",
+      date: "March 3, 2025",
       author: "DC4Biathletes Team",
       image: "/lovable-uploads/bb790a7d-2299-4e75-acb4-c8d38183773f.png",
-      content: "The DC4Biathletes project has officially launched, marking a significant milestone in supporting dual career athletes in biathlon sports. This innovative initiative aims to bridge the gap between athletic excellence and academic achievement."
+      content: "From 1 to 3 March 2025, the DC4Biathletes project was actively promoted at the IBU Youth and Junior World Championships (YJWCH) in Östersund, Sweden. The initiative aimed to raise awareness about the importance of dual careers in biathlon and encourage athletes aged 18 and older to participate in the project's survey. The event provided a valuable opportunity to connect with young biathletes, coaches, and support teams worldwide. A dedicated DC4Biathletes stand was set up, featuring roll-ups, beach flags, and stickers, along with the recognized IBU Academy branding. To ensure maximum outreach, multiple communication channels were utilized, including personal interactions with athletes, coaches, and team officials, announcements through the official event WhatsApp group, and presentations during workshops organized by the IBU Sustainability Department. As a result, 110 responses from 31 different countries were collected over the three days, marking a significant step in promoting the DC4Biathletes project within the biathlon community."
     },
     {
       title: "Gathering Insights from Biathletes at the Biathlon Development Camp in Lillehammer",
