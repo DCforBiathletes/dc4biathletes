@@ -1,16 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Import existing pages
-import Home from './pages/Home';
-import About from './pages/About';
-import Research from './pages/Research';
-import News from './pages/News';
-import Partners from './pages/Partners';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import NotFound from './pages/NotFound';
-
 function App() {
   return (
     <Router>
@@ -30,14 +20,14 @@ function App() {
 
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/research" element={<Research />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/partners" element={<Partners />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<div className="p-8"><h1 className="text-2xl">Home Page</h1></div>} />
+            <Route path="/about" element={<div className="p-8"><h1 className="text-2xl">About Page</h1></div>} />
+            <Route path="/research" element={<div className="p-8"><h1 className="text-2xl">Research Page</h1></div>} />
+            <Route path="/news" element={<div className="p-8"><h1 className="text-2xl">News Page</h1></div>} />
+            <Route path="/partners" element={<div className="p-8"><h1 className="text-2xl">Partners Page</h1></div>} />
+            <Route path="/contact" element={<div className="p-8"><h1 className="text-2xl">Contact Page</h1></div>} />
+            <Route path="/privacy-policy" element={<div className="p-8"><h1 className="text-2xl">Privacy Policy</h1></div>} />
+            <Route path="*" element={<div className="p-8"><h1 className="text-2xl">Page Not Found</h1></div>} />
           </Routes>
         </main>
 
