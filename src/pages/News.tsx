@@ -18,7 +18,12 @@ const News = () => {
 
   return (
     <div className="min-h-screen pt-16 bg-[#06374f] w-full">
-      <section className="relative py-32 w-full bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(/lovable-uploads/e1197fe3-2c0e-4bea-bbd4-5d58778a1943.png)`}}>
+      <section className="relative py-32 w-full">
+        <img 
+          src="/lovable-uploads/e1197fe3-2c0e-4bea-bbd4-5d58778a1943.png" 
+          alt="News hero background" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative z-10 container mx-auto text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Latest News</h1>
