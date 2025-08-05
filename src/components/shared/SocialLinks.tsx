@@ -1,14 +1,8 @@
 import React from "react";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 
-interface SocialLink {
-  href: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  label: string;
-}
-
 export const SocialLinks: React.FC = () => {
-  const socialLinks: SocialLink[] = [
+  const socialLinks = [
     {
       href: "https://www.facebook.com/profile.php?id=61574055687627&locale=de_DE",
       Icon: Facebook,
