@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Navigation from "@/components/Navigation";
 // import Footer from "@/components/Footer";
-// import Index from "@/pages/Index";
+import Index from "@/pages/Index";
 import Research from "@/pages/Research";
 import Partners from "@/pages/Partners";
 import AppPage from "@/pages/AppPage";
@@ -20,7 +20,7 @@ function App() {
         {/* <Navigation /> */}
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<div>Test</div>} />
+            <Route path="/" element={<Index />} />
             <Route path="/research" element={<Research />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/app" element={<AppPage />} />
