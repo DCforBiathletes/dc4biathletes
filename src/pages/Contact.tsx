@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ThankYouDialog } from "@/components/contact/ThankYouDialog";
 import { DebugDialog } from "@/components/contact/DebugDialog";
