@@ -1,14 +1,7 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/*" element={<div>Hello World</div>} />
-      </Routes>
-    </Router>
-  );
+  return <div>Hello World</div>;
 }
 
 export default App;
