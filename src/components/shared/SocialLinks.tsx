@@ -1,9 +1,9 @@
 import React from "react";
-import { Facebook, Instagram, Linkedin, LucideIcon } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 interface SocialLink {
   href: string;
-  Icon: LucideIcon;
+  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   label: string;
 }
 
