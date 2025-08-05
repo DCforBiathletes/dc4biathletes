@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Navigation from "@/components/Navigation";
 // import Footer from "@/components/Footer";
 // import Index from "@/pages/Index";
-
 import Partners from "@/pages/Partners";
 import AppPage from "@/pages/AppPage";
 // import Contact from "@/pages/Contact";
