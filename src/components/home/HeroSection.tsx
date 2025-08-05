@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Users, Smartphone } from "lucide-react";
-import { LazyImage } from "@/components/ui/LazyImage";
 
 export const HeroSection: React.FC = () => {
   return (
     <section className="relative py-20 px-4 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <LazyImage
+        <img
           src="/lovable-uploads/a6457d6b-454b-40aa-accd-fac43ae26997.png"
           alt="Biathletes training at shooting range"
           className="w-full h-full object-cover"
