@@ -1,13 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<div>Home Page</div>} />
-        <Route path="*" element={<div>Not Found</div>} />
-      </Routes>
-    </Router>
+    <div>
+      <h1>DC4Biathletes</h1>
+      <p>Minimal working app</p>
+    </div>
   );
 }
 
