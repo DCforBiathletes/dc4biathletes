@@ -2,11 +2,11 @@ import React from 'react';
 
 function News() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#06374f] pt-16">
       {/* Hero Section */}
-      <section className="relative bg-[#06374f] text-white py-20 px-4">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Latest News</h1>
+      <section className="relative min-h-[50vh] flex items-center justify-center text-center px-4">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Latest News</h1>
           <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
             Stay updated with the latest developments, research insights, and success stories from the DC4Biathletes project
           </p>
@@ -14,7 +14,7 @@ function News() {
       </section>
 
       {/* News Content */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="bg-white/80 backdrop-blur-sm border border-primary/10 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
@@ -23,7 +23,7 @@ function News() {
                 <span className="inline-block w-2 h-2 bg-primary rounded-full"></span>
                 August 4, 2025 - DC4Biathletes Team
               </p>
-              <p className="text-foreground leading-relaxed">
+              <p className="text-primary/80 leading-relaxed">
                 The DC4Biathletes project has officially launched, marking a significant milestone in supporting dual career athletes in biathlon sports. This innovative initiative aims to bridge the gap between athletic excellence and academic achievement.
               </p>
             </div>
@@ -34,7 +34,7 @@ function News() {
                 <span className="inline-block w-2 h-2 bg-primary/60 rounded-full"></span>
                 August 4, 2025 - Research Team
               </p>
-              <p className="text-foreground leading-relaxed">
+              <p className="text-primary/80 leading-relaxed">
                 Researchers travelled to Lillehammer to collaborate with the Biathlon Development Camp, gathering valuable insights from athletes about balancing sports and academic careers. The findings will inform our support framework.
               </p>
             </div>
