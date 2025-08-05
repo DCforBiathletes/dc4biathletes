@@ -13,7 +13,7 @@ const News = () => {
       title: "Gathering Insights from Biathletes at Lillehammer",
       date: "August 4, 2025", 
       author: "Research Team",
-      image: "/lovable-uploads/147d7c36-3d03-4bbd-b016-79c2ed106f99.png",
+      image: "/lovable-uploads/f0b3e3c3-b86b-4d71-84ec-8735e98ae1aa.png",
       content: "Researchers travelled to Lillehammer to collaborate with the Biathlon Development Camp, gathering valuable insights from athletes about balancing sports and academic careers. The findings will inform our support framework."
     }
   ];
