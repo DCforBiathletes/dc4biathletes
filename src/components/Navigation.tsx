@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SocialLinks } from "@/components/shared/SocialLinks";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,8 +53,34 @@ const Navigation = () => {
             </div>
 
             {/* Social Media Links - added to the right side */}
-            <div className="hidden md:flex">
-              <SocialLinks />
+            <div className="hidden md:flex space-x-4">
+              <a
+                href="https://www.facebook.com/profile.php?id=61574055687627&locale=de_DE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary/80 transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/dc4biathletes/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary/80 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/dc4biathletes-project/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary/80 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
             </div>
           </div>
 
@@ -76,7 +101,33 @@ const Navigation = () => {
                 
                 {/* Social Media Links in mobile menu */}
                 <div className="flex space-x-4 px-4 py-2">
-                  <SocialLinks />
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61574055687627&locale=de_DE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/dc4biathletes/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/dc4biathletes-project/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
                 </div>
               </div>
             </div>

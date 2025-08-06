@@ -43,8 +43,8 @@ const Partners = () => {
         {/* Hero Image Container */}
         <div className="absolute inset-0">
           <img
-            src="/lovable-uploads/d6b5aa56-f707-48b4-b580-24b3e35bbb55.png"
-            alt="Team collaboration and partnership"
+            src="/lovable-uploads/619c457c-792b-45d0-b4af-d399947f8b92.png"
+            alt="Partners meeting"
             className="w-full h-full object-cover"
           />
           {/* Overlay - updated to use 15% black transparency instead of 30% */}

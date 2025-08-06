@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PartnerLogos } from "@/components/shared/PartnerLogos";
 
 const Footer = () => {
   const partners = [
@@ -29,7 +28,21 @@ const Footer = () => {
   return (
     <footer className="bg-primary/5 border-t border-primary/10">
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <PartnerLogos partners={partners} />
+        {/* Partner Logos */}
+        <div className="mb-12">
+          <p className="text-center text-primary/80 mb-6 text-sm font-medium">Our Partners</p>
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            {partners.map((partner, index) => (
+              <div key={index} className="h-16 flex items-center">
+                <img
+                  src={partner.logoUrl}
+                  alt={`${partner.name} Logo`}
+                  className="max-h-full w-auto max-w-[120px] object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="flex justify-center">
           {/* Privacy Policy Link - Centered */}
